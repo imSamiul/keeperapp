@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import InputArea from "./InputArea";
 import ShowListItem from "./toDoItem";
-let check = false;
+
 function App() {
-  const [newItem, setItem] = useState("");
   const [names, setName] = useState([]);
-  function listItem(event) {
-    const value = event.target.value;
-    setItem(value);
-    check = true;
-  }
-  function addListItem() {
+
+  function addListItem(newItem) {
     setName((names) => {
       return [...names, newItem];
     });
-    check = false;
-    setItem("");
   }
   function deleteItem(id) {
     setName((preValue) => {
@@ -29,12 +22,7 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <InputArea
-        listItem={listItem}
-        value={newItem}
-        check={check}
-        addListItem={addListItem}
-      />
+      <InputArea toAdd={addListItem} />
       <div>
         <ul>
           {names.map((name, index) => (
