@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 let check = false;
 function App() {
+  const [newItem, setItem] = useState("");
   const [names, setName] = useState([]);
-  let [newItem, setItem] = useState("");
   function listItem(event) {
     const value = event.target.value;
     setItem(value);
     check = true;
   }
   function addListItem() {
-    setName((names) => [...names, newItem]);
+    setName((names) => {
+      return [...names, newItem];
+    });
     check = false;
+    setItem("");
   }
   return (
     <div className="container">
@@ -18,19 +21,17 @@ function App() {
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <form>
-          <input onChange={listItem} type="text" />
+          <input onChange={listItem} type="text" value={newItem} />
           {check ? (
-            <button onClick={addListItem} type="reset">
+            <button onClick={addListItem}>
               {/* <button onClick={addListItem}> */}
               <span>Add</span>
             </button>
           ) : (
-            <button type="reset">
+            <button>
               <span>Add</span>
-            </button>
-          )}
-        </form>
+            </button> 
+           )}
       </div>
       <div>
         <ul>
