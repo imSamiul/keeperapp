@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ShowListItem from "./toDoItem";
 let check = false;
 function App() {
   const [newItem, setItem] = useState("");
@@ -15,28 +16,36 @@ function App() {
     check = false;
     setItem("");
   }
+  function deleteItem(id) {
+    setName((preValue) => {
+      return preValue.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-          <input onChange={listItem} type="text" value={newItem} />
-          {check ? (
-            <button onClick={addListItem}>
-              {/* <button onClick={addListItem}> */}
-              <span>Add</span>
-            </button>
-          ) : (
-            <button>
-              <span>Add</span>
-            </button> 
-           )}
+        <input onChange={listItem} type="text" value={newItem} />
+        {
+          <button onClick={check ? addListItem : () => {}}>
+            {/* <button onClick={addListItem}> */}
+            <span>Add</span>
+          </button>
+        }
       </div>
       <div>
         <ul>
-          {names.map((name) => (
-            <li key={Math.random()}>{name}</li>
+          {names.map((name, index) => (
+            <ShowListItem
+              key={Math.random()}
+              id={index}
+              item={name}
+              onChecked={deleteItem}
+            />
           ))}
         </ul>
       </div>
