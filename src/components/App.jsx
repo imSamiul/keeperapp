@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputArea from "./InputArea";
 import ShowListItem from "./toDoItem";
 let check = false;
 function App() {
@@ -28,15 +29,12 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input onChange={listItem} type="text" value={newItem} />
-        {
-          <button onClick={check ? addListItem : () => {}}>
-            {/* <button onClick={addListItem}> */}
-            <span>Add</span>
-          </button>
-        }
-      </div>
+      <InputArea
+        listItem={listItem}
+        value={newItem}
+        check={check}
+        addListItem={addListItem}
+      />
       <div>
         <ul>
           {names.map((name, index) => (
