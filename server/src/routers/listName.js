@@ -24,8 +24,12 @@ router.post('/listNames', auth, async (req, res) => {
 
 router.get('/listNames', auth, async (req, res) => {
   try {
-    const listNames = await ListName.find({ owner: req.user._id });
-    const listNamesArray = listNames.map((list) => list.title);
+    const listNames = await ListName.find({ owner: req.user._id }).populate(
+      'tasks',
+    );
+    const listNamesArray = listNames.map((list) => {
+      return { title: list.title, tasks: list.tasks };
+    });
     res.send({ listNamesArray });
   } catch (error) {
     res.status(500).send({ error: 'Could not load list names' });
