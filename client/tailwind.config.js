@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         figtree: ["Figtree", "sans-serif"],
+        alegreya: ["Alegreya", "serif"],
       },
     },
   },

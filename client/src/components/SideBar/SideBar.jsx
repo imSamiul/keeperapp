@@ -12,7 +12,7 @@ function SideBar() {
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-blue-200 h-full p-4 w-80">
+      <div className="bg-[#e5e5e5] h-full p-4 w-80">
         <Link to="/todo">Keeper</Link>
         <SideBarList taskListNames={taskListNames} />
       </div>
