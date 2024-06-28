@@ -28,7 +28,7 @@ router.get('/listNames', auth, async (req, res) => {
       'tasks',
     );
     const listNamesArray = listNames.map((list) => {
-      return { title: list.title, tasks: list.tasks };
+      return { id: list._id, title: list.title, tasks: list.tasks };
     });
     res.send({ listNamesArray });
   } catch (error) {

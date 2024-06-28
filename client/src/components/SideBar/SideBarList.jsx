@@ -6,8 +6,8 @@ function SideBarList({ taskListNames }) {
       <ul>
         {taskListNames.map((listName) => {
           return (
-            <li key={listName}>
-              <NavLink to={`${listName}`}>{listName}</NavLink>
+            <li key={listName.id}>
+              <NavLink to={`${listName.title}`}>{listName.title}</NavLink>
             </li>
           );
         })}

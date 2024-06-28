@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import AddToDo from "./AddToDo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import AddList from "../ListNames/AddList";
 
 function AllTasks() {
   const toDos = useSelector((state) => state.todo.toDos);
   const navigate = useNavigate();
+  const listNamesData = useRouteLoaderData("todo");
 
   const handleDivClick = (toDo) => {
     navigate(`/todo/${toDo.listName}`);
@@ -14,15 +15,15 @@ function AllTasks() {
   return (
     <>
       <AddList />
-      {toDos.map((toDo) => {
+      {listNamesData.map((listNameData) => {
         return (
-          <div key={toDo.listName} className="border relative">
-            <h2>{toDo.listName}</h2>
-            <AddToDo listName={toDo.listName} />
+          <div key={listNameData.id} className="border relative">
+            <h2>{listNameData.title}</h2>
+            <AddToDo listName={listNameData.title} />
             <div>
-              {toDo.tasks.map((task) => {
+              {listNameData.tasks.map((task) => {
                 return (
-                  <li key={task.id}>
+                  <li key={task._id}>
                     {task.title}
                     {task.completed ? "Completed" : "Not Completed"}
                   </li>
