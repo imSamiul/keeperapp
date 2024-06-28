@@ -19,7 +19,10 @@ function SideBar() {
       ></label>
       <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80">
         <h3 className="font-alegreya text-3xl mb-6 font-semibold">Menu</h3>
-        <AddList classNames="w-full max-w-xs bg-white" />
+        <AddList
+          inputClassNames="w-full max-w-xs bg-white"
+          btnClassNames="w-full py-2.5"
+        />
         <SideBarList taskListNames={taskListNames} />
       </div>
     </div>

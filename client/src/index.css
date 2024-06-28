@@ -3,3 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  scrollbar-color: #4b5563 #2d3748;
+}

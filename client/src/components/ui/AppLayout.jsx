@@ -4,7 +4,7 @@ import Header from "./Header";
 
 function AppLayout() {
   return (
-    <div className="bg-[#14213d]">
+    <div className="bg-[#14213d] px-4">
       <Header />
       <div className="container mx-auto  h-screen bg-[#ffffff] rounded-lg ">
         <div className="drawer lg:drawer-open h-full  gap-5 ">

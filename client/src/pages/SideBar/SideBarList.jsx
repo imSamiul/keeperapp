@@ -2,12 +2,14 @@ import { NavLink } from "react-router-dom";
 
 function SideBarList({ taskListNames }) {
   return (
-    <div>
+    <div className="my-4">
       <ul>
         {taskListNames.map((listName) => {
           return (
             <li key={listName.id}>
-              <NavLink to={`${listName.title}`}>{listName.title}</NavLink>
+              <NavLink to={`${listName.title}`} className="px-2">
+                {listName.title}
+              </NavLink>
             </li>
           );
         })}

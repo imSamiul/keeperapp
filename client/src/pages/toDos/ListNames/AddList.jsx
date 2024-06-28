@@ -1,12 +1,12 @@
 import { Form } from "react-router-dom";
 import Input from "../../../components/ui/Input";
+import Button from "../../../components/ui/Button";
 
-function AddList({ classNames }) {
+function AddList({ btnClassNames, inputClassNames }) {
   return (
-    <Form method="POST">
-      <Input name="listName" type="text" classNames={classNames} />
-
-      <button>+ Add new List </button>
+    <Form method="POST" className="flex flex-col gap-2">
+      <Input name="listName" type="text" classNames={inputClassNames} />
+      <Button classNames={btnClassNames}>+ Add new List</Button>
     </Form>
   );
 }

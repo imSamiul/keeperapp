@@ -1,4 +1,5 @@
 export default function Input({ name, classNames, ...props }) {
+  classNames += " " + classNames;
   return (
     <input
       name={name}
