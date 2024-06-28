@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./components/toDos/Tasks/todoSlice";
-import userReducer from "./components/users/userSlice";
-import listNamesReducer from "./components/toDos/ListNames/listNamesSlice";
+import todoReducer from "./pages/toDos/Tasks/todoSlice";
+import userReducer from "./pages/users/userSlice";
+import listNamesReducer from "./pages/toDos/ListNames/listNamesSlice";
 
 const store = configureStore({
   reducer: {

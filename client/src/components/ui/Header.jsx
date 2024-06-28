@@ -1,4 +1,4 @@
-import logoImage from "../assets/icons/to-do-list.png";
+import logoImage from "../../assets/icons/to-do-list.png";
 function Header() {
   return (
     <div className="py-6 flex items-center justify-center">

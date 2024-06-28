@@ -1,19 +1,25 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import { getTaskList } from "../../services/apiListNames";
 import SideBarList from "./SideBarList";
+import AddList from "../toDos/ListNames/AddList";
 
 function SideBar() {
-  const taskListNames = useRouteLoaderData("todo");
+  const fetchListNames = useRouteLoaderData("todo");
+  const taskListNames = [
+    { id: "all tasks", title: "All Tasks" },
+    ...fetchListNames,
+  ];
 
   return (
-    <div className="drawer-side h-full  ">
+    <div className="drawer-side h-full rounded-l-lg">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-[#e5e5e5] h-full p-4 w-80">
-        <Link to="/todo">Keeper</Link>
+      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80">
+        <h3 className="font-alegreya text-3xl mb-6 font-semibold">Menu</h3>
+        <AddList classNames="w-full max-w-xs bg-white" />
         <SideBarList taskListNames={taskListNames} />
       </div>
     </div>

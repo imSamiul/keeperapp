@@ -1,20 +1,20 @@
-import Login from "./components/users/Login";
-import Register from "./components/users/Register";
-import { action as registerUser } from "./actions/RegisterUser";
-import { action as loginUser } from "./actions/LoginUser.js";
-import Welcome from "./ui/Welcome";
-import Homepage from "./ui/Homepage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import Welcome from "./pages/Welcome";
+import Login from "./pages/users/Login";
+import Register from "./pages/users/Register";
+import Error from "./components/ui/Error";
+import AppLayout from "./components/ui/AppLayout";
+import AllTasks from "./pages/toDos/Tasks/AllTasks";
+import Task from "./pages/toDos/Tasks/Task";
 
-import Error from "./ui/Error.jsx";
+// React Router DOM action
+import { action as loginUser } from "./components/actions/LoginUser";
+import { action as registerUser } from "./components/actions/RegisterUser";
+import { action as addTaskList } from "./components/actions/AddTaskList";
 
-import AppLayout from "./ui/AppLayout.jsx";
-import AllTasks from "./components/toDos/Tasks/AllTasks.jsx";
-
-// import { loader as loadTask } from "./components/toDos/Task.jsx";
-import { action as addTaskList } from "./components/toDos/ListNames/AddList.jsx";
-import Task from "./components/toDos/Tasks/Task.jsx";
-import { loader as loadListNames } from "./components/SideBar/SideBar.jsx";
+// React Router DOM loader function
+import { loader as loadListNames } from "./components/loaders/LoadListNames";
 
 const router = createBrowserRouter([
   {
@@ -47,21 +47,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // async function registerUser(userData) {
-  //   try {
-  //     const res = await fetch("http://localhost:3000/users/register", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(userData),
-  //     });
-  //     const data = await res.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // }
   return <RouterProvider router={router} />;
 }
 

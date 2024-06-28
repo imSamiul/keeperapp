@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
-import { registerUser } from "../services/apiUsers";
-import store from "../store";
-import { addUser, setToken } from "../components/users/userSlice";
+import { addUser, setToken } from "../../pages/users/userSlice";
+import { registerUser } from "../../services/apiUsers";
+import store from "../../store";
 
 export async function action({ request }) {
   const formData = await request.formData();
