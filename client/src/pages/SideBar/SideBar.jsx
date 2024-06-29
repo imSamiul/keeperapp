@@ -10,20 +10,26 @@ function SideBar() {
     ...fetchListNames,
   ];
 
+  const modifyListNames = taskListNames.map((listName) => {
+    let lowerCaseString = listName.title.toLowerCase();
+    let resultString = lowerCaseString.replace(/\s+/g, "-");
+    return { id: listName.title, title: listName.title, url: resultString };
+  });
+
   return (
-    <div className="drawer-side h-full rounded-l-lg">
+    <div className="drawer-side  rounded-l-lg h-full">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80">
+      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80 ">
         <h3 className="font-alegreya text-3xl mb-6 font-semibold">Menu</h3>
         <AddList
           inputClassNames="w-full max-w-xs bg-white"
           btnClassNames="w-full py-2.5"
         />
-        <SideBarList taskListNames={taskListNames} />
+        <SideBarList taskListNames={modifyListNames} />
       </div>
     </div>
   );

@@ -4,12 +4,12 @@ import Header from "./Header";
 
 function AppLayout() {
   return (
-    <div className="bg-[#14213d] px-4">
+    <div className="bg-[#14213d] px-4 pb-8 h-screen">
       <Header />
-      <div className="container mx-auto  h-screen bg-[#ffffff] rounded-lg ">
-        <div className="drawer lg:drawer-open h-full  gap-5 ">
+      <div className="container mx-auto  mb-8 bg-[#ffffff] rounded-lg h-5/6">
+        <div className="drawer lg:drawer-open  gap-5 h-full">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content ">
+          <div className="drawer-content h-full overflow-auto scrollbar">
             <Content />
             <label
               htmlFor="my-drawer-2"

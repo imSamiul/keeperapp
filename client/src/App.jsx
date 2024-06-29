@@ -31,9 +31,15 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     id: "todo",
     loader: loadListNames,
+    action: addTaskList,
     children: [
       {
         index: true,
+        element: <AllTasks />,
+        action: addTaskList,
+      },
+      {
+        path: "all-tasks",
         element: <AllTasks />,
         action: addTaskList,
       },
