@@ -6,7 +6,7 @@
 
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
-    @apply w-2 h-5;
+    @apply w-0 h-5;
   }
 
   .scrollbar::-webkit-scrollbar-track {

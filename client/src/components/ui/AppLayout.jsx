@@ -10,7 +10,7 @@ function AppLayout() {
         <div className="drawer lg:drawer-open  gap-5 h-full rounded-lg ">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
 
-          <div className="drawer-content overflow-hidden scrollbar rounded-lg">
+          <div className="drawer-content overflow-hidden  rounded-lg">
             <Content />
 
             <label

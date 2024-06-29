@@ -33,7 +33,7 @@ function SideBar() {
             btnClassNames="w-full py-2.5"
           />
         </div>
-        <div className="my-4 flex-[9] overflow-auto scrollbar">
+        <div className="my-4 flex-[9] rounded-md overflow-hidden scrollbar">
           <SideBarList taskListNames={modifyListNames} />
         </div>
         <div className="flex justify-around w-full flex-1 items-center">

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function SideBarList({ taskListNames }) {
   return (
-    <div className="rounded-md h-full  ">
+    <div className="overflow-auto scrollbar h-full  ">
       {taskListNames.map((listName) => {
         return (
           <div key={listName.id} className="flex flex-col  ">
