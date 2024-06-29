@@ -14,7 +14,10 @@ function AllTasks() {
 
   return (
     <>
-      <AddList />
+      <h1 className="font-alegreya font-semibold text-3xl my-8 px-4">
+        All Tasks
+      </h1>
+
       {listNamesData.map((listNameData) => {
         return (
           <div key={listNameData.id} className="border relative">
