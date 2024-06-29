@@ -23,13 +23,23 @@ function SideBar() {
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80 ">
-        <h3 className="font-alegreya text-3xl mb-6 font-semibold">Menu</h3>
-        <AddList
-          inputClassNames="w-full max-w-xs bg-white"
-          btnClassNames="w-full py-2.5"
-        />
-        <SideBarList taskListNames={modifyListNames} />
+      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80 flex flex-col">
+        <h3 className="font-alegreya text-3xl mb-6 font-semibold flex-1">
+          Menu
+        </h3>
+        <div className="flex-1">
+          <AddList
+            inputClassNames="w-full max-w-xs bg-white"
+            btnClassNames="w-full py-2.5"
+          />
+        </div>
+        <div className="my-4 flex-[9] overflow-auto scrollbar">
+          <SideBarList taskListNames={modifyListNames} />
+        </div>
+        <div className="flex justify-around w-full flex-1 items-center">
+          <h1>Settings</h1>
+          <h1>Log Out</h1>
+        </div>
       </div>
     </div>
   );
