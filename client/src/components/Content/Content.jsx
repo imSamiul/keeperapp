@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function Content() {
   return (
-    <div>
+    <div className="overflow-auto h-full scrollbar">
       <Outlet />
     </div>
   );

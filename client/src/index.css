@@ -1,30 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
 @tailwind base;
-
 @tailwind components;
-.scrollbar {
-  scrollbar-width: thin;
-  /* scrollbar-color: var(--secondary) var(--primary); */
-}
-
-/* Chrome, Edge, and Safari */
-.scrollbar::-webkit-scrollbar {
-  width: 15px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-  background: red;
-  border-radius: 5px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-  background-color: black;
-  border-radius: 14px;
-  border: 3px solid blue;
-}
-
 @tailwind utilities;
-/* * {
-  scrollbar-color: #4b5563 #2d3748;
-} */
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    @apply w-2 h-5;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-[#e5e5e5];
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-[#14213d] bg-opacity-25;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+}
