@@ -1,45 +1,18 @@
-import { useSelector } from "react-redux";
-import AddToDo from "./AddToDo";
-import { useNavigate, useRouteLoaderData } from "react-router-dom";
-import AddList from "../ListNames/AddList";
+import AllListWithTasks from "../ListNames/AllListWithTasks";
 
 function AllTasks() {
-  const toDos = useSelector((state) => state.todo.toDos);
-  const navigate = useNavigate();
-  const listNamesData = useRouteLoaderData("todo");
-
-  const handleDivClick = (toDo) => {
-    navigate(`/todo/${toDo.listName}`);
-  };
-
   return (
     <>
-      <h1 className="font-alegreya font-semibold text-3xl my-8 px-4">
-        All Tasks
-      </h1>
+      <div className="flex items-center w-full bg-[#fca311] bg-opacity-70">
+        <label htmlFor="my-drawer-2" className="drawer-button lg:hidden ml-3">
+          <i className="fa-solid fa-bars"></i>
+        </label>
+        <h1 className="font-shantellSans font-semibold text-4xl my-5 px-4 w-full text-center ">
+          All Tasks
+        </h1>
+      </div>
 
-      {listNamesData.map((listNameData) => {
-        return (
-          <div key={listNameData.id} className="border relative">
-            <h2>{listNameData.title}</h2>
-            <AddToDo listName={listNameData.title} />
-            <div>
-              {listNameData.tasks.map((task) => {
-                return (
-                  <li key={task._id}>
-                    {task.title}
-                    {task.completed ? "Completed" : "Not Completed"}
-                  </li>
-                );
-              })}
-            </div>
-            <div
-              className="absolute inset-0 cursor-pointer"
-              onClick={() => handleDivClick(toDo)}
-            ></div>
-          </div>
-        );
-      })}
+      <AllListWithTasks />
     </>
   );
 }

@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         figtree: ["Figtree", "sans-serif"],
         alegreya: ["Alegreya", "serif"],
+        shantellSans: ["Shantell Sans", "cursive"],
       },
     },
   },

@@ -17,7 +17,7 @@ function SideBar() {
   });
 
   return (
-    <div className="drawer-side  rounded-l-lg h-full w-auto">
+    <div className="drawer-side  rounded-l-lg h-full">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
