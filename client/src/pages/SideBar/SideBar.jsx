@@ -1,5 +1,5 @@
-import { Link, useRouteLoaderData } from "react-router-dom";
-import { getTaskList } from "../../services/apiListNames";
+import { useRouteLoaderData } from "react-router-dom";
+
 import SideBarList from "./SideBarList";
 import AddList from "../toDos/ListNames/AddList";
 
@@ -48,9 +48,3 @@ function SideBar() {
 }
 
 export default SideBar;
-
-export async function loader() {
-  const taskList = await getTaskList();
-
-  return taskList.listNamesArray;
-}
