@@ -34,13 +34,12 @@ export async function action({ request }) {
     return errors;
   }
   if (res) {
+    console.log(res);
     store.dispatch(addUser(res.user));
     store.dispatch(setToken(res.token));
     localStorage.setItem("token", res.token);
-
     return redirect("/todo");
   } else {
-    errors.message = res;
     return redirect("/register");
   }
 }
