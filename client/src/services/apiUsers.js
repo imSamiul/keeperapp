@@ -40,9 +40,11 @@ export async function login(userData) {
     if (res.ok) {
       return data;
     } else {
-      throw new Error(data.message);
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
     }
   } catch (error) {
-    throw new Error(error);
+    throw json({ message: error.message }, { status: error.status || 500 });
   }
 }

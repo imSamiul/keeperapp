@@ -5,9 +5,19 @@ import store from "../../store";
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const authData = {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
+  const errors = {};
+  if (!authData.email || !authData.password) {
+    errors.message = "Please fill in all fields";
+  }
+  if (errors.message) {
+    return errors;
+  }
 
-  const res = await login(data);
+  const res = await login(authData);
 
   if (res) {
     store.dispatch(addUser(res.user));

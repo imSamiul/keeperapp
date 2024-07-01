@@ -15,10 +15,12 @@ import { action as addTaskList } from "./components/actions/AddTaskList";
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
 import ErrorPage from "./pages/Error";
+import { checkAuthToken } from "./util/auth";
 
 const router = createBrowserRouter([
   {
     element: <Homepage />,
+    loader: checkAuthToken,
     children: [
       { element: <Welcome />, path: "/" },
       { element: <Login />, path: "/login", action: loginUser },
