@@ -1,4 +1,9 @@
-export default function Button({ children, classNames, ...props }) {
+export default function Button({
+  children,
+  classNames,
+  iconClassNames,
+  ...props
+}) {
   classNames += " " + classNames;
 
   return (
@@ -6,6 +11,7 @@ export default function Button({ children, classNames, ...props }) {
       className={`btn bg-[#fca311] border-none text-white min-h-7 h-auto font-figtree rounded-md hover:bg-white hover:text-black hover:border-solid ${classNames}`}
       {...props}
     >
+      <i className={iconClassNames}></i>
       {children}
     </button>
   );

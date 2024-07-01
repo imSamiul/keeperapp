@@ -2,8 +2,7 @@ import { useRouteLoaderData } from "react-router-dom";
 
 import SideBarList from "./SideBarList";
 import AddList from "../toDos/ListNames/AddList";
-import Button from "../../components/ui/Button";
-// import Modal from "../../components/ui/Modal";
+import Modal from "../../components/ui/Modal";
 
 function SideBar() {
   const fetchListNames = useRouteLoaderData("todo");
@@ -34,6 +33,7 @@ function SideBar() {
             <AddList
               inputClassNames="w-full max-w-xs bg-white"
               btnClassNames="w-full text-base py-3 md:py-2.5"
+              iconClassNames="fa-solid fa-plus"
             />
           </div>
         </div>
@@ -42,7 +42,20 @@ function SideBar() {
         </div>
         <div className="flex justify-around w-full flex-1 items-center">
           <h1>Settings</h1>
-          {/* <Modal btnClassNames="w-full text-base py-3 md:py-2.5">Log Out</Modal> */}
+          <Modal
+            btnClassNames="w-full text-base py-3 md:py-2.5 "
+            iconClassNames="fa-solid fa-right-from-bracket"
+            btnTitle="Log Out"
+            actionBtnTitle={["Yes", "No"]}
+            handleModalAction={() => console.log("Logging out...")}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <i className="fa-solid fa-right-from-bracket fa-xl"></i>
+              <h3 className="text-2xl font-semibold ">Logout</h3>
+            </div>
+
+            <p className="text-xl">Are you sure want to log out?</p>
+          </Modal>
         </div>
       </div>
     </div>
