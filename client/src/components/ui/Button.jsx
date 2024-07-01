@@ -8,7 +8,7 @@ export default function Button({
 
   return (
     <button
-      className={`btn bg-[#fca311] border-none text-white min-h-7 h-auto font-figtree rounded-md hover:bg-white hover:text-black hover:border-solid ${classNames}`}
+      className={`btn bg-[#fca311] border-none text-white min-h-6 h-auto font-figtree rounded-sm hover:bg-white hover:text-black hover:border-solid ${classNames}`}
       {...props}
     >
       <i className={iconClassNames}></i>

@@ -4,16 +4,13 @@ import SideBarList from "./SideBarList";
 import AddList from "../toDos/ListNames/AddList";
 import Modal from "../../components/ui/Modal";
 import { logout } from "../../services/apiUsers";
+import FixedSidebar from "./FixedSidebar";
 
 function SideBar() {
   const fetchListNames = useRouteLoaderData("todo");
   const navigate = useNavigate();
-  const taskListNames = [
-    { id: "all tasks", title: "All Tasks" },
-    ...fetchListNames,
-  ];
 
-  const modifyListNames = taskListNames.map((listName) => {
+  const modifyListNames = fetchListNames.map((listName) => {
     let lowerCaseString = listName.title.toLowerCase();
     let resultString = lowerCaseString.replace(/\s+/g, "-");
     return { id: listName.title, title: listName.title, url: resultString };
@@ -40,12 +37,15 @@ function SideBar() {
           <div className="flex-1">
             <AddList
               inputClassNames="w-full max-w-xs bg-white"
-              btnClassNames="w-full text-base py-3 md:py-2.5"
+              btnClassNames="w-full text-base py-2 md:py-2"
               iconClassNames="fa-solid fa-plus"
             />
           </div>
         </div>
-        <div className="my-4 flex-[9] rounded-md bg-[#14213d]  bg-opacity-5  overflow-hidden scrollbar">
+        <div className="my-2  flex-[3] rounded-md bg-[#14213d]  bg-opacity-5 ">
+          <FixedSidebar />
+        </div>
+        <div className="mb-4 flex-[9] rounded-md bg-[#14213d]  bg-opacity-5  overflow-hidden scrollbar">
           <SideBarList taskListNames={modifyListNames} />
         </div>
         <div className="flex justify-around w-full flex-1 items-center">
