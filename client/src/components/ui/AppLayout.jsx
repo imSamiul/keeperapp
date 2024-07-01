@@ -7,14 +7,14 @@ function AppLayout() {
   return (
     <div
       id="content"
-      className="bg-[#14213d] px-4  pb-5 h-screen  font-figtree"
+      className="bg-[#14213d] md:px-4  pb-5 h-screen   font-figtree"
     >
       <Header />
-      <div className="container mx-auto   h-[85%] bg-[#ffffff] rounded-lg ">
-        <div className="drawer lg:drawer-open   h-full rounded-lg mb-10">
+      <div className="container mx-auto   md:h-[85%] bg-[#ffffff] md:rounded-lg ">
+        <div className="drawer lg:drawer-open   md:h-full rounded-lg md:mb-10">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
 
-          <div className="drawer-content overflow-hidden  rounded-r-lg">
+          <div className="drawer-content overflow-hidden  md:rounded-r-lg">
             <Content />
           </div>
 

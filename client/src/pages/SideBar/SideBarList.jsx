@@ -9,9 +9,9 @@ function SideBarList({ taskListNames }) {
             <NavLink
               to={`${listName.url}`}
               className={({ isActive }) =>
-                `font-figtree py-2 px-5 bg-[#14213d] bg-opacity-5 ${
+                `font-figtree py-2 px-5  ${
                   isActive
-                    ? "bg-opacity-100 text-white"
+                    ? "bg-opacity-100 bg-[#14213d] text-white"
                     : "hover:bg-[#14213d] hover:text-black hover:bg-opacity-30"
                 }`
               }

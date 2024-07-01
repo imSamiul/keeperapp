@@ -24,16 +24,18 @@ function SideBar() {
         className="drawer-overlay"
       ></label>
       <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80 flex flex-col">
-        <h3 className="font-alegreya text-3xl mb-6 font-semibold flex-1">
-          Menu
-        </h3>
-        <div className="flex-1">
-          <AddList
-            inputClassNames="w-full max-w-xs bg-white"
-            btnClassNames="w-full py-2.5"
-          />
+        <div>
+          <h3 className="font-alegreya text-3xl mb-6 font-semibold flex-1">
+            Menu
+          </h3>
+          <div className="flex-1">
+            <AddList
+              inputClassNames="w-full max-w-xs bg-white"
+              btnClassNames="w-full text-base py-3 md:py-2.5"
+            />
+          </div>
         </div>
-        <div className="my-4 flex-[9] rounded-md overflow-hidden scrollbar">
+        <div className="my-4 flex-[9] rounded-md bg-[#14213d]  bg-opacity-5  overflow-hidden scrollbar">
           <SideBarList taskListNames={modifyListNames} />
         </div>
         <div className="flex justify-around w-full flex-1 items-center">
