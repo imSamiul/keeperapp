@@ -2,6 +2,8 @@ import { useRouteLoaderData } from "react-router-dom";
 
 import SideBarList from "./SideBarList";
 import AddList from "../toDos/ListNames/AddList";
+import Button from "../../components/ui/Button";
+// import Modal from "../../components/ui/Modal";
 
 function SideBar() {
   const fetchListNames = useRouteLoaderData("todo");
@@ -40,7 +42,7 @@ function SideBar() {
         </div>
         <div className="flex justify-around w-full flex-1 items-center">
           <h1>Settings</h1>
-          <h1>Log Out</h1>
+          {/* <Modal btnClassNames="w-full text-base py-3 md:py-2.5">Log Out</Modal> */}
         </div>
       </div>
     </div>

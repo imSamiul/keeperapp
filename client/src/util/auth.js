@@ -14,9 +14,8 @@ export function getAuthToken() {
 export function checkAuthToken() {
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    return redirect("/register");
+  if (token) {
+    return redirect("/todo");
   }
-
-  return redirect("/todo");
+  return null;
 }
