@@ -1,3 +1,5 @@
+import { json } from "react-router-dom";
+
 const API_URL = "http://localhost:3000/users";
 
 export async function registerUser(userData) {
@@ -12,11 +14,16 @@ export async function registerUser(userData) {
     const data = await res.json();
     if (res.ok) {
       return data;
+    }
+    if (res.status === 409) {
+      return { status: 409, message: data.message };
     } else {
-      console.log(data.message);
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
     }
   } catch (error) {
-    console.log(error);
+    throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
 

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SideBar from "../../pages/SideBar/SideBar";
 import Content from "../Content/Content";
 import Header from "./Header";

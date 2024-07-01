@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-
+      minlength: 6,
       trim: true,
       validate: (value) => {
         if (validator.contains(value.toLowerCase(), 'password')) {

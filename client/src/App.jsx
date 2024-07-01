@@ -3,7 +3,6 @@ import Homepage from "./pages/Homepage";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/users/Login";
 import Register from "./pages/users/Register";
-import Error from "./components/ui/Error";
 import AppLayout from "./components/ui/AppLayout";
 import AllTasks from "./pages/toDos/Tasks/AllTasks";
 import Task from "./pages/toDos/Tasks/Task";
@@ -15,6 +14,7 @@ import { action as addTaskList } from "./components/actions/AddTaskList";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
+import ErrorPage from "./pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       { element: <Login />, path: "/login", action: loginUser },
       { element: <Register />, path: "/register", action: registerUser },
     ],
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/todo",

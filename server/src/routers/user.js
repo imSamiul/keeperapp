@@ -17,7 +17,7 @@ router.post('/users/register', async (req, res) => {
   } catch (error) {
     if (error.code === 11000) {
       // Duplicate key error
-      res.status(400).send({ message: 'Email is already registered' });
+      res.status(409).send({ message: 'Email is already registered' });
     } else {
       res.status(500).send({ message: error });
     }
