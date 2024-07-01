@@ -34,6 +34,7 @@ const router = createBrowserRouter([
     id: "todo",
     loader: loadListNames,
     action: addTaskList,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
 
 const API_URL = "http://localhost:3000/listNames";
@@ -31,13 +32,16 @@ export async function getTaskList() {
         Authorization: `Bearer ${getAuthToken()}`,
       },
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.error || "Could not fetch list names");
-    }
     const data = await res.json();
-    return data;
+
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
   } catch (error) {
-    console.log(error);
+    throw json({ message: error.message }, { status: error.status || 500 });
   }
 }

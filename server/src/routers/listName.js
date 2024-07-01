@@ -30,9 +30,10 @@ router.get('/listNames', auth, async (req, res) => {
     const listNamesArray = listNames.map((list) => {
       return { id: list._id, title: list.title, tasks: list.tasks };
     });
-    res.send({ listNamesArray });
+
+    res.status(201).send({ listNamesArray });
   } catch (error) {
-    res.status(500).send({ error: 'Could not load list names' });
+    res.status(500).send({ message: error.toString() });
   }
 });
 

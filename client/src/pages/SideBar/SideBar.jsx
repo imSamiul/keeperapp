@@ -1,11 +1,13 @@
-import { useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import SideBarList from "./SideBarList";
 import AddList from "../toDos/ListNames/AddList";
 import Modal from "../../components/ui/Modal";
+import { logout } from "../../services/apiUsers";
 
 function SideBar() {
   const fetchListNames = useRouteLoaderData("todo");
+  const navigate = useNavigate();
   const taskListNames = [
     { id: "all tasks", title: "All Tasks" },
     ...fetchListNames,
@@ -16,6 +18,15 @@ function SideBar() {
     let resultString = lowerCaseString.replace(/\s+/g, "-");
     return { id: listName.title, title: listName.title, url: resultString };
   });
+
+  async function handleLogout() {
+    const logOut = await logout();
+    console.log(logOut);
+    if (logOut === 200) {
+      localStorage.removeItem("token");
+      navigate("/");
+    }
+  }
 
   return (
     <div className="drawer-side  rounded-l-lg h-full">
@@ -47,7 +58,7 @@ function SideBar() {
             iconClassNames="fa-solid fa-right-from-bracket"
             btnTitle="Log Out"
             actionBtnTitle={["Yes", "No"]}
-            handleModalAction={() => console.log("Logging out...")}
+            handleModalAction={handleLogout}
           >
             <div className="flex items-center gap-3 mb-4">
               <i className="fa-solid fa-right-from-bracket fa-xl"></i>
