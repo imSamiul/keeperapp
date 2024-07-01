@@ -41,11 +41,11 @@ const router = createBrowserRouter([
         element: <AllTasks />,
         action: addTaskList,
       },
-      {
-        path: "all-tasks",
-        element: <AllTasks />,
-        action: addTaskList,
-      },
+      // {
+      //   path: "all-tasks",
+      //   element: <AllTasks />,
+      //   action: addTaskList,
+      // },
       {
         path: ":listName",
         element: <Task />,

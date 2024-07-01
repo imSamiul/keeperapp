@@ -29,17 +29,14 @@ function SideBar() {
   }
 
   return (
-    <div className="drawer-side  rounded-l-lg h-full">
+    <div className="drawer-side h-full mt-14  lg:mt-0  rounded-l-lg ">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-[#e5e5e5] h-full py-8 px-9 w-80 flex flex-col">
+      <div className="bg-[#e5e5e5] h-[calc(100vh-48px)] md:h-full py-4 px-9 w-80 flex flex-col ">
         <div>
-          <h3 className="font-alegreya text-3xl mb-6 font-semibold flex-1">
-            Menu
-          </h3>
           <div className="flex-1">
             <AddList
               inputClassNames="w-full max-w-xs bg-white"

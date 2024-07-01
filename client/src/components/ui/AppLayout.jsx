@@ -1,16 +1,14 @@
 import SideBar from "../../pages/SideBar/SideBar";
 import Content from "../Content/Content";
-import Header from "./Header";
+
+import NavBar from "./NavBar";
 
 function AppLayout() {
   return (
-    <div
-      id="content"
-      className="bg-[#14213d] md:px-4  pb-5 h-screen   font-figtree"
-    >
-      <Header />
-      <div className="container mx-auto   md:h-[85%] bg-[#ffffff] md:rounded-lg ">
-        <div className="drawer lg:drawer-open   md:h-full rounded-lg md:mb-10">
+    <div id="content" className="  font-figtree  ">
+      <NavBar />
+      <div className="  bg-[#ffffff] md:rounded-lg h-[calc(100vh-64px)]">
+        <div className="drawer lg:drawer-open   md:h-full rounded-lg  ">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
 
           <div className="drawer-content overflow-hidden  md:rounded-r-lg">
