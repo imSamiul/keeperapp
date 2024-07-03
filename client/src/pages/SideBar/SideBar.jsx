@@ -32,7 +32,7 @@ function SideBar() {
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-[#e5e5e5] h-[calc(100vh-48px)] md:h-full py-4 px-9 w-80 flex flex-col ">
+      <div className="bg-[#e5e5e5] h-[calc(100vh-48px)] lg:h-full py-4 px-9 w-80 flex flex-col ">
         <div>
           <div className="flex-1">
             <AddList
