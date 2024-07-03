@@ -16,6 +16,7 @@ import { action as addTaskList } from "./components/actions/AddTaskList";
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
 import ErrorPage from "./pages/Error";
 import { checkAuthToken } from "./util/auth";
+import { loader as loadListTasks } from "./components/loaders/loadListTasks";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: ":listName",
         element: <Task />,
-        // loader: loadTask,
+        loader: loadListTasks,
       },
     ],
   },
