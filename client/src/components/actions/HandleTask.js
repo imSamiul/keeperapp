@@ -24,8 +24,8 @@ export async function action({ request, params }) {
   };
   if (btnIntent === "addTask") {
     const newTask = await createTask(toDoData);
-
-    store.dispatch(addTodo(newTask));
+    console.log(newTask);
+    store.dispatch(addTodo(newTask.savedTask));
     message.success = "Task added successfully!";
     return message;
   }
