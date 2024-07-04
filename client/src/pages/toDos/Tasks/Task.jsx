@@ -1,3 +1,5 @@
+import AddToDo from "./AddToDo";
+
 function Task() {
   const tasks = [
     { title: "task1", completed: true },
@@ -24,6 +26,7 @@ function Task() {
 
   return (
     <div className="bg-[#fca311] bg-opacity-10 p-5">
+      <AddToDo />
       {tasks
         .sort((a, b) => a.completed - b.completed) // Sort tasks with completed ones first
         .map((task) => (

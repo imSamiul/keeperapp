@@ -11,6 +11,7 @@ import Task from "./pages/toDos/Tasks/Task";
 import { action as loginUser } from "./components/actions/LoginUser";
 import { action as registerUser } from "./components/actions/RegisterUser";
 import { action as addTaskList } from "./components/actions/AddTaskList";
+import { action as handleTask } from "./components/actions/HandleTask";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
@@ -42,15 +43,11 @@ const router = createBrowserRouter([
         element: <AllTasks />,
         action: addTaskList,
       },
-      // {
-      //   path: "all-tasks",
-      //   element: <AllTasks />,
-      //   action: addTaskList,
-      // },
       {
         path: ":listName",
         element: <Task />,
         loader: loadListTasks,
+        action: handleTask,
       },
     ],
   },

@@ -6,6 +6,7 @@ const listNameSchema = new mongoose.Schema(
       type: String,
       default: 'tasks',
       trim: true,
+      lowercase: true,
     },
 
     owner: {

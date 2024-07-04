@@ -9,10 +9,11 @@ const router = new express.Router();
 
 router.post('/tasks', auth, async (req, res) => {
   const { title, completed, listName } = req.body;
+
   const createTask = new Task({
     title,
     completed,
-    listName,
+    owner: req.user._id,
   });
   try {
     const findList = await ListName.findOne({
@@ -21,7 +22,7 @@ router.post('/tasks', auth, async (req, res) => {
     });
 
     if (!findList) {
-      return res.status(400).send({ error: 'List name not found' });
+      return res.status(400).send({ message: 'List name not found' });
     }
     const savedTask = await createTask.save();
     const updateList = await ListName.findOneAndUpdate(

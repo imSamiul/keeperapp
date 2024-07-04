@@ -14,5 +14,5 @@ export async function action({ request }) {
 
   store.dispatch(createNewList(newListItem.title));
 
-  return null;
+  return { success: true };
 }
