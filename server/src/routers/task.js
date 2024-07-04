@@ -37,6 +37,7 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 router.get('/tasks/:listName', auth, async (req, res) => {
+  const { listName } = req.params;
   console.log(listName);
 
   try {

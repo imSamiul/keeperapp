@@ -5,11 +5,15 @@ import { useEffect, useState } from "react";
 
 function AddList({ btnClassNames, inputClassNames, iconClassNames }) {
   const [listName, setListName] = useState("");
+  const [error, setError] = useState("");
   const actionData = useActionData();
   const navigation = useNavigation();
 
   useEffect(() => {
     if (navigation.state === "idle" && actionData) {
+      if (actionData.message) {
+        setError(actionData.message);
+      }
       setListName("");
     }
   }, [navigation.state, actionData]);
@@ -21,11 +25,15 @@ function AddList({ btnClassNames, inputClassNames, iconClassNames }) {
         type="text"
         classNames={inputClassNames}
         value={listName}
-        onChange={(e) => setListName(e.target.value)}
+        onChange={(e) => {
+          setListName(e.target.value);
+          setError("");
+        }}
       />
       <Button classNames={btnClassNames} iconClassNames={iconClassNames}>
         Add new List
       </Button>
+      {error && <p>{error}</p>}
     </Form>
   );
 }

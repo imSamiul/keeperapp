@@ -6,6 +6,14 @@ export async function action({ request }) {
   const data = await request.formData();
   const listNameData = data.get("listName");
 
+  const errors = {};
+  if (listNameData.length < 1) {
+    errors.message = "List name must be at least 1 character";
+  }
+  if (Object.keys(errors).length > 0) {
+    return errors;
+  }
+
   const listNameObj = {
     title: listNameData,
   };
