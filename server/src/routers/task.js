@@ -37,12 +37,12 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 router.get('/tasks/:listName', auth, async (req, res) => {
-  const { listName } = req.params;
   console.log(listName);
+
   try {
     const tasks = await ListName.findOne({
       owner: req.user._id,
-      title: new RegExp(listName, 'i'),
+      title: listName,
     }).populate('tasks');
     res.status(201).send({ tasks });
   } catch (error) {
