@@ -17,7 +17,7 @@ function ListItem({ listNameData }) {
       onClick={() => handleDivClick(listNameData.title)}
     >
       <div className="border-dashed border-2 border-[#fca311] py-2 px-4 h-full rounded-md overflow-hidden">
-        <h2 className="text-lg font-semibold underline underline-offset-4 decoration-wavy ">
+        <h2 className="text-lg font-semibold underline underline-offset-4 decoration-wavy capitalize">
           {listNameData.title}
         </h2>
         <div className="mt-4 ">
