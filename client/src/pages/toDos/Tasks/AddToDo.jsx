@@ -7,7 +7,9 @@ function AddToDo() {
     <Form method="POST">
       <input id="title" type="text" name="title" />
 
-      <Button>Add</Button>
+      <Button type="submit" name="intent" value="addTask">
+        Add
+      </Button>
     </Form>
   );
 }
