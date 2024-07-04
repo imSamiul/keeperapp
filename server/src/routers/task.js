@@ -38,14 +38,15 @@ router.post('/tasks', auth, async (req, res) => {
 
 router.get('/tasks/:listName', auth, async (req, res) => {
   const { listName } = req.params;
-  console.log(listName);
+  const modifyListName = listName.replace(/-/g, ' ');
 
   try {
-    const tasks = await ListName.findOne({
+    const task = await ListName.findOne({
       owner: req.user._id,
-      title: listName,
+      title: modifyListName,
     }).populate('tasks');
-    res.status(201).send({ tasks });
+
+    res.status(201).send({ task });
   } catch (error) {
     res.status(500).send({ message: error.toString() });
   }
