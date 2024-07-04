@@ -32,7 +32,8 @@ router.post('/tasks', auth, async (req, res) => {
     );
     res.status(201).send({ savedTask, updateList });
   } catch (error) {
-    res.status(400).send(error);
+    console.log('called');
+    res.status(400).send({ message: error.toString() });
   }
 });
 

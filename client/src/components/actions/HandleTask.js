@@ -7,15 +7,26 @@ export async function action({ request, params }) {
   const modifyListName = listName.replace(/-/g, " ");
   const data = await request.formData();
   const btnIntent = data.get("intent");
+  const title = data.get("title");
+
+  let message = {};
+  if (title.length < 1) {
+    message.error = "Task must be at least 1 character";
+  }
+  if (Object.keys(message).length > 0) {
+    return message;
+  }
 
   const toDoData = {
-    title: data.get("title"),
+    title,
     listName: modifyListName,
     completed: false,
   };
   if (btnIntent === "addTask") {
     const newTask = await createTask(toDoData);
+
     store.dispatch(addTodo(newTask));
-    return { success: true };
+    message.success = "Task added successfully!";
+    return message;
   }
 }

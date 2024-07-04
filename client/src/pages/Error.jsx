@@ -3,7 +3,7 @@ import LinkButton from "../components/ui/LinkButton";
 
 function ErrorPage() {
   const error = useRouteError();
-  console.log(error.data.message);
+  console.log(error.data.message || error.data);
 
   return (
     <div className="h-screen font-figtree text-white  bg-[#14213d] flex flex-col items-center justify-center gap-5">
