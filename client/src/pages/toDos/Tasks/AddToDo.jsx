@@ -18,7 +18,7 @@ function AddToDo() {
     }
   }, [navigation.state, actionData]);
   return (
-    <Form method="POST">
+    <Form method="POST" className=" flex w-full gap-2">
       <Input
         id="title"
         type="text"
@@ -28,9 +28,17 @@ function AddToDo() {
           setTitle(e.target.value);
           setError("");
         }}
+        classNames="bg-white shadow-md w-full font-shantellSans text-xl"
+        placeholder="Add new task"
       />
 
-      <Button type="submit" name="intent" value="addTask">
+      <Button
+        type="submit"
+        name="intent"
+        value="addTask"
+        classNames="text-base py-2 md:py-2"
+        iconClassNames="fa-solid fa-clipboard-list"
+      >
         Add
       </Button>
       {error && <p>{error}</p>}

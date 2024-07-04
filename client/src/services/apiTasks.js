@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
 
-const API_URL = "http://localhost:3000/tasks";
+const API_URL = "http://192.168.31.207:3000/tasks";
 
 export async function getListTasks(listName) {
   try {
