@@ -6,7 +6,6 @@ export async function action({ request, params }) {
   const data = await request.formData();
   if (request.method === "PATCH") {
     const checked = data.get("id");
-    console.log(checked);
     return null;
   }
 

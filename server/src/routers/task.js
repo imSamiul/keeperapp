@@ -51,4 +51,23 @@ router.get('/tasks/:listName', auth, async (req, res) => {
     res.status(500).send({ message: error.toString() });
   }
 });
+router.patch('/tasks/check/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  console.log('called');
+
+  try {
+    const task = await Task.findOne({ _id: id, owner: req.user._id });
+
+    if (!task) {
+      return res.status(400).send({ message: 'Task not found' });
+    }
+
+    task.completed = !task.completed;
+    await task.save();
+
+    res.status(201).send({ task });
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
 module.exports = router;
