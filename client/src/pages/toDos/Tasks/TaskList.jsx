@@ -1,12 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSubmit } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 
 function TaskList() {
   const data = useLoaderData();
+  const submit = useSubmit();
   const tasks = data.tasks;
 
   function handleCompleteTask(e) {
-    console.log(e.target.name);
+    submit({ id: e.target.name }, { method: "PATCH" });
   }
 
   return (
@@ -21,9 +22,9 @@ function TaskList() {
             <input
               type="checkbox"
               className="checkbox border-[#fca311] [--chkbg:#fca311] [--chkfg:white] checked:border-none"
-              checked={task.completed}
+              checked={!task.completed}
               onChange={handleCompleteTask}
-              name={task}
+              name={task._id}
             />
             <p
               className={`font-shantellSans text-xl text-black ${

@@ -3,12 +3,12 @@ import LinkButton from "../components/ui/LinkButton";
 
 function ErrorPage() {
   const error = useRouteError();
-  console.log(error.data.message || error.data);
+  console.log(error.data?.message || error);
 
   return (
     <div className="h-screen font-figtree text-white  bg-[#14213d] flex flex-col items-center justify-center gap-5">
       <h1 className="text-4xl  font-bold">Something went wrong 😢</h1>
-      <p className="text-lg">{error.data.message || error.data}</p>
+      <p className="text-lg">{error.data?.message || "error"}</p>
 
       <LinkButton to="-1">&larr; Go back</LinkButton>
     </div>

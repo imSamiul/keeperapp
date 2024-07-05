@@ -3,9 +3,16 @@ import { createTask } from "../../services/apiTasks";
 import store from "../../store";
 
 export async function action({ request, params }) {
+  const data = await request.formData();
+  if (request.method === "PATCH") {
+    const checked = data.get("id");
+    console.log(checked);
+    return null;
+  }
+
   const { listName } = params;
   const modifyListName = listName.replace(/-/g, " ");
-  const data = await request.formData();
+
   const btnIntent = data.get("intent");
   const title = data.get("title");
 
