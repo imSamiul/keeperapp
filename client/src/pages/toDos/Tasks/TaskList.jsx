@@ -1,9 +1,13 @@
-import React from "react";
 import { useLoaderData } from "react-router-dom";
+import Button from "../../../components/ui/Button";
 
 function TaskList() {
   const data = useLoaderData();
-  const tasks = data.tasks || [];
+  const tasks = data.tasks;
+
+  function handleCompleteTask(e) {
+    console.log(e.target.name);
+  }
 
   return (
     <div>
@@ -18,6 +22,8 @@ function TaskList() {
               type="checkbox"
               className="checkbox border-[#fca311] [--chkbg:#fca311] [--chkfg:white] checked:border-none"
               checked={task.completed}
+              onChange={handleCompleteTask}
+              name={task}
             />
             <p
               className={`font-shantellSans text-xl text-black ${
@@ -26,6 +32,7 @@ function TaskList() {
             >
               {task.title}
             </p>
+            <Button iconClassNames="fa-solid fa-pen-to-square"></Button>
           </div>
         ))}
     </div>

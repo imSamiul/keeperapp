@@ -16,12 +16,11 @@ const todoSlice = createSlice({
       });
       return;
     },
-
-    addNewList(state, action) {
-      state.taskList.push(action.payload);
+    loadTasks(state, action) {
+      state.tasks = [...action.payload];
     },
   },
 });
 
-export const { addTodo, addNewList } = todoSlice.actions;
+export const { addTodo, loadTasks } = todoSlice.actions;
 export default todoSlice.reducer;
