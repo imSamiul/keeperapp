@@ -22,7 +22,7 @@ function TaskList() {
             <input
               type="checkbox"
               className="checkbox border-[#fca311] [--chkbg:#fca311] [--chkfg:white] checked:border-none"
-              checked={!task.completed}
+              checked={task.completed}
               onChange={handleCompleteTask}
               name={task._id}
             />

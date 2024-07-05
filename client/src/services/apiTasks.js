@@ -49,7 +49,7 @@ export async function createTask(taskData) {
 
 export async function handleCompleteTask(taskId) {
   try {
-    const res = await fetch(`${API_URL}/${taskId}`, {
+    const res = await fetch(`${API_URL}/check/${taskId}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,

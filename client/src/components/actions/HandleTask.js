@@ -1,11 +1,13 @@
 import { addTodo } from "../../pages/toDos/Tasks/todoSlice";
-import { createTask } from "../../services/apiTasks";
+import { createTask, handleCompleteTask } from "../../services/apiTasks";
 import store from "../../store";
 
 export async function action({ request, params }) {
   const data = await request.formData();
   if (request.method === "PATCH") {
     const checked = data.get("id");
+    const task = await handleCompleteTask(checked);
+    console.log(task);
     return null;
   }
 
