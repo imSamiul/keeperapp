@@ -27,13 +27,14 @@ export async function getListTasks(listName) {
 
 export async function getTask(taskId) {
   try {
-    const res = await fetch(`{API_URL}/${taskId}`, {
+    const res = await fetch(`${API_URL}/edit/${taskId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,
       },
     });
     const data = await res.json();
+
     if (res.ok) {
       return data;
     } else {
