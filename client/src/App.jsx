@@ -46,17 +46,14 @@ const router = createBrowserRouter([
       },
       {
         path: ":listName",
-
+        element: <Task />,
+        action: handleTask,
         loader: loadTaskList,
         id: "listName",
         children: [
           {
-            index: true,
-            element: <Task />,
-            action: handleTask,
-          },
-          {
             path: ":taskName",
+
             element: <EditTask />,
           },
         ],

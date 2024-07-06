@@ -1,7 +1,7 @@
 import React from "react";
 
 function EditTask() {
-  return dib;
+  return <div>Edit</div>;
 }
 
 export default EditTask;

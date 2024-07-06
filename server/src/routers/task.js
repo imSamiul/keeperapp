@@ -53,7 +53,6 @@ router.get('/tasks/:listName', auth, async (req, res) => {
 });
 router.patch('/tasks/check/:id', auth, async (req, res) => {
   const { id } = req.params;
-  console.log('called');
 
   try {
     const task = await Task.findOne({ _id: id, owner: req.user._id });

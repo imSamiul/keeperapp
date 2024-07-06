@@ -5,9 +5,11 @@ import store from "../../store";
 export async function action({ request, params }) {
   const data = await request.formData();
   if (request.method === "PATCH") {
-    const checked = data.get("id");
-    const task = await handleCompleteTask(checked);
+    const id = data.get("id");
+
+    const task = await handleCompleteTask(id);
     console.log(task);
+
     return null;
   }
 
