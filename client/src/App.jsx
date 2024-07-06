@@ -8,16 +8,17 @@ import AllTasks from "./pages/toDos/Tasks/AllTasks";
 import Task from "./pages/toDos/Tasks/Task";
 import EditTask from "./pages/toDos/Tasks/EditTask";
 import ErrorPage from "./pages/Error";
+import { checkAuthToken } from "./util/auth";
 
 // React Router DOM action
 import { action as loginUser } from "./components/actions/LoginUser";
 import { action as registerUser } from "./components/actions/RegisterUser";
 import { action as addTaskList } from "./components/actions/AddTaskList";
 import { action as handleTask } from "./components/actions/HandleTask";
+import { action as editTask } from "./components/actions/EditTask";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
-import { checkAuthToken } from "./util/auth";
 import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
 
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
 
             element: <EditTask />,
             loader: loadTask,
+            action: editTask,
           },
         ],
       },

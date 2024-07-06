@@ -23,7 +23,7 @@ function TaskList() {
           >
             <div className="flex items-center gap-2">
               <Checkbox
-                className="checkbox border-[#fca311] [--chkbg:#fca311] [--chkfg:white] checked:border-none"
+                className=" border-[#fca311] [--chkbg:#fca311] [--chkfg:white]"
                 checked={task.completed}
                 onChange={handleCompleteTask}
                 name={task._id}

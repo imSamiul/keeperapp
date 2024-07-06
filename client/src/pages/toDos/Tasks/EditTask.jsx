@@ -1,25 +1,39 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useSubmit } from "react-router-dom";
 import Input from "../../../components/ui/Input";
 import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
+import Checkbox from "../../../components/ui/Checkbox";
 
 function EditTask() {
   const data = useLoaderData();
-  const [title, setTitle] = useState(data.task.title);
+  const submit = useSubmit();
+  const task = data.task;
+  const [title, setTitle] = useState(task.title);
 
   function handleTask(e) {
     setTitle(e.target.value);
   }
   useEffect(() => {
-    setTitle(data.task.title);
-  }, [data.task.title]);
+    setTitle(task.title);
+  }, [task.title]);
+
+  function handleCompleteTask(e) {
+    const id = e.target.name;
+    console.log(id);
+    submit({ id, checked: true }, { method: "PATCH" });
+  }
 
   return (
     <Form className="flex-[3] bg-white h-fit rounded-md overflow-hidden">
       <h3 className="text-xl font-medium py-2 px-4 bg-[#e5e5e5] ">Edit</h3>
       <div className="py-4 px-2">
         <div className="flex items-center gap-2 ">
-          <input type="checkbox" />
+          <Checkbox
+            className=" border-[#fca311] [--chkbg:#fca311] [--chkfg:white]"
+            checked={task.completed}
+            name={task._id}
+            onChange={handleCompleteTask}
+          />
           <input
             type="text"
             name="title"

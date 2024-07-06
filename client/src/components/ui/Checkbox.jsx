@@ -1,10 +1,8 @@
-import React from "react";
-
 function Checkbox({ className, checked, name, ...props }) {
   return (
     <input
       type="checkbox"
-      className={className}
+      className={`checkbox  checked:border-none ${className}`}
       checked={checked}
       name={name}
       {...props}
