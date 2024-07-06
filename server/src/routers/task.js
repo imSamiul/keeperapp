@@ -6,7 +6,40 @@ const ListName = require('../model/listName');
 const auth = require('../middleware/auth');
 
 const router = new express.Router();
+// GET:
+router.get('/tasks/:listName', auth, async (req, res) => {
+  const { listName } = req.params;
+  const modifyListName = listName.replace(/-/g, ' ');
 
+  try {
+    const task = await ListName.findOne({
+      owner: req.user._id,
+      title: modifyListName,
+    }).populate('tasks');
+
+    res.status(201).send({ task });
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
+
+router.get('/tasks/edit/:id', auth, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const task = await Task.findOne({ _id: id, owner: req.user._id });
+
+    if (!task) {
+      return res.status(400).send({ message: 'Task not found' });
+    }
+
+    res.status(201).send({ task });
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
+
+// POST:
 router.post('/tasks', auth, async (req, res) => {
   const { title, completed, listName } = req.body;
 
@@ -36,21 +69,7 @@ router.post('/tasks', auth, async (req, res) => {
   }
 });
 
-router.get('/tasks/:listName', auth, async (req, res) => {
-  const { listName } = req.params;
-  const modifyListName = listName.replace(/-/g, ' ');
-
-  try {
-    const task = await ListName.findOne({
-      owner: req.user._id,
-      title: modifyListName,
-    }).populate('tasks');
-
-    res.status(201).send({ task });
-  } catch (error) {
-    res.status(500).send({ message: error.toString() });
-  }
-});
+// PATCH:
 router.patch('/tasks/check/:id', auth, async (req, res) => {
   const { id } = req.params;
 

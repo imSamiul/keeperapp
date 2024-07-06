@@ -12,13 +12,13 @@ function TaskList() {
   }
 
   return (
-    <div>
+    <div className="flex-[8]">
       {tasks
         .sort((a, b) => a.completed - b.completed) // Sort tasks with completed ones first
         .map((task) => (
           <div
             key={task.title}
-            className="flex  p-2 bg-white mt-2 rounded-md shadow-md justify-between"
+            className="flex mt-2 p-2 bg-white  rounded-md shadow-md justify-between"
           >
             <div className="flex items-center gap-2">
               <input

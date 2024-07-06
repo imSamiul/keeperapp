@@ -7,7 +7,7 @@ function Task() {
     <div className="bg-[#fca311] h-full bg-opacity-10 p-5">
       <AddToDo />
 
-      <div className="flex">
+      <div className="flex gap-2  mt-2">
         <TaskList />
         <Outlet />
       </div>

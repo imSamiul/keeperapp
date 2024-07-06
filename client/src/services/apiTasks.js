@@ -3,6 +3,7 @@ import { getAuthToken } from "../util/auth";
 
 const API_URL = "http://192.168.31.207:3000/tasks";
 
+// GET:
 export async function getListTasks(listName) {
   try {
     const res = await fetch(`${API_URL}/${listName}`, {
@@ -24,6 +25,28 @@ export async function getListTasks(listName) {
   }
 }
 
+export async function getTask(taskId) {
+  try {
+    const res = await fetch(`{API_URL}/${taskId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
+
+// POST:
 export async function createTask(taskData) {
   try {
     const res = await fetch(API_URL, {
@@ -47,6 +70,7 @@ export async function createTask(taskData) {
   }
 }
 
+// PATCH:
 export async function handleCompleteTask(taskId) {
   try {
     const res = await fetch(`${API_URL}/check/${taskId}`, {
