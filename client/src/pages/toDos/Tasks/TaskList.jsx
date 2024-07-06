@@ -1,5 +1,6 @@
 import { useRouteLoaderData, useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
+import Checkbox from "../../../components/ui/Checkbox";
 
 function TaskList() {
   const data = useRouteLoaderData("listName");
@@ -21,8 +22,7 @@ function TaskList() {
             className="flex mt-2 p-2 bg-white  rounded-md shadow-md justify-between"
           >
             <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
+              <Checkbox
                 className="checkbox border-[#fca311] [--chkbg:#fca311] [--chkfg:white] checked:border-none"
                 checked={task.completed}
                 onChange={handleCompleteTask}
