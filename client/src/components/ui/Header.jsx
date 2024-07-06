@@ -7,7 +7,7 @@ function Header() {
   }
 
   return (
-    <div className="flex items-center w-full bg-[#fca311] bg-opacity-80">
+    <div className="flex items-center w-full bg-[#fca311] bg-opacity-80 ">
       <label htmlFor="my-drawer-2" className="drawer-button lg:hidden ml-3">
         <i className="fa-solid fa-bars fa-lg"></i>
       </label>

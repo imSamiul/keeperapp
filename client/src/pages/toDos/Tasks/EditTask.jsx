@@ -15,7 +15,13 @@ function EditTask() {
 
   return (
     <div className="flex-[1] bg-white h-fit p-2">
-      <Input type="text" name="title" value={title} onChange={handleTask} />
+      <Input
+        type="text"
+        name="title"
+        value={title}
+        onChange={handleTask}
+        classNames="bg-[#e5e5e5]"
+      />
     </div>
   );
 }

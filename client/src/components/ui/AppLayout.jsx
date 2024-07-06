@@ -8,7 +8,7 @@ function AppLayout() {
     <div id="content" className="  font-figtree  ">
       <NavBar />
       <div className="  bg-[#ffffff] md:rounded-lg h-[calc(100vh-64px)]">
-        <div className="drawer lg:drawer-open   md:h-full rounded-lg  ">
+        <div className="drawer lg:drawer-open   h-full rounded-lg  ">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
 
           <div className="drawer-content overflow-hidden  md:rounded-r-lg">
