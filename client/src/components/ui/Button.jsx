@@ -11,7 +11,7 @@ export default function Button({
       className={`btn bg-[#fca311] border-none text-white min-h-6 h-auto font-figtree rounded-sm hover:bg-white hover:text-black hover:border-solid ${classNames}`}
       {...props}
     >
-      <i className={iconClassNames}></i>
+      {iconClassNames && <i className={iconClassNames}></i>}
       {children}
     </button>
   );

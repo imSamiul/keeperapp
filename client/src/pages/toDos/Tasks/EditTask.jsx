@@ -1,12 +1,20 @@
-import { Form, useLoaderData, useLocation, useSubmit } from "react-router-dom";
+import {
+  Form,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useSubmit,
+} from "react-router-dom";
 import Input from "../../../components/ui/Input";
 import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Checkbox from "../../../components/ui/Checkbox";
+import LinkButton from "../../../components/ui/LinkButton";
 
 function EditTask() {
   const data = useLoaderData();
   const submit = useSubmit();
+  const navigate = useNavigate();
 
   const task = data.task;
   const [title, setTitle] = useState(task.title);
@@ -43,8 +51,18 @@ function EditTask() {
             className="input py-1 px-0 h-auto rounded-sm border-t-0 border-r-0 border-l-0 border-b-2 border-[#fca311] w-full font-shantellSans text-xl "
           ></input>
         </div>
-        <Button>Cancel</Button>
-        <Button>Update</Button>
+
+        <div className="mt-2 flex gap-2 items-center justify-end">
+          <button
+            className="btn h-auto min-h-6 rounded-sm p-2 text-md"
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </button>
+          <Button classNames="p-2 text-md" iconClassNames="fa-solid fa-check">
+            Update
+          </Button>
+        </div>
       </div>
     </Form>
   );
