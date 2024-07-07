@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      lowercase: true,
+      // lowercase: true,
     },
     completed: {
       type: Boolean,
