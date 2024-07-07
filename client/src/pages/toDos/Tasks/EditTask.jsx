@@ -26,10 +26,8 @@ function EditTask() {
     setTitle(task.title);
   }, [task.title]);
 
-  function handleCompleteTask(e) {
-    const id = e.target.name;
-
-    submit({ id, checked: true }, { method: "PATCH" });
+  function handleCompleteTask() {
+    submit({ checked: true }, { method: "PATCH" });
   }
 
   return (
@@ -48,18 +46,22 @@ function EditTask() {
             name="title"
             onChange={handleTask}
             value={title}
-            className="input py-1 px-0 h-auto rounded-sm border-t-0 border-r-0 border-l-0 border-b-2 border-[#fca311] w-full font-shantellSans text-xl "
+            className="input py-1 px-0 h-auto rounded-sm border-t-0 border-r-0 border-l-0 border-b-2 border-[#fca311] w-full font-shantellSans text-xl focus:border-[#fca311] focus:outline-none "
           ></input>
         </div>
 
         <div className="mt-2 flex gap-2 items-center justify-end">
           <button
-            className="btn h-auto min-h-6 rounded-sm p-2 text-md"
+            className="btn h-auto min-h-6 rounded-sm p-2 text-md hover:bg-[#e5e5e5]  hover:border-solid"
             onClick={() => navigate(-1)}
           >
             Cancel
           </button>
-          <Button classNames="p-2 text-md" iconClassNames="fa-solid fa-check">
+          <Button
+            classNames="p-2 text-md"
+            iconClassNames="fa-solid fa-check"
+            disabled={task.title === title}
+          >
             Update
           </Button>
         </div>
