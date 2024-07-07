@@ -92,3 +92,25 @@ export async function handleCompleteTask(taskId) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+export async function updateTask(taskId, taskData) {
+  try {
+    const res = await fetch(`${API_URL}/edit/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+      body: JSON.stringify(taskData),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}

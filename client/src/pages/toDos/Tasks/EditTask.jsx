@@ -27,18 +27,21 @@ function EditTask() {
   }, [task.title]);
 
   function handleCompleteTask() {
-    submit({ checked: true }, { method: "PATCH" });
+    submit({ checkTask: true }, { method: "PATCH" });
   }
 
   return (
-    <Form className="flex-[3] bg-white h-fit rounded-md overflow-hidden">
+    <Form
+      method="PATCH"
+      className="flex-[3] bg-white h-fit rounded-md overflow-hidden"
+    >
       <h3 className="text-xl font-medium py-2 px-4 bg-[#e5e5e5] ">Edit</h3>
       <div className="py-4 px-2">
         <div className="flex items-center gap-2 ">
           <Checkbox
             className=" border-[#fca311] [--chkbg:#fca311] [--chkfg:white]"
             checked={task.completed}
-            name={task._id}
+            name="checked"
             onChange={handleCompleteTask}
           />
           <input
