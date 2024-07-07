@@ -5,8 +5,9 @@ import AddList from "../toDos/ListNames/AddList";
 import Modal from "../../components/ui/Modal";
 import { logout } from "../../services/apiUsers";
 import FixedSidebar from "./FixedSidebar";
+import Button from "../../components/ui/Button";
 
-function SideBar() {
+function SideBar({ toggleDrawer }) {
   const fetchListNames = useRouteLoaderData("todo");
   const navigate = useNavigate();
 
@@ -31,17 +32,24 @@ function SideBar() {
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
+        onClick={toggleDrawer}
       ></label>
       <div className="bg-[#e5e5e5] h-[calc(100vh-48px)] lg:h-full py-4 px-9 w-80 flex flex-col ">
-        <div>
-          <div className="flex-1">
-            <AddList
-              inputClassNames="w-full max-w-xs bg-white"
-              btnClassNames="w-full text-base py-2 md:py-2"
-              iconClassNames="fa-solid fa-plus"
-            />
-          </div>
+        <button
+          className="btn h-auto min-h-6 w-fit rounded-none border-none outline-none border-0 text-lg font-normal my-2 self-end shadow-none  "
+          onClick={toggleDrawer}
+        >
+          <i className="fa-solid fa-chevron-left fa-md text-[#fca311]"></i>
+          <span>Back</span>
+        </button>
+        <div className="flex-1">
+          <AddList
+            inputClassNames="w-full max-w-xs bg-white"
+            btnClassNames="w-full text-base py-2 md:py-2"
+            iconClassNames="fa-solid fa-plus"
+          />
         </div>
+
         <div className="my-2  flex-[3] rounded-md bg-[#14213d]  bg-opacity-5 ">
           <FixedSidebar />
         </div>
