@@ -88,4 +88,25 @@ router.patch('/tasks/check/:id', auth, async (req, res) => {
     res.status(500).send({ message: error.toString() });
   }
 });
+router.patch('/tasks/edit/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const updatedTask = req.body;
+  const allowedUpdates = ['title', 'completed'];
+  const updates = Object.keys(updatedTask);
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update),
+  );
+  if (!isValidOperation) {
+    return res.status(400).send({ message: 'Invalid updates!' });
+  }
+
+  try {
+    const task = await Task.findOne({ _id: id, owner: req.user._id });
+    updates.forEach((update) => (task[update] = updatedTask[update]));
+    await task.save();
+    res.status(201).send({ task });
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
 module.exports = router;
