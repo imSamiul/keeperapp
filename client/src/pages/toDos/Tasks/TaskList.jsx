@@ -5,6 +5,7 @@ import Checkbox from "../../../components/ui/Checkbox";
 function TaskList() {
   const data = useRouteLoaderData("listName");
   const submit = useSubmit();
+
   const tasks = data.tasks;
 
   function handleCompleteTask(e) {
@@ -36,7 +37,7 @@ function TaskList() {
                 {task.title}
               </p>
             </div>
-            <LinkButton to={task._id}>
+            <LinkButton to={task._id} state={location.pathname}>
               <i className="fa-solid fa-pen-to-square fa-xl"></i>
             </LinkButton>
           </div>

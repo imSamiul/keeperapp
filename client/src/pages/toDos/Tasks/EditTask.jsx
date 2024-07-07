@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useSubmit } from "react-router-dom";
+import { Form, useLoaderData, useLocation, useSubmit } from "react-router-dom";
 import Input from "../../../components/ui/Input";
 import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
@@ -7,6 +7,7 @@ import Checkbox from "../../../components/ui/Checkbox";
 function EditTask() {
   const data = useLoaderData();
   const submit = useSubmit();
+
   const task = data.task;
   const [title, setTitle] = useState(task.title);
 
@@ -19,7 +20,7 @@ function EditTask() {
 
   function handleCompleteTask(e) {
     const id = e.target.name;
-    console.log(id);
+
     submit({ id, checked: true }, { method: "PATCH" });
   }
 
