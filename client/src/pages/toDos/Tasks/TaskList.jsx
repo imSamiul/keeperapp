@@ -43,7 +43,7 @@ function TaskList() {
                 <i className="fa-solid fa-pen-to-square fa-xl"></i>
               </LinkButton>
               <Modal
-                btnTitle={<i className="fa-solid fa-trash-can  fa-lg"></i>}
+                iconClassNames="fa-solid fa-trash-can  fa-lg"
                 btnClassNames="p-3"
                 actionBtnTitle={["Delete", "Cancel"]}
               >

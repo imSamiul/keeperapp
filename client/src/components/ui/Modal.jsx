@@ -15,7 +15,7 @@ function Modal({
         iconClassNames={iconClassNames}
         onClick={() => document.getElementById("my_modal_1").showModal()}
       >
-        {btnTitle}
+        {btnTitle && btnTitle}
       </Button>
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box bg-white">
