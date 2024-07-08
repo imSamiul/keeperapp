@@ -38,12 +38,18 @@ function TaskList() {
                 {task.title}
               </p>
             </div>
-            <LinkButton to={task._id} state={location.pathname}>
-              <i className="fa-solid fa-pen-to-square fa-xl"></i>
-            </LinkButton>
-            <Modal btnTitle="Delete" actionBtnTitle={["Delete", "Cancel"]}>
-              Are you sure?
-            </Modal>
+            <div className="flex gap-3">
+              <LinkButton to={task._id} state={location.pathname}>
+                <i className="fa-solid fa-pen-to-square fa-xl"></i>
+              </LinkButton>
+              <Modal
+                btnTitle={<i className="fa-solid fa-trash-can  fa-lg"></i>}
+                btnClassNames="p-3"
+                actionBtnTitle={["Delete", "Cancel"]}
+              >
+                Are you sure?
+              </Modal>
+            </div>
           </div>
         ))}
     </div>
