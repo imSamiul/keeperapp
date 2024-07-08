@@ -14,7 +14,7 @@ function TaskList() {
     submit({ id }, { method: "PATCH" });
   }
   function handleDeleteTask(taskId) {
-    submit({ taskId }, { method: "DELETE" });
+    submit({ id, taskId }, { method: "DELETE" });
   }
 
   return (

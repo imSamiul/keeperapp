@@ -4,12 +4,18 @@ import store from "../../store";
 
 export async function action({ request, params }) {
   const data = await request.formData();
-  if (request.method === "PATCH") {
-    const id = data.get("id");
+  const id = data.get("id");
+  const taskId = data.get("taskId");
 
+  // PATCH: complete task
+  if (request.method === "PATCH") {
     const task = await handleCompleteTask(id);
     console.log(task);
-
+    return null;
+  }
+  // DELETE: delete task
+  if (request.method === "DELETE") {
+    console.log(id, taskId);
     return null;
   }
 

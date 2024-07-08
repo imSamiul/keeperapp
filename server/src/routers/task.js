@@ -121,7 +121,7 @@ router.delete('/tasks/:listId/:id', auth, async (req, res) => {
     if (!res) {
       return res.status(400).send({ message: 'Task not found' });
     }
-    const newList = await ListName.updateOne(
+    const newList = await ListName.findOneAndUpdate(
       { _id: listId },
       { $pull: { tasks: id } },
     );
