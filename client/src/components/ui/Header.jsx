@@ -13,7 +13,7 @@ function Header({ toggleDrawer }) {
         className="drawer-button lg:hidden ml-3 cursor-pointer"
         onClick={toggleDrawer}
       >
-        <i className="fa-solid fa-bars fa-lg"></i>
+        <i className="fa-solid fa-bars text-2xl"></i>
       </label>
 
       <h1 className="font-shantellSans font-semibold text-2xl md:text-4xl my-3 md:my-5 px-4 w-full text-center capitalize ">
