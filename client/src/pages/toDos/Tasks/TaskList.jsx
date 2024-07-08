@@ -7,11 +7,14 @@ function TaskList() {
   const data = useRouteLoaderData("listName");
   const submit = useSubmit();
 
-  const tasks = data.tasks;
+  const { id, tasks } = data;
 
   function handleCompleteTask(e) {
     const id = e.target.name;
     submit({ id }, { method: "PATCH" });
+  }
+  function handleDeleteTask(taskId) {
+    submit({ taskId }, { method: "DELETE" });
   }
 
   return (
@@ -46,6 +49,7 @@ function TaskList() {
                 iconClassNames="fa-solid fa-trash-can  fa-lg"
                 btnClassNames="p-3"
                 actionBtnTitle={["Delete", "Cancel"]}
+                handleModalAction={() => handleDeleteTask(task._id)}
               >
                 <h1 className="text-lg lg:text-xl">Are you sure?</h1>
               </Modal>

@@ -7,9 +7,9 @@ export async function loader({ params }) {
 
   const listTasks = await getListTasks(listName);
 
-  const tasks = listTasks.task.tasks;
+  const { _id, tasks } = listTasks.task;
 
   store.dispatch(loadTasks(tasks));
 
-  return { tasks };
+  return { id: _id, tasks };
 }

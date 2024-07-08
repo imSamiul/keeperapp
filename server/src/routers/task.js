@@ -109,4 +109,26 @@ router.patch('/tasks/edit/:id', auth, async (req, res) => {
     res.status(500).send({ message: error.toString() });
   }
 });
+
+// DELETE:
+router.delete('/tasks/:listId/:id', auth, async (req, res) => {
+  const { listId, id } = req.params;
+  try {
+    const deletedTask = await Task.findOneAndDelete({
+      _id: id,
+      owner: req.user._id,
+    });
+    if (!res) {
+      return res.status(400).send({ message: 'Task not found' });
+    }
+    const newList = await ListName.updateOne(
+      { _id: listId },
+      { $pull: { tasks: id } },
+    );
+    res.status(201).send({ deletedTask, newList });
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
+
 module.exports = router;
