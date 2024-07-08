@@ -47,7 +47,7 @@ function TaskList() {
                 btnClassNames="p-3"
                 actionBtnTitle={["Delete", "Cancel"]}
               >
-                Are you sure?
+                <h1 className="text-lg lg:text-xl">Are you sure?</h1>
               </Modal>
             </div>
           </div>
