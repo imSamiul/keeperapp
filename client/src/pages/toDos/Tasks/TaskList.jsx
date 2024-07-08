@@ -41,7 +41,9 @@ function TaskList() {
             <LinkButton to={task._id} state={location.pathname}>
               <i className="fa-solid fa-pen-to-square fa-xl"></i>
             </LinkButton>
-            {/* <Modal></Modal> */}
+            <Modal btnTitle="Delete" actionBtnTitle={["Delete", "Cancel"]}>
+              Are you sure?
+            </Modal>
           </div>
         ))}
     </div>
