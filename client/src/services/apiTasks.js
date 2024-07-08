@@ -114,3 +114,25 @@ export async function updateTask(taskId, taskData) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+
+// DELETE:
+export async function deleteTask(listId, taskId) {
+  try {
+    const res = await fetch(`${API_URL}/${listId}/${taskId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}

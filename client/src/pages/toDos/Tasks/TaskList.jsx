@@ -6,15 +6,15 @@ import Modal from "../../../components/ui/Modal";
 function TaskList() {
   const data = useRouteLoaderData("listName");
   const submit = useSubmit();
-
-  const { id, tasks } = data;
+  // id: id of list name and tasks: list of tasks
+  const { id: listId, tasks } = data;
 
   function handleCompleteTask(e) {
-    const id = e.target.name;
-    submit({ id }, { method: "PATCH" });
+    const taskId = e.target.name;
+    submit({ taskId }, { method: "PATCH" });
   }
   function handleDeleteTask(taskId) {
-    submit({ id, taskId }, { method: "DELETE" });
+    submit({ listId, taskId }, { method: "DELETE" });
   }
 
   return (

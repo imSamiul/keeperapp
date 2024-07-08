@@ -10,6 +10,6 @@ export async function loader({ params }) {
   const { _id, tasks } = listTasks.task;
 
   store.dispatch(loadTasks(tasks));
-
+  // id: id of list name and tasks: list of tasks
   return { id: _id, tasks };
 }
