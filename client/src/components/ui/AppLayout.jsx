@@ -20,6 +20,7 @@ function AppLayout() {
             type="checkbox"
             className="drawer-toggle "
             checked={open}
+            readOnly
           />
 
           <div className="drawer-content overflow-hidden  md:rounded-r-lg">

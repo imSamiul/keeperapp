@@ -1,6 +1,7 @@
 import { useRouteLoaderData, useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
+import Modal from "../../../components/ui/Modal";
 
 function TaskList() {
   const data = useRouteLoaderData("listName");
@@ -40,6 +41,7 @@ function TaskList() {
             <LinkButton to={task._id} state={location.pathname}>
               <i className="fa-solid fa-pen-to-square fa-xl"></i>
             </LinkButton>
+            {/* <Modal></Modal> */}
           </div>
         ))}
     </div>
