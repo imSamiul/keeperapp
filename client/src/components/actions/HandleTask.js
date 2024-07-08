@@ -1,21 +1,26 @@
 import { addTodo } from "../../pages/toDos/Tasks/todoSlice";
-import { createTask, handleCompleteTask } from "../../services/apiTasks";
+import {
+  createTask,
+  deleteTask,
+  handleCompleteTask,
+} from "../../services/apiTasks";
 import store from "../../store";
 
 export async function action({ request, params }) {
   const data = await request.formData();
-  const id = data.get("id");
   const taskId = data.get("taskId");
+  const listId = data.get("listId");
 
   // PATCH: complete task
   if (request.method === "PATCH") {
-    const task = await handleCompleteTask(id);
+    const task = await handleCompleteTask(taskId);
     console.log(task);
     return null;
   }
   // DELETE: delete task
   if (request.method === "DELETE") {
-    console.log(id, taskId);
+    const task = await deleteTask(listId, taskId);
+    console.log(task);
     return null;
   }
 
