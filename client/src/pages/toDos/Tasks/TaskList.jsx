@@ -17,11 +17,6 @@ function TaskList() {
     submit({ listId, taskId }, { method: "DELETE" });
   }
 
-  const handleModalAction = (task) => {
-    console.log(task);
-    handleDeleteTask(task._id);
-  };
-
   return (
     <div className="flex-[8]">
       {tasks
