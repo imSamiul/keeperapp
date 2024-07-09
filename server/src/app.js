@@ -3,6 +3,10 @@ const cors = require('cors');
 const userRouter = require('./routers/user');
 const taskRouter = require('./routers/task');
 const listName = require('./routers/listName');
+const path = require('path');
+require('dotenv').config({
+  path: path.resolve(__dirname, '../config/prod.env'),
+});
 
 require('./db/mongoose');
 
