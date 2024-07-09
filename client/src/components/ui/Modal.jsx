@@ -7,17 +7,20 @@ function Modal({
   btnTitle,
   actionBtnTitle,
   handleModalAction,
+  task,
 }) {
   return (
     <div className="font-figtree">
       <Button
         classNames={btnClassNames}
         iconClassNames={iconClassNames}
-        onClick={() => document.getElementById("my_modal_1").showModal()}
+        onClick={() =>
+          document.getElementById(`my_modal_${task?._id}`).showModal()
+        }
       >
         {btnTitle && btnTitle}
       </Button>
-      <dialog id="my_modal_1" className="modal">
+      <dialog id={`my_modal_${task?._id}`} className="modal">
         <div className="modal-box bg-white">
           {children}
           <div className="modal-action">

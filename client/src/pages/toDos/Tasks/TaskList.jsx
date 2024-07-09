@@ -17,13 +17,18 @@ function TaskList() {
     submit({ listId, taskId }, { method: "DELETE" });
   }
 
+  const handleModalAction = (task) => {
+    console.log(task);
+    handleDeleteTask(task._id);
+  };
+
   return (
     <div className="flex-[8]">
       {tasks
         .sort((a, b) => a.completed - b.completed) // Sort tasks with completed ones first
         .map((task) => (
           <div
-            key={task.title}
+            key={task._id}
             className="flex mt-2 p-2 bg-white  rounded-md shadow-md justify-between"
           >
             <div className="flex items-center gap-2">
@@ -45,13 +50,18 @@ function TaskList() {
               <LinkButton to={task._id} state={location.pathname}>
                 <i className="fa-solid fa-pen-to-square fa-xl"></i>
               </LinkButton>
+
               <Modal
                 iconClassNames="fa-solid fa-trash-can  fa-lg"
                 btnClassNames="p-3"
                 actionBtnTitle={["Delete", "Cancel"]}
-                handleModalAction={() => handleDeleteTask(task._id)}
+                handleModalAction={() => handleDeleteTask(task?._id)}
+                task={task}
               >
-                <h1 className="text-lg lg:text-xl">Are you sure?</h1>
+                <h1 className="text-lg lg:text-xl">
+                  Are you sure want to delete
+                  <span className="font-semibold"> {task.title} </span>?
+                </h1>
               </Modal>
             </div>
           </div>

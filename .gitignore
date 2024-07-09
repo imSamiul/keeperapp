@@ -28,3 +28,5 @@ config
 *.env.example
 *.env.local
 *.env.staging
+/server/config/prod.env
+/server/config/dev.env
