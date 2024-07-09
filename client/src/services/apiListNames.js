@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
-
-const API_URL = "http://192.168.31.207:3000/listNames";
+console.log(import.meta.env.VITE_API_URL);
+const API_URL = `${import.meta.env.VITE_API_URL}/listNames`;
 
 export async function createList(listNameData) {
   try {
