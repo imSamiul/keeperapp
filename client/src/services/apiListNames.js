@@ -1,6 +1,6 @@
 import { json } from "react-router-dom";
 import { getAuthToken } from "../util/auth";
-console.log(import.meta.env.VITE_API_URL);
+
 const API_URL = `${import.meta.env.VITE_API_URL}/listNames`;
 
 export async function createList(listNameData) {
