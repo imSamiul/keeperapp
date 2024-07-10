@@ -13,7 +13,7 @@ import { checkAuthToken } from "./util/auth";
 // React Router DOM action
 import { action as loginUser } from "./components/actions/LoginUser";
 import { action as registerUser } from "./components/actions/RegisterUser";
-import { action as addTaskList } from "./components/actions/AddTaskList";
+import { action as handleTaskList } from "./components/actions/HandleTaskList";
 import { action as handleTask } from "./components/actions/HandleTask";
 import { action as editTask } from "./components/actions/EditTask";
 
@@ -38,13 +38,13 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     id: "todo",
     loader: loadListNames,
-    action: addTaskList,
+    action: handleTaskList,
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: <AllTasks />,
-        action: addTaskList,
+        action: handleTaskList,
       },
       {
         path: ":listName",

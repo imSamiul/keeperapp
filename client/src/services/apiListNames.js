@@ -3,6 +3,7 @@ import { getAuthToken } from "../util/auth";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/listNames`;
 
+// POST: create list
 export async function createList(listNameData) {
   try {
     const res = await fetch(`${API_URL}`, {
@@ -13,17 +14,20 @@ export async function createList(listNameData) {
       },
       body: JSON.stringify(listNameData),
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.error || "Could not create list");
-    }
     const data = await res.json();
+    if (!res.ok) {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+
     return data;
   } catch (error) {
-    console.log(error.message); // Log the error message to the console
+    throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
 
+// GET: get list names
 export async function getTaskList() {
   try {
     const res = await fetch(`${API_URL}`, {

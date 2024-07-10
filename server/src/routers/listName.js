@@ -10,7 +10,7 @@ router.post('/listNames', auth, async (req, res) => {
   const { title } = req.body;
   const duplicateList = await ListName.findOne({ title, owner: req.user._id });
   if (duplicateList) {
-    return res.status(400).send({ error: 'List name already exists' });
+    return res.status(400).send({ message: 'List name already exists' });
   }
   const createList = new ListName({ title, owner: req.user._id });
   try {
@@ -18,7 +18,8 @@ router.post('/listNames', auth, async (req, res) => {
 
     res.status(201).send({ title: savedList.title });
   } catch (error) {
-    res.status(400).send(error);
+    console.log(error);
+    res.status(500).send({ message: error.toString() });
   }
 });
 
