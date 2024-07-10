@@ -9,7 +9,7 @@ export async function loader() {
     return redirect("/register");
   }
 
-  const taskList = await getTaskList();
+  const { listNamesArray, user } = await getTaskList();
 
-  return taskList.listNamesArray;
+  return { taskList: listNamesArray, user };
 }

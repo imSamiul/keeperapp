@@ -22,6 +22,7 @@ router.post('/listNames', auth, async (req, res) => {
   }
 });
 
+// GET:
 router.get('/listNames', auth, async (req, res) => {
   try {
     const listNames = await ListName.find({ owner: req.user._id }).populate(
@@ -31,7 +32,7 @@ router.get('/listNames', auth, async (req, res) => {
       return { id: list._id, title: list.title, tasks: list.tasks };
     });
 
-    res.status(201).send({ listNamesArray });
+    res.status(201).send({ listNamesArray, user: req.user });
   } catch (error) {
     res.status(500).send({ message: error.toString() });
   }

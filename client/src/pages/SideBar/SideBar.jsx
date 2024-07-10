@@ -7,7 +7,7 @@ import { logout } from "../../services/apiUsers";
 import FixedSidebar from "./FixedSidebar";
 
 function SideBar({ toggleDrawer }) {
-  const fetchListNames = useRouteLoaderData("todo");
+  const { taskList: fetchListNames } = useRouteLoaderData("todo");
   const navigate = useNavigate();
 
   const modifyListNames = fetchListNames.map((listName) => {
