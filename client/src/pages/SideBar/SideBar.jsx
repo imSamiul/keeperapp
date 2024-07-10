@@ -46,6 +46,7 @@ function SideBar({ toggleDrawer }) {
             inputClassNames="w-full max-w-xs bg-white"
             btnClassNames="w-full text-base py-2 md:py-2"
             iconClassNames="fa-solid fa-plus"
+            placeholder="Add list name here"
           />
         </div>
 

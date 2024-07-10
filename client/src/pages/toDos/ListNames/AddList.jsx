@@ -3,7 +3,12 @@ import Input from "../../../components/ui/Input";
 import Button from "../../../components/ui/Button";
 import { useEffect, useState } from "react";
 
-function AddList({ btnClassNames, inputClassNames, iconClassNames }) {
+function AddList({
+  btnClassNames,
+  inputClassNames,
+  iconClassNames,
+  placeholder,
+}) {
   const [listName, setListName] = useState("");
   const [error, setError] = useState("");
   const actionData = useActionData();
@@ -23,6 +28,7 @@ function AddList({ btnClassNames, inputClassNames, iconClassNames }) {
       <Input
         name="listName"
         type="text"
+        placeholder={placeholder}
         classNames={inputClassNames}
         value={listName}
         onChange={(e) => {
