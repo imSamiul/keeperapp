@@ -23,7 +23,7 @@ function AppLayout() {
             readOnly
           />
 
-          <div className="drawer-content overflow-hidden  md:rounded-r-lg">
+          <div className="drawer-content overflow-hidden  ">
             <Content toggleDrawer={toggleDrawer} />
           </div>
 
