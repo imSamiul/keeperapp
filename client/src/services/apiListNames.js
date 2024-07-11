@@ -49,3 +49,27 @@ export async function getTaskList() {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+
+// PATCH:
+// Edit list name
+export async function editListName(listName, listNameObj) {
+  try {
+    const res = await fetch(`${API_URL}/edit/${listName}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+      body: JSON.stringify(listNameObj),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}

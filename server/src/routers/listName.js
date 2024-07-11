@@ -43,6 +43,7 @@ router.get('/listNames', auth, async (req, res) => {
 
 router.patch('/listNames/edit/:listName', auth, async (req, res) => {
   const { listName } = req.params;
+  console.log(listName);
   const updateListObj = req.body;
   const allowedUpdates = ['title'];
   const updates = Object.keys(updateListObj);

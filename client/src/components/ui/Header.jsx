@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 function Header({ toggleDrawer }) {
   const [toggleInput, setToggleInput] = useState(false);
-  const [listName, setListName] = useState("All Tasks"); // Initial state
+  const [listName, setListName] = useState("");
+  const [initialListName, setInitialListName] = useState("All Tasks"); // Initial state
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
 
@@ -13,6 +14,7 @@ function Header({ toggleDrawer }) {
     if (params.listName) {
       const formattedListName = params.listName.replace("-", " ");
       setListName(formattedListName);
+      setInitialListName(formattedListName);
     }
   }, [params.listName]);
   // if (listName) {
@@ -23,7 +25,7 @@ function Header({ toggleDrawer }) {
   }
 
   function handleEditListName() {
-    submit({ title: listName }, { method: "PATCH" });
+    submit({ title: listName, listName: initialListName }, { method: "PATCH" });
     setToggleInput((prev) => !prev);
   }
   function handleListNameValue(e) {

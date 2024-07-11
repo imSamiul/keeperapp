@@ -6,6 +6,7 @@ export async function loader({ params }) {
   const { listName } = params;
 
   const listTasks = await getListTasks(listName);
+  console.log(listTasks);
 
   const { _id, tasks } = listTasks.task;
 

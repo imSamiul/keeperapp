@@ -1,21 +1,24 @@
 import { createNewList } from "../../pages/toDos/ListNames/listNamesSlice";
-import { createList } from "../../services/apiListNames";
+import { createList, editListName } from "../../services/apiListNames";
 import store from "../../store";
 
 export async function action({ request }) {
   const data = await request.formData();
-  const listNameData = data.get("listName");
+  const listName = data.get("listName");
 
   // PATCH: edit task list name
   if (request.method === "PATCH") {
-    console.log("PATCH");
     const title = data.get("title");
-    console.log(title);
-    // const listName = await createList(listNameData, listId);
+    const listNameData = {
+      title: title,
+    };
+
+    const updateListName = await editListName(listName, listNameData);
+    console.log(updateListName);
     return null;
   }
   const errors = {};
-  if (listNameData.length < 1) {
+  if (listName.length < 1) {
     errors.message = "List name must be at least 1 character";
   }
   if (Object.keys(errors).length > 0) {
@@ -23,7 +26,7 @@ export async function action({ request }) {
   }
 
   const listNameObj = {
-    title: listNameData,
+    title: listName,
   };
 
   const newListItem = await createList(listNameObj);

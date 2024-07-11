@@ -104,6 +104,9 @@ router.patch('/tasks/edit/:id', auth, async (req, res) => {
 
   try {
     const task = await Task.findOne({ _id: id, owner: req.user._id });
+    if (!task) {
+      return res.status(400).send({ message: 'Task not found' });
+    }
     updates.forEach((update) => (task[update] = updatedTask[update]));
     await task.save();
     res.status(201).send({ task });
