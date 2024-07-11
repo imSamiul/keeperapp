@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  header: "All Tasks",
+  listNameHeader: "All Tasks",
   listNames: [],
 };
 
@@ -13,9 +13,13 @@ const listNamesSlice = createSlice({
       state.listNames.push(action.payload);
     },
     changeHeader(state, action) {
-      state.header = action.payload;
+      state.listNameHeader = action.payload;
+    },
+    resetHeader(state) {
+      state.listNameHeader = "All Tasks";
     },
   },
 });
-export const { createNewList } = listNamesSlice.actions;
+export const { createNewList, changeHeader, resetHeader } =
+  listNamesSlice.actions;
 export default listNamesSlice.reducer;

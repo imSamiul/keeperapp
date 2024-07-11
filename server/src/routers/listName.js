@@ -1,11 +1,11 @@
 const express = require('express');
-
 const ListName = require('../model/listName');
 const auth = require('../middleware/auth');
-const User = require('../model/user');
 
 const router = new express.Router();
+
 // POST:
+// Create new list name
 router.post('/listNames', auth, async (req, res) => {
   const { title } = req.body;
   const duplicateList = await ListName.findOne({ title, owner: req.user._id });
@@ -16,22 +16,25 @@ router.post('/listNames', auth, async (req, res) => {
   try {
     const savedList = await createList.save();
 
-    res.status(201).send({ title: savedList.title });
+    return res.status(201).send({ title: savedList.title });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 
 // GET:
+// Get list names
 router.get('/listNames', auth, async (req, res) => {
   try {
     const listNames = await ListName.find({ owner: req.user._id }).populate(
       'tasks',
     );
-    const listNamesArray = listNames.map((list) => {
-      return { id: list._id, title: list.title, tasks: list.tasks };
-    });
+    const listNamesArray = listNames.map((list) => ({
+      id: list._id,
+      title: list.title,
+      tasks: list.tasks,
+    }));
 
     res.status(201).send({ listNamesArray, user: req.user });
   } catch (error) {
@@ -40,10 +43,10 @@ router.get('/listNames', auth, async (req, res) => {
 });
 
 // PATCH:
+// Edit list name
+router.patch('/listNames/edit/:listId', auth, async (req, res) => {
+  const { listId } = req.params;
 
-router.patch('/listNames/edit/:listName', auth, async (req, res) => {
-  const { listName } = req.params;
-  console.log(listName);
   const updateListObj = req.body;
   const allowedUpdates = ['title'];
   const updates = Object.keys(updateListObj);
@@ -52,23 +55,25 @@ router.patch('/listNames/edit/:listName', auth, async (req, res) => {
     allowedUpdates.includes(update),
   );
   if (!isValidOperation) {
-    res.status(400).send({ message: 'Invalid updates' });
+    return res.status(400).send({ message: 'Invalid updates' });
   }
 
   try {
     const listNameObj = await ListName.findOne({
-      title: listName,
+      _id: listId,
       owner: req.user._id,
     });
 
     if (!listNameObj) {
       return res.status(400).send({ message: 'List not found' });
     }
-    updates.forEach((update) => (listNameObj[update] = updateListObj[update]));
+    updates.forEach((update) => {
+      listNameObj[update] = updateListObj[update];
+    });
     await listNameObj.save();
-    res.status(201).send({ listNameObj });
+    return res.status(201).send({ listNameObj });
   } catch (error) {
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 

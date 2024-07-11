@@ -1,9 +1,17 @@
 import { useRouteLoaderData } from "react-router-dom";
 import ListItem from "./ListItem";
 import AddList from "./AddList";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { resetHeader } from "./listNamesSlice";
 
 function AllListWithTasks() {
   const { taskList: listNamesData, user } = useRouteLoaderData("todo");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("reset header");
+    dispatch(resetHeader());
+  }, [dispatch]);
 
   return (
     <div className="px-4 py-4">

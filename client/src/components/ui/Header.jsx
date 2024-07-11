@@ -6,29 +6,37 @@ import {
 } from "react-router-dom";
 import Button from "./Button";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import Modal from "./Modal";
 
 function Header({ toggleDrawer }) {
+  const listNameHeader = useSelector((state) => state.listNames.listNameHeader);
+  console.log(listNameHeader);
+
   const [toggleInput, setToggleInput] = useState(false);
-  const [listName, setListName] = useState("All Tasks");
+  const [listName, setListName] = useState(listNameHeader || "");
   const [initialListName, setInitialListName] = useState("All Tasks"); // Initial state
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const prevLocation = useRef(location.pathname);
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const prevLocation = useRef(location.pathname);
+
+  useEffect(() => {
+    setListName(listNameHeader);
+  }, [listNameHeader]);
 
   // Resolve naming conflict and set initial state
-  useEffect(() => {
-    if (params.listName) {
-      const formattedListName = params.listName.replace("-", " ");
-      setListName(formattedListName);
-      setInitialListName(formattedListName);
-    } else {
-      setListName("All Tasks");
-    }
-  }, [params.listName]);
+  // useEffect(() => {
+  //   if (params.listName) {
+  //     const formattedListName = params.listName.replace("-", " ");
+  //     setListName(formattedListName);
+  //     setInitialListName(formattedListName);
+  //   } else {
+  //     setListName("All Tasks");
+  //   }
+  // }, [params.listName]);
   // if (listName) {
   //   setListName((prev) => prev.replace("-", " "));
   // }
@@ -37,27 +45,27 @@ function Header({ toggleDrawer }) {
   }
 
   function handleEditListName() {
-    submit({ title: listName, listName: initialListName }, { method: "PATCH" });
+    submit({ id: params.id, title: listNameHeader }, { method: "PATCH" });
     setToggleInput((prev) => !prev);
   }
   function handleListNameValue(e) {
     setListName(e.target.value);
   }
-  useEffect(() => {
-    const handlePopstate = () => {
-      const currentLocation = location.pathname;
-      if (currentLocation !== prevLocation.current) {
-        // Redirect to a specific URL when back button is pressed
-        navigate("/todo");
-      }
-    };
+  // useEffect(() => {
+  //   const handlePopstate = () => {
+  //     const currentLocation = location.pathname;
+  //     if (currentLocation !== prevLocation.current) {
+  //       // Redirect to a specific URL when back button is pressed
+  //       navigate("/todo");
+  //     }
+  //   };
 
-    window.addEventListener("popstate", handlePopstate);
+  //   window.addEventListener("popstate", handlePopstate);
 
-    return () => {
-      window.removeEventListener("popstate", handlePopstate);
-    };
-  }, [navigate, location]);
+  //   return () => {
+  //     window.removeEventListener("popstate", handlePopstate);
+  //   };
+  // }, [navigate, location]);
 
   return (
     <div className="flex md:gap-5 w-full bg-[#fca311] bg-opacity-80 ">
@@ -89,7 +97,7 @@ function Header({ toggleDrawer }) {
             iconClassNames="fa-solid fa-check"
             classNames="bg-[#14213d] text-white md:text-base py-2"
             onClick={handleEditListName}
-            disabled={listName === initialListName || listName === ""}
+            disabled={listName === listNameHeader || listName === ""}
           >
             Done
           </Button>

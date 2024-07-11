@@ -5,7 +5,7 @@ function Content({ toggleDrawer }) {
   return (
     <div className="overflow-auto h-full scrollbar">
       <Header toggleDrawer={toggleDrawer} />
-      {/* <Outlet /> */}
+      <Outlet />
     </div>
   );
 }

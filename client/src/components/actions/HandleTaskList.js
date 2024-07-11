@@ -9,12 +9,13 @@ export async function action({ request }) {
 
   // PATCH: edit task list name
   if (request.method === "PATCH") {
+    const listId = data.get("id");
     const title = data.get("title");
     const listNameData = {
       title: title,
     };
 
-    const updateListName = await editListName(listName, listNameData);
+    const updateListName = await editListName(listId, listNameData);
     const newUrl = updateListName.listNameObj.title
       .replace(/\s+/g, "-")
       .toLowerCase();
