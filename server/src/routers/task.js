@@ -1,23 +1,21 @@
 const express = require('express');
 
 const Task = require('../model/task');
-const User = require('../model/user');
 const ListName = require('../model/listName');
 const auth = require('../middleware/auth');
 
 const router = new express.Router();
 // GET:
-router.get('/tasks/:listName', auth, async (req, res) => {
-  const { listName } = req.params;
-  const modifyListName = listName.replace(/-/g, ' ');
+router.get('/tasks/:listNameId', auth, async (req, res) => {
+  const { listNameId } = req.params;
 
   try {
-    const task = await ListName.findOne({
+    const listWithTasks = await ListName.findOne({
       owner: req.user._id,
-      title: modifyListName,
+      _id: listNameId,
     }).populate('tasks');
 
-    res.status(201).send({ task });
+    res.status(201).send({ listWithTasks });
   } catch (error) {
     res.status(500).send({ message: error.toString() });
   }
@@ -33,9 +31,9 @@ router.get('/tasks/edit/:id', auth, async (req, res) => {
       return res.status(400).send({ message: 'Task not found' });
     }
 
-    res.status(201).send({ task });
+    return res.status(201).send({ task });
   } catch (error) {
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 
@@ -63,9 +61,9 @@ router.post('/tasks', auth, async (req, res) => {
       { $push: { tasks: savedTask._id } },
       { new: true },
     );
-    res.status(201).send({ savedTask, updateList });
+    return res.status(201).send({ savedTask, updateList });
   } catch (error) {
-    res.status(400).send({ message: error.toString() });
+    return res.status(400).send({ message: error.toString() });
   }
 });
 
@@ -84,9 +82,9 @@ router.patch('/tasks/check/:id', auth, async (req, res) => {
     task.completed = !task.completed;
     await task.save();
 
-    res.status(201).send({ task });
+    return res.status(201).send({ task });
   } catch (error) {
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 // Edit task
@@ -107,11 +105,13 @@ router.patch('/tasks/edit/:id', auth, async (req, res) => {
     if (!task) {
       return res.status(400).send({ message: 'Task not found' });
     }
-    updates.forEach((update) => (task[update] = updatedTask[update]));
+    updates.forEach((update) => {
+      task[update] = updatedTask[update];
+    });
     await task.save();
-    res.status(201).send({ task });
+    return res.status(201).send({ task });
   } catch (error) {
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 
@@ -130,9 +130,9 @@ router.delete('/tasks/:listId/:id', auth, async (req, res) => {
       { _id: listId },
       { $pull: { tasks: id } },
     );
-    res.status(201).send({ deletedTask, newList });
+    return res.status(201).send({ deletedTask, newList });
   } catch (error) {
-    res.status(500).send({ message: error.toString() });
+    return res.status(500).send({ message: error.toString() });
   }
 });
 

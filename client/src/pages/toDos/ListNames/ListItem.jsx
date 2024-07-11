@@ -3,18 +3,15 @@ import { useNavigate } from "react-router-dom";
 function ListItem({ listNameData }) {
   const navigate = useNavigate();
 
-  const handleDivClick = (listName) => {
-    let lowerCaseString = listName.toLowerCase();
-    let resultString = lowerCaseString.replace(/\s+/g, "-");
-
-    navigate(`/todo/${resultString}`);
+  const handleDivClick = (listId) => {
+    navigate(`/todo/${listId}`);
   };
 
   return (
     <div
       key={listNameData.id}
       className="min-h-60 max-h-60   bg-[#fca311] bg-opacity-20 rounded-md font-shantellSans p-5"
-      onClick={() => handleDivClick(listNameData.title)}
+      onClick={() => handleDivClick(listNameData.id)}
     >
       <div className="border-dashed border-2 border-[#fca311] py-2 px-4 h-full rounded-md overflow-hidden">
         <h2 className="text-lg font-semibold underline underline-offset-4 decoration-wavy capitalize">

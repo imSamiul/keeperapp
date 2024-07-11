@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         action: handleTaskList,
       },
       {
-        path: ":listName",
+        path: ":listNameId",
         element: <Task />,
         action: handleTask,
         loader: loadTaskList,

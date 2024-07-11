@@ -5,9 +5,9 @@ import { getAuthToken } from "../util/auth";
 const API_URL = `${import.meta.env.VITE_API_URL}/tasks`;
 
 // GET:
-export async function getListTasks(listName) {
+export async function getListTasks(listNameId) {
   try {
-    const res = await fetch(`${API_URL}/${listName}`, {
+    const res = await fetch(`${API_URL}/${listNameId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,

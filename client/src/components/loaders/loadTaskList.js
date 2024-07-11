@@ -3,9 +3,9 @@ import { getListTasks } from "../../services/apiTasks";
 import store from "../../store";
 
 export async function loader({ params }) {
-  const { listName } = params;
+  const { listNameId } = params;
 
-  const listTasks = await getListTasks(listName);
+  const listTasks = await getListTasks(listNameId);
 
   const { _id, tasks } = listTasks.task;
 
