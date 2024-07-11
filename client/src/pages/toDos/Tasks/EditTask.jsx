@@ -1,15 +1,7 @@
-import {
-  Form,
-  useLoaderData,
-  useLocation,
-  useNavigate,
-  useSubmit,
-} from "react-router-dom";
-import Input from "../../../components/ui/Input";
+import { Form, useLoaderData, useNavigate, useSubmit } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Checkbox from "../../../components/ui/Checkbox";
-import LinkButton from "../../../components/ui/LinkButton";
 
 function EditTask() {
   const data = useLoaderData();
@@ -19,13 +11,15 @@ function EditTask() {
   const task = data.task;
   const [title, setTitle] = useState(task.title);
 
+  // Control the input field
   function handleTask(e) {
     setTitle(e.target.value);
   }
+  // Set the title to the task title in initial render and when task title changes
   useEffect(() => {
     setTitle(task.title);
   }, [task.title]);
-
+  //  Handle task complete checkbox
   function handleCompleteTask() {
     submit({ checkTask: true }, { method: "PATCH" });
   }

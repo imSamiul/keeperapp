@@ -7,7 +7,14 @@ function LinkButton({ children, to, ...props }) {
     " text-[#fca311] opacity-80 hover:opacity-100 hover:underline";
 
   if (to === "-1")
-    return <Button onClick={() => navigate(-1)}>{children}</Button>;
+    return (
+      <Button
+        classNames="bg-[#fca311] text-white hover:bg-white hover:text-black "
+        onClick={() => navigate(-1)}
+      >
+        {children}
+      </Button>
+    );
 
   return (
     <Link to={to} className={className} {...props}>
