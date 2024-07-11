@@ -61,7 +61,7 @@ function EditTask() {
             Cancel
           </button>
           <Button
-            classNames="p-2 text-md"
+            classNames="p-2 text-md bg-[#fca311] text-white hover:bg-white hover:text-black "
             iconClassNames="fa-solid fa-check"
             disabled={task.title === title}
           >

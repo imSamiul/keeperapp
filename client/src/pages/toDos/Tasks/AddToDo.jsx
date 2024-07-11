@@ -3,10 +3,13 @@ import { Form, useActionData, useNavigation } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import { useEffect, useState } from "react";
 import Input from "../../../components/ui/Input";
+import { useSelector } from "react-redux";
 
 function AddToDo() {
   const [error, setError] = useState("");
   const [title, setTitle] = useState("");
+  const listName = useSelector((state) => state.listNames.listNameHeader);
+
   const actionData = useActionData();
   const navigation = useNavigation();
   useEffect(() => {
@@ -19,6 +22,7 @@ function AddToDo() {
   }, [navigation.state, actionData]);
   return (
     <Form method="POST" className=" flex w-full gap-2">
+      <input type="hidden" name="listName" value={listName} />
       <Input
         id="title"
         type="text"

@@ -48,7 +48,7 @@ function TaskList() {
 
               <Modal
                 iconClassNames="fa-solid fa-trash-can  fa-lg"
-                btnClassNames="p-3"
+                btnClassNames="p-3 bg-[#fca311] text-white hover:bg-white hover:text-black "
                 actionBtnTitle={["Delete", "Cancel"]}
                 handleModalAction={() => handleDeleteTask(task?._id)}
                 task={task}
