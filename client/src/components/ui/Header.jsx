@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function Header({ toggleDrawer }) {
   const [toggleInput, setToggleInput] = useState(false);
-  const [listName, setListName] = useState("");
+  const [listName, setListName] = useState("All Tasks");
   const [initialListName, setInitialListName] = useState("All Tasks"); // Initial state
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
@@ -54,7 +54,7 @@ function Header({ toggleDrawer }) {
           }}
           onBlur={handleEditListName}
           name="listName"
-          value={listName ? listName : "All Tasks"}
+          value={listName}
           onChange={handleListNameValue}
         ></input>
         {toggleInput && (
@@ -67,7 +67,7 @@ function Header({ toggleDrawer }) {
           </Button>
         )}
       </div>
-      {!toggleInput && (
+      {!toggleInput && listName !== "All Tasks" && (
         <div className="w-full flex p-5 gap-2 md:gap-3  justify-end">
           <Button
             classNames="bg-[#14213d] text-white md:text-base w-fit"

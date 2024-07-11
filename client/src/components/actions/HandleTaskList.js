@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import { createNewList } from "../../pages/toDos/ListNames/listNamesSlice";
 import { createList, editListName } from "../../services/apiListNames";
 import store from "../../store";
@@ -14,8 +15,11 @@ export async function action({ request }) {
     };
 
     const updateListName = await editListName(listName, listNameData);
+    const newUrl = updateListName.listNameObj.title
+      .replace(/\s+/g, "-")
+      .toLowerCase();
     console.log(updateListName);
-    return null;
+    return redirect(`/todo/${newUrl}`);
   }
   const errors = {};
   if (listName.length < 1) {
