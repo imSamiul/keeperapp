@@ -15,6 +15,8 @@ function Header({ toggleDrawer }) {
       const formattedListName = params.listName.replace("-", " ");
       setListName(formattedListName);
       setInitialListName(formattedListName);
+    } else {
+      setListName("All Tasks");
     }
   }, [params.listName]);
   // if (listName) {
@@ -44,7 +46,7 @@ function Header({ toggleDrawer }) {
         </label>
         <input
           className={`input bg-transparent font-shantellSans font-semibold text-2xl md:text-4xl my-3 md:my-5 px-2 capitalize border-0 outline-none focus:outline-none focus:border-0 w-full rounded-none hover:cursor-text ${
-            toggleInput ? "border-b focus:border-b border-white" : ""
+            toggleInput ? "border-b focus:border-b border-black" : ""
           }`}
           disabled={!toggleInput}
           style={{
@@ -62,6 +64,7 @@ function Header({ toggleDrawer }) {
             iconClassNames="fa-solid fa-check"
             classNames="bg-[#14213d] text-white md:text-base py-2"
             onClick={handleEditListName}
+            disabled={listName === initialListName || listName === ""}
           >
             Done
           </Button>

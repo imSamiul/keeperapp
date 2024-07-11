@@ -18,7 +18,7 @@ export async function action({ request }) {
     const newUrl = updateListName.listNameObj.title
       .replace(/\s+/g, "-")
       .toLowerCase();
-    console.log(updateListName);
+
     return redirect(`/todo/${newUrl}`);
   }
   const errors = {};
