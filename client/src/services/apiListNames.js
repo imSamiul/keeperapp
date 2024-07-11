@@ -52,9 +52,9 @@ export async function getTaskList() {
 
 // PATCH:
 // Edit list name
-export async function editListName(listName, listNameObj) {
+export async function editListName(listId, listNameObj) {
   try {
-    const res = await fetch(`${API_URL}/edit/${listName}`, {
+    const res = await fetch(`${API_URL}/edit/${listId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

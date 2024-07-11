@@ -1,22 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SideBar from "../../pages/SideBar/SideBar";
 import Content from "../Content/Content";
-
 import NavBar from "./NavBar";
-import { useDispatch } from "react-redux";
-import { resetHeader } from "../../pages/toDos/ListNames/listNamesSlice";
 
 function AppLayout() {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
 
   function toggleDrawer() {
     setOpen((prev) => !prev);
   }
-  useEffect(() => {
-    console.log("reset header");
-    dispatch(resetHeader());
-  }, [dispatch]);
 
   return (
     <div id="content" className="  font-figtree  ">

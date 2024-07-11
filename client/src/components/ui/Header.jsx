@@ -1,17 +1,11 @@
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSubmit,
-} from "react-router-dom";
+import { useParams, useSubmit } from "react-router-dom";
 import Button from "./Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "./Modal";
 
 function Header({ toggleDrawer }) {
   const listNameHeader = useSelector((state) => state.listNames.listNameHeader);
-  console.log(listNameHeader);
 
   const [toggleInput, setToggleInput] = useState(false);
   const [listName, setListName] = useState(listNameHeader || "");
@@ -40,14 +34,17 @@ function Header({ toggleDrawer }) {
   // if (listName) {
   //   setListName((prev) => prev.replace("-", " "));
   // }
+
+  // to check if the list name is editing or not
   function handleToggleEditListName() {
     setToggleInput((prev) => !prev);
   }
-
+  // to submit the edited list name
   function handleEditListName() {
-    submit({ id: params.id, title: listNameHeader }, { method: "PATCH" });
+    submit({ id: params.listNameId, title: listName }, { method: "PATCH" });
     setToggleInput((prev) => !prev);
   }
+  // to change input value
   function handleListNameValue(e) {
     setListName(e.target.value);
   }

@@ -8,8 +8,8 @@ import { resetHeader } from "./listNamesSlice";
 function AllListWithTasks() {
   const { taskList: listNamesData, user } = useRouteLoaderData("todo");
   const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log("reset header");
     dispatch(resetHeader());
   }, [dispatch]);
 

@@ -16,9 +16,7 @@ export async function action({ request }) {
     };
 
     const updateListName = await editListName(listId, listNameData);
-    const newUrl = updateListName.listNameObj.title
-      .replace(/\s+/g, "-")
-      .toLowerCase();
+    const newUrl = updateListName.listNameObj._id;
 
     return redirect(`/todo/${newUrl}`);
   }
