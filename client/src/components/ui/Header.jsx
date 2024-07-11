@@ -1,6 +1,12 @@
-import { useParams, useSubmit } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSubmit,
+} from "react-router-dom";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Modal from "./Modal";
 
 function Header({ toggleDrawer }) {
   const [toggleInput, setToggleInput] = useState(false);
@@ -8,6 +14,10 @@ function Header({ toggleDrawer }) {
   const [initialListName, setInitialListName] = useState("All Tasks"); // Initial state
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const prevLocation = useRef(location.pathname);
 
   // Resolve naming conflict and set initial state
   useEffect(() => {
@@ -33,6 +43,21 @@ function Header({ toggleDrawer }) {
   function handleListNameValue(e) {
     setListName(e.target.value);
   }
+  useEffect(() => {
+    const handlePopstate = () => {
+      const currentLocation = location.pathname;
+      if (currentLocation !== prevLocation.current) {
+        // Redirect to a specific URL when back button is pressed
+        navigate("/todo");
+      }
+    };
+
+    window.addEventListener("popstate", handlePopstate);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopstate);
+    };
+  }, [navigate, location]);
 
   return (
     <div className="flex md:gap-5 w-full bg-[#fca311] bg-opacity-80 ">
@@ -77,6 +102,12 @@ function Header({ toggleDrawer }) {
             iconClassNames="fa-solid fa-pen-to-square"
             onClick={handleToggleEditListName}
           ></Button>
+          {/* <Modal>
+            <h1 className="text-lg lg:text-xl">
+              Are you sure want to delete
+              <span className="font-semibold"> {listName} </span>?
+            </h1>
+          </Modal> */}
           <Button
             classNames="bg-[#14213d] text-white md:text-base w-fit"
             iconClassNames="fa-solid fa-trash-can"
