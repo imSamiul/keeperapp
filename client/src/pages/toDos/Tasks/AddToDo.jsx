@@ -36,7 +36,7 @@ function AddToDo() {
         type="submit"
         name="intent"
         value="addTask"
-        classNames="text-base py-2 md:py-2"
+        classNames="text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black "
         iconClassNames="fa-solid fa-clipboard-list"
       >
         Add

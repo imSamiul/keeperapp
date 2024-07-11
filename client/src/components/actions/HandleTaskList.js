@@ -5,6 +5,8 @@ import store from "../../store";
 export async function action({ request }) {
   const data = await request.formData();
   const listNameData = data.get("listName");
+  const { listName } = request;
+  console.log(listName);
 
   // PATCH: edit task list name
   // if(request.method === "PATCH") {

@@ -13,7 +13,7 @@ function SideBar({ toggleDrawer }) {
   const modifyListNames = fetchListNames.map((listName) => {
     let lowerCaseString = listName.title.toLowerCase();
     let resultString = lowerCaseString.replace(/\s+/g, "-");
-    return { id: listName.title, title: listName.title, url: resultString };
+    return { id: listName.id, title: listName.title, url: resultString };
   });
 
   async function handleLogout() {
