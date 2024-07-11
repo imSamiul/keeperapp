@@ -70,6 +70,7 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 // PATCH:
+// Check or uncheck task
 router.patch('/tasks/check/:id', auth, async (req, res) => {
   const { id } = req.params;
 
@@ -88,6 +89,7 @@ router.patch('/tasks/check/:id', auth, async (req, res) => {
     res.status(500).send({ message: error.toString() });
   }
 });
+// Edit task
 router.patch('/tasks/edit/:id', auth, async (req, res) => {
   const { id } = req.params;
   const updatedTask = req.body;
