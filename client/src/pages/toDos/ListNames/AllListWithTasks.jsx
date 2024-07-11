@@ -19,7 +19,7 @@ function AllListWithTasks() {
             <AddList
               inputClassNames="bg-white"
               placeholder="Add list name here"
-              btnClassNames="w-full text-base py-2 md:py-2"
+              btnClassNames="w-full text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black "
               iconClassNames="fa-solid fa-plus"
             />
           </div>

@@ -44,7 +44,7 @@ function SideBar({ toggleDrawer }) {
         <div className="flex-1">
           <AddList
             inputClassNames="w-full max-w-xs bg-white"
-            btnClassNames="w-full text-base py-2 md:py-2"
+            btnClassNames="w-full text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black "
             iconClassNames="fa-solid fa-plus"
             placeholder="Add list name here"
           />
@@ -59,7 +59,7 @@ function SideBar({ toggleDrawer }) {
         <div className="flex justify-around w-full flex-1 items-center">
           <h1>Settings</h1>
           <Modal
-            btnClassNames="w-full text-base py-3 md:py-2.5 "
+            btnClassNames="w-full text-base py-3 md:py-2.5 bg-[#fca311] text-white hover:bg-white hover:text-black "
             iconClassNames="fa-solid fa-right-from-bracket"
             btnTitle="Log Out"
             actionBtnTitle={["Yes", "No"]}
