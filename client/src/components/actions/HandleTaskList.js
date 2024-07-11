@@ -5,15 +5,15 @@ import store from "../../store";
 export async function action({ request }) {
   const data = await request.formData();
   const listNameData = data.get("listName");
-  const { listName } = request;
-  console.log(listName);
 
   // PATCH: edit task list name
-  // if(request.method === "PATCH") {
-  //   const listId = data.get("listId");
-  //   // const listName = await createList(listNameData, listId);
-  //   return null;
-  // }
+  if (request.method === "PATCH") {
+    console.log("PATCH");
+    const title = data.get("title");
+    console.log(title);
+    // const listName = await createList(listNameData, listId);
+    return null;
+  }
   const errors = {};
   if (listNameData.length < 1) {
     errors.message = "List name must be at least 1 character";

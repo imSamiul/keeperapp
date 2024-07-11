@@ -1,18 +1,33 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSubmit } from "react-router-dom";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Header({ toggleDrawer }) {
   const [toggleInput, setToggleInput] = useState(false);
-  let { listName } = useParams();
-  if (listName) {
-    listName = listName.replace("-", " ");
-  }
+  const [listName, setListName] = useState("All Tasks"); // Initial state
+  const submit = useSubmit();
+  const params = useParams(); // Use the entire params object
+
+  // Resolve naming conflict and set initial state
+  useEffect(() => {
+    if (params.listName) {
+      const formattedListName = params.listName.replace("-", " ");
+      setListName(formattedListName);
+    }
+  }, [params.listName]);
+  // if (listName) {
+  //   setListName((prev) => prev.replace("-", " "));
+  // }
   function handleToggleEditListName() {
     setToggleInput((prev) => !prev);
   }
-  function handleEditListNam() {
+
+  function handleEditListName() {
+    submit({ title: listName }, { method: "PATCH" });
     setToggleInput((prev) => !prev);
+  }
+  function handleListNameValue(e) {
+    setListName(e.target.value);
   }
 
   return (
@@ -26,7 +41,7 @@ function Header({ toggleDrawer }) {
           <i className="fa-solid fa-bars text-2xl"></i>
         </label>
         <input
-          className={`input bg-transparent font-shantellSans font-semibold text-2xl md:text-4xl my-3 md:my-5 px-2 capitalize border-0 outline-none focus:outline-none focus:border-0 w-full rounded-none ${
+          className={`input bg-transparent font-shantellSans font-semibold text-2xl md:text-4xl my-3 md:my-5 px-2 capitalize border-0 outline-none focus:outline-none focus:border-0 w-full rounded-none hover:cursor-text ${
             toggleInput ? "border-b focus:border-b border-white" : ""
           }`}
           disabled={!toggleInput}
@@ -35,14 +50,16 @@ function Header({ toggleDrawer }) {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
           }}
-          onBlur={() => setToggleInput((prev) => !prev)}
+          onBlur={handleEditListName}
+          name="listName"
           value={listName ? listName : "All Tasks"}
+          onChange={handleListNameValue}
         ></input>
         {toggleInput && (
           <Button
             iconClassNames="fa-solid fa-check"
             classNames="bg-[#14213d] text-white md:text-base py-2"
-            onClick={handleEditListNam}
+            onClick={handleEditListName}
           >
             Done
           </Button>
