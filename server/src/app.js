@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const userRouter = require('./routers/user');
 const taskRouter = require('./routers/task');
 const listName = require('./routers/listName');
-const path = require('path');
 require('dotenv').config({
-  path: path.resolve(__dirname, '../config/dev.env'),
+  path: path.resolve(__dirname, '../config/prod.env'),
 });
 
 require('./db/mongoose');
