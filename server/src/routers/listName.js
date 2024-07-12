@@ -1,6 +1,7 @@
 const express = require('express');
 const ListName = require('../model/listName');
 const auth = require('../middleware/auth');
+const Task = require('../model/task');
 
 const router = new express.Router();
 
@@ -86,6 +87,7 @@ router.delete('/listNames/delete/:listId', auth, async (req, res) => {
       _id: listId,
       owner: req.user._id,
     });
+    await Task.deleteMany({ listId });
     if (deletedList) {
       return res.status(201).send({ deletedList });
     }

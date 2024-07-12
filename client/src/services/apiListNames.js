@@ -73,3 +73,24 @@ export async function editListName(listId, listNameObj) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+
+// DELETE: delete list
+export async function deleteList(listId) {
+  try {
+    const res = await fetch(`${API_URL}/delete/${listId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}

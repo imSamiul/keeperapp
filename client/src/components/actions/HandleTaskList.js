@@ -1,6 +1,10 @@
 import { redirect } from "react-router-dom";
 import { createNewList } from "../../pages/toDos/ListNames/listNamesSlice";
-import { createList, editListName } from "../../services/apiListNames";
+import {
+  createList,
+  deleteList,
+  editListName,
+} from "../../services/apiListNames";
 import store from "../../store";
 
 export async function action({ request }) {
@@ -19,6 +23,12 @@ export async function action({ request }) {
     const newUrl = updateListName.listNameObj._id;
 
     return redirect(`/todo/${newUrl}`);
+  }
+  // DELETE: delete task list
+  if (request.method === "DELETE") {
+    const listId = data.get("id");
+    const deletedList = await deleteList(listId);
+    return redirect(`/todo`);
   }
   const errors = {};
   if (listName.length < 1) {

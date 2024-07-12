@@ -6,10 +6,11 @@ import {
 } from "../../services/apiTasks";
 import store from "../../store";
 
-export async function action({ request }) {
+export async function action({ request, params }) {
   const data = await request.formData();
   const taskId = data.get("taskId");
-  const listId = data.get("listId");
+
+  const listId = params.listNameId;
 
   // PATCH: complete task
   if (request.method === "PATCH") {
@@ -39,6 +40,7 @@ export async function action({ request }) {
   const toDoData = {
     title,
     listName,
+    listId,
     completed: false,
   };
   if (btnIntent === "addTask") {

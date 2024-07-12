@@ -39,11 +39,12 @@ router.get('/tasks/edit/:id', auth, async (req, res) => {
 
 // POST:
 router.post('/tasks', auth, async (req, res) => {
-  const { title, completed, listName } = req.body;
+  const { title, completed, listId, listName } = req.body;
 
   const createTask = new Task({
     title,
     completed,
+    listId,
     owner: req.user._id,
   });
   try {
@@ -91,7 +92,7 @@ router.patch('/tasks/check/:id', auth, async (req, res) => {
 router.patch('/tasks/edit/:id', auth, async (req, res) => {
   const { id } = req.params;
   const updatedTask = req.body;
-  const allowedUpdates = ['title', 'completed'];
+  const allowedUpdates = ['title', 'completed', 'listId'];
   const updates = Object.keys(updatedTask);
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update),
