@@ -77,4 +77,22 @@ router.patch('/listNames/edit/:listId', auth, async (req, res) => {
   }
 });
 
+// DELETE:
+// Delete list name
+router.delete('/listNames/delete/:listId', auth, async (req, res) => {
+  const { listId } = req.params;
+  try {
+    const deletedList = await ListName.findOneAndDelete({
+      _id: listId,
+      owner: req.user._id,
+    });
+    if (deletedList) {
+      return res.status(201).send({ deletedList });
+    }
+    return res.status(400).send({ message: 'List not found' });
+  } catch (error) {
+    return res.status(500).send({ message: error.toString() });
+  }
+});
+
 module.exports = router;

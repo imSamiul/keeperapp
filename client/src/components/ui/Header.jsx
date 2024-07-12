@@ -39,14 +39,18 @@ function Header({ toggleDrawer }) {
   function handleToggleEditListName() {
     setToggleInput((prev) => !prev);
   }
+  // to change input value
+  function handleListNameValue(e) {
+    setListName(e.target.value);
+  }
   // to submit the edited list name
   function handleEditListName() {
     submit({ id: params.listNameId, title: listName }, { method: "PATCH" });
     setToggleInput((prev) => !prev);
   }
-  // to change input value
-  function handleListNameValue(e) {
-    setListName(e.target.value);
+  // to delete the list
+  function handleDeleteList() {
+    submit({ id: params.listNameId }, { method: "DELETE" });
   }
   // useEffect(() => {
   //   const handlePopstate = () => {
@@ -107,16 +111,17 @@ function Header({ toggleDrawer }) {
             iconClassNames="fa-solid fa-pen-to-square"
             onClick={handleToggleEditListName}
           ></Button>
-          {/* <Modal>
+          <Modal
+            actionBtnTitle={["Yes", "No"]}
+            iconClassNames="fa-solid fa-trash-can"
+            btnClassNames="bg-[#14213d] text-white md:text-base w-fit h-full"
+            handleModalAction={handleDeleteList}
+          >
             <h1 className="text-lg lg:text-xl">
               Are you sure want to delete
               <span className="font-semibold"> {listName} </span>?
             </h1>
-          </Modal> */}
-          <Button
-            classNames="bg-[#14213d] text-white md:text-base w-fit"
-            iconClassNames="fa-solid fa-trash-can"
-          ></Button>
+          </Modal>
         </div>
       )}
     </div>

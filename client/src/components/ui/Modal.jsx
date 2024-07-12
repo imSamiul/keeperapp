@@ -26,13 +26,13 @@ function Modal({
           <div className="modal-action">
             <form method="dialog" className="flex gap-3">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn">{actionBtnTitle[1]}</button>
-              <button
+              <Button className="btn">{actionBtnTitle[1]}</Button>
+              <Button
                 className="btn bg-red-700 text-white border-none hover:opacity-90 hover:border-solid hover:text-black"
                 onClick={handleModalAction}
               >
                 {actionBtnTitle[0]}
-              </button>
+              </Button>
             </form>
           </div>
         </div>

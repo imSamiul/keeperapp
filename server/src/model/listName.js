@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Task = require('./task');
 
 const listNameSchema = new mongoose.Schema(
   {
@@ -22,6 +23,20 @@ const listNameSchema = new mongoose.Schema(
     ],
   },
   { timestamps: true },
+);
+
+listNameSchema.pre(
+  'findOneAndDelete',
+  async function deleteTasksWithList(next) {
+    const list = this;
+    try {
+      // 'this' refers to the document being removed
+      await Task.deleteMany({ list: list._id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
 );
 
 const ListName = mongoose.model('ListName', listNameSchema);
