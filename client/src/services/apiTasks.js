@@ -47,6 +47,27 @@ export async function getTask(taskId) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+// get todays tasks
+export async function getTodayTasks() {
+  try {
+    const res = await fetch(`${API_URL}/today`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
 
 // POST:
 export async function createTask(taskData) {

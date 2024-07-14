@@ -3,7 +3,7 @@ import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
 import Modal from "../../../components/ui/Modal";
 
-function TaskList({ listId, tasks }) {
+function TaskList({ tasks }) {
   const submit = useSubmit();
 
   function handleCompleteTask(e) {
@@ -11,7 +11,7 @@ function TaskList({ listId, tasks }) {
     submit({ taskId }, { method: "PATCH" });
   }
   function handleDeleteTask(taskId) {
-    submit({ listId, taskId }, { method: "DELETE" });
+    submit({ taskId }, { method: "DELETE" });
   }
 
   return (

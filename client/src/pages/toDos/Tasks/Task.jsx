@@ -5,13 +5,13 @@ import TaskList from "./TaskList";
 function Task() {
   const data = useRouteLoaderData("listName");
   // id: id of list name and tasks: list of tasks
-  const { id: listId, tasks } = data;
+  const { tasks } = data;
   return (
     <div className="bg-[#fca311] h-full bg-opacity-10 p-5">
       <AddToDo />
 
       <div className="flex gap-2 flex-col-reverse md:flex-row mt-2">
-        <TaskList listId={listId} tasks={tasks} />
+        <TaskList tasks={tasks} />
         <Outlet />
       </div>
     </div>

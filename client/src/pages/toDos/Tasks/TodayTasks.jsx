@@ -1,8 +1,15 @@
-import React from "react";
+import { useLoaderData } from "react-router-dom";
 import TaskList from "./TaskList";
 
 function TodayTasks() {
-  return <div>{/* <TaskList></TaskList> */}</div>;
+  const todayTasks = useLoaderData();
+  console.log(todayTasks.todayTasks);
+
+  return (
+    <div>
+      <TaskList tasks={todayTasks.todayTasks}></TaskList>
+    </div>
+  );
 }
 
 export default TodayTasks;
