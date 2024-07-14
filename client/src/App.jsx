@@ -21,6 +21,7 @@ import { action as editTask } from "./components/actions/EditTask";
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
 import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
+import TodayTasks from "./pages/toDos/Tasks/TodayTasks";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <TodayTasks />,
+      },
+      {
+        path: "all-tasks-with-list",
         element: <AllTasks />,
         action: handleTaskList,
       },
