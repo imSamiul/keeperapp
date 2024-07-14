@@ -1,12 +1,12 @@
 import { redirect } from "react-router-dom";
 import { handleCompleteTask, updateTask } from "../../services/apiTasks";
-import { getLastSecondBeforeTomorrow } from "../utils/time";
 
 export async function action({ request, params }) {
   const { taskId } = params;
   const data = await request.formData();
   const checkTask = data.get("checkTask");
   const title = data.get("title");
+  const listName = data.get("listName");
 
   const checked = data.get("checked") === "on";
   const btnIntent = data.get("intent");
@@ -19,18 +19,18 @@ export async function action({ request, params }) {
   let taskObj = {
     title: title,
     completed: checked,
+    listName: listName,
   };
+  console.log(taskObj);
   if (btnIntent === "addToday") {
     taskObj = {
-      title: title,
-      completed: checked,
-      today: getLastSecondBeforeTomorrow(),
+      ...taskObj,
+      today: Date.now(),
     };
   }
   if (btnIntent === "removeToday") {
     taskObj = {
-      title: title,
-      completed: checked,
+      ...taskObj,
       today: "",
     };
   }

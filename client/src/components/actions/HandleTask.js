@@ -42,6 +42,7 @@ export async function action({ request, params }) {
     listName,
     listId,
     completed: false,
+    today: null,
   };
   if (btnIntent === "addTask") {
     const newTask = await createTask(toDoData);

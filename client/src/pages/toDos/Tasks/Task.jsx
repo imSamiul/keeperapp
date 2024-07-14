@@ -4,6 +4,7 @@ import TaskList from "./TaskList";
 
 function Task() {
   const data = useRouteLoaderData("listName");
+
   // id: id of list name and tasks: list of tasks
   const { tasks } = data;
   return (

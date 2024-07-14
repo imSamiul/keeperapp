@@ -2,6 +2,7 @@ import { Form, useLoaderData, useNavigate, useSubmit } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Checkbox from "../../../components/ui/Checkbox";
+import { useSelector } from "react-redux";
 
 function EditTask() {
   const data = useLoaderData();
@@ -11,6 +12,8 @@ function EditTask() {
 
   const [addToday, setAddToday] = useState(false);
   const [title, setTitle] = useState(task.title);
+
+  const listName = useSelector((state) => state.listNames.listNameHeader);
 
   // Control the input field
   function handleTask(e) {
@@ -47,6 +50,8 @@ function EditTask() {
             value={title}
             className="input py-1 px-0 h-auto rounded-sm border-t-0 border-r-0 border-l-0 border-b-2 border-[#fca311] w-full font-shantellSans text-xl focus:border-[#fca311] focus:outline-none "
           ></input>
+          <input type="hidden" name="listName" value={listName} />
+          <input type="hidden" name="taskId" value={task._id} />
         </div>
 
         <div className="mt-2 flex gap-2 items-center justify-end">

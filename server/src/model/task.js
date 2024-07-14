@@ -21,7 +21,10 @@ const taskSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-
+    listName: {
+      type: String,
+      required: true,
+    },
     listId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
