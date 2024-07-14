@@ -1,13 +1,10 @@
-import { useRouteLoaderData, useSubmit } from "react-router-dom";
+import { useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
 import Modal from "../../../components/ui/Modal";
 
-function TaskList() {
-  const data = useRouteLoaderData("listName");
+function TaskList({ listId, tasks }) {
   const submit = useSubmit();
-  // id: id of list name and tasks: list of tasks
-  const { id: listId, tasks } = data;
 
   function handleCompleteTask(e) {
     const taskId = e.target.name;

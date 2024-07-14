@@ -5,10 +5,11 @@ import Checkbox from "../../../components/ui/Checkbox";
 
 function EditTask() {
   const data = useLoaderData();
+  const task = data.task;
   const submit = useSubmit();
   const navigate = useNavigate();
 
-  const task = data.task;
+  const [addToday, setAddToday] = useState(false);
   const [title, setTitle] = useState(task.title);
 
   // Control the input field
@@ -18,7 +19,8 @@ function EditTask() {
   // Set the title to the task title in initial render and when task title changes
   useEffect(() => {
     setTitle(task.title);
-  }, [task.title]);
+    setAddToday(task.today);
+  }, [task.title, task.today]);
   //  Handle task complete checkbox
   function handleCompleteTask() {
     submit({ checkTask: true }, { method: "PATCH" });
@@ -60,6 +62,17 @@ function EditTask() {
             disabled={task.title === title}
           >
             Update
+          </Button>
+        </div>
+
+        <div className="mt-3">
+          <Button
+            classNames="bg-[#fca311] text-white hover:bg-white hover:text-black py-2 w-full"
+            iconClassNames="fa-solid fa-sun"
+            name="intent"
+            value={addToday ? "removeToday" : "addToday"}
+          >
+            {addToday ? "Remove from today" : "Add to today"}
           </Button>
         </div>
       </div>

@@ -17,8 +17,14 @@ const taskSchema = new mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    today: {
+      type: Date,
+      default: null,
+    },
+
     listId: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: 'List',
     },
   },

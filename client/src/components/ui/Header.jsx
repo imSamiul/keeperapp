@@ -9,31 +9,12 @@ function Header({ toggleDrawer }) {
 
   const [toggleInput, setToggleInput] = useState(false);
   const [listName, setListName] = useState(listNameHeader || "");
-  const [initialListName, setInitialListName] = useState("All Tasks"); // Initial state
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
-
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const prevLocation = useRef(location.pathname);
 
   useEffect(() => {
     setListName(listNameHeader);
   }, [listNameHeader]);
-
-  // Resolve naming conflict and set initial state
-  // useEffect(() => {
-  //   if (params.listName) {
-  //     const formattedListName = params.listName.replace("-", " ");
-  //     setListName(formattedListName);
-  //     setInitialListName(formattedListName);
-  //   } else {
-  //     setListName("All Tasks");
-  //   }
-  // }, [params.listName]);
-  // if (listName) {
-  //   setListName((prev) => prev.replace("-", " "));
-  // }
 
   // to check if the list name is editing or not
   function handleToggleEditListName() {
@@ -52,21 +33,6 @@ function Header({ toggleDrawer }) {
   function handleDeleteList() {
     submit({ id: params.listNameId }, { method: "DELETE" });
   }
-  // useEffect(() => {
-  //   const handlePopstate = () => {
-  //     const currentLocation = location.pathname;
-  //     if (currentLocation !== prevLocation.current) {
-  //       // Redirect to a specific URL when back button is pressed
-  //       navigate("/todo");
-  //     }
-  //   };
-
-  //   window.addEventListener("popstate", handlePopstate);
-
-  //   return () => {
-  //     window.removeEventListener("popstate", handlePopstate);
-  //   };
-  // }, [navigate, location]);
 
   return (
     <div className="flex md:gap-5 w-full bg-[#fca311] bg-opacity-80 ">

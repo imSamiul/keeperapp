@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 const navLinks = [
   { to: "/todo", title: "Today" },
-  { to: "/todo/all-tasks-with-list", title: "All Tasks" },
-  { to: "/todo/important", title: "Important" },
-  { to: "/todo/completed", title: "Complete" },
-  { to: "/todo/incomplete", title: "Incomplete" },
+  { to: "/todo/all-tasks", title: "All Tasks" },
+  { to: "/todo/fixed-tasks/important", title: "Important" },
+  { to: "/todo/fixed-tasks/completed", title: "Complete" },
+  { to: "/todo/fixed-tasks/incomplete", title: "Incomplete" },
 ];
 function FixedSidebar() {
   return (
