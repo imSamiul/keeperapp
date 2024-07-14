@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Link } from "react-router-dom";
 import Input from "../../components/ui/Input";
+import Button from "../../components/ui/Button";
 
 function Login() {
   const [formInputValue, setFormInputValue] = useState({
@@ -36,9 +37,9 @@ function Login() {
           onChange={handleChange}
           value={formInputValue.password}
         ></Input>
-        <button className="btn bg-[#C425D9] border-none py-3 text-white min-h-0 h-auto hover:text-black hover:outline-1  hover:border-black hover:border-solid hover:border-st">
+        <Button className=" bg-[#C425D9] border-none py-3 text-white min-h-0 h-auto hover:text-black hover:outline-1  hover:border-black hover:border-solid hover:border-st">
           Login
-        </button>
+        </Button>
       </Form>
 
       {/* <div className=" mt-8 mb-4 flex items-center justify-between">

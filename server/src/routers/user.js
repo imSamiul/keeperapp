@@ -2,6 +2,7 @@ const express = require('express');
 
 const User = require('../model/user');
 const auth = require('../middleware/auth');
+const ListName = require('../model/listName');
 
 const router = new express.Router();
 
@@ -11,7 +12,13 @@ router.post('/users/register', async (req, res) => {
 
   try {
     const createUserSave = await createUser.save();
+
     if (createUserSave) {
+      const newList = new ListName({
+        name: 'tasks',
+        owner: createUserSave._id,
+      });
+      await newList.save();
       const token = await createUser.generateAuthToken();
       res.status(201).send({ user: createUser, token });
     }
@@ -28,6 +35,7 @@ router.post('/users/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const loginSuccessfulUser = await User.findByCredentials(email, password);
+
     if (loginSuccessfulUser) {
       const token = await loginSuccessfulUser.generateAuthToken();
       res.status(201).send({ user: loginSuccessfulUser, token });
