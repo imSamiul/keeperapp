@@ -6,7 +6,7 @@ function TodayTasks() {
   console.log(todayTasks.todayTasks);
 
   return (
-    <div>
+    <div className="bg-[#fca311] h-full bg-opacity-10 p-5">
       <TaskList tasks={todayTasks.todayTasks}></TaskList>
     </div>
   );

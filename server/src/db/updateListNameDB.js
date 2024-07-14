@@ -11,30 +11,31 @@ async function updateTasksWithListReference() {
   });
 
   try {
-    const users = await User.find();
-    users.forEach(async (user) => {
-      const newList = new ListName({ name: 'tasks', owner: user._id });
-      await newList.save();
+    const lists = await ListName.find(); // Get all lists
+
+    lists.forEach(async (list) => {
+      // Assuming 'tasks' in List contains the task IDs
+      await Task.updateMany(
+        { _id: { $in: list.tasks } }, // Find tasks with IDs in the list's tasks array
+        { $set: { listName: list.title } }, // Set the 'list' field to the current list's ID
+      );
     });
-    console.log('List updated successfully');
+
+    console.log('Tasks updated successfully');
   } catch (error) {
-    console.log('Error updating list:', error);
+    console.error('Error updating tasks:', error);
   }
 }
 updateTasksWithListReference();
 
 // try {
-//   const lists = await ListName.find(); // Get all lists
-//   console.log(lists);
-//   lists.forEach(async (list) => {
-//     // Assuming 'tasks' in List contains the task IDs
-//     await Task.updateMany(
-//       { _id: { $in: list.tasks } }, // Find tasks with IDs in the list's tasks array
-//       { $set: { listId: list._id } }, // Set the 'list' field to the current list's ID
-//     );
+//   const users = await User.find();
+//   users.forEach(async (user) => {
+//     const newList = new ListName({ name: 'tasks', owner: user._id });
+//     await newList.save();
 //   });
-
-//   console.log('Tasks updated successfully');
+//   console.log('List updated successfully');
 // } catch (error) {
-//   console.error('Error updating tasks:', error);
+//   console.log('Error updating list:', error);
+// }
 // }

@@ -50,7 +50,11 @@ function EditTask() {
             value={title}
             className="input py-1 px-0 h-auto rounded-sm border-t-0 border-r-0 border-l-0 border-b-2 border-[#fca311] w-full font-shantellSans text-xl focus:border-[#fca311] focus:outline-none "
           ></input>
-          <input type="hidden" name="listName" value={listName} />
+          <input
+            type="hidden"
+            name="listName"
+            value={task.listName ? task.listName : listName}
+          />
           <input type="hidden" name="taskId" value={task._id} />
         </div>
 

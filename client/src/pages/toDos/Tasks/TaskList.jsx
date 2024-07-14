@@ -37,6 +37,9 @@ function TaskList({ tasks }) {
               >
                 {task.title}
               </p>
+              <p className="font-shantellSans text-black/50">
+                -{task.listName}
+              </p>
             </div>
             <div className="flex gap-3">
               <LinkButton to={task._id} state={location.pathname}>
