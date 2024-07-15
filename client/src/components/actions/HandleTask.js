@@ -20,7 +20,8 @@ export async function action({ request, params }) {
   }
   // DELETE: delete task
   if (request.method === "DELETE") {
-    const task = await deleteTask(listId, taskId);
+    const deleteListId = data.get("deleteListId");
+    const task = await deleteTask(deleteListId, taskId);
     return task;
   }
 

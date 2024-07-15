@@ -10,8 +10,8 @@ function TaskList({ tasks }) {
     const taskId = e.target.name;
     submit({ taskId }, { method: "PATCH" });
   }
-  function handleDeleteTask(taskId) {
-    submit({ taskId }, { method: "DELETE" });
+  function handleDeleteTask(taskId, deleteListId) {
+    submit({ taskId, deleteListId }, { method: "DELETE" });
   }
 
   return (
@@ -42,7 +42,7 @@ function TaskList({ tasks }) {
               </p>
             </div>
             <div className="flex gap-3">
-              <LinkButton to={task._id} state={location.pathname}>
+              <LinkButton to={`/todo/${task.listId}/${task._id}`}>
                 <i className="fa-solid fa-pen-to-square fa-xl"></i>
               </LinkButton>
 
@@ -50,7 +50,9 @@ function TaskList({ tasks }) {
                 iconClassNames="fa-solid fa-trash-can  fa-lg"
                 btnClassNames="p-3 bg-[#fca311] text-white hover:bg-white hover:text-black "
                 actionBtnTitle={["Delete", "Cancel"]}
-                handleModalAction={() => handleDeleteTask(task?._id)}
+                handleModalAction={() =>
+                  handleDeleteTask(task?._id, task?.listId)
+                }
                 task={task}
               >
                 <h1 className="text-lg lg:text-xl">

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import TaskList from "./TaskList";
 
 function TodayTasks() {
@@ -8,6 +8,7 @@ function TodayTasks() {
   return (
     <div className="bg-[#fca311] h-full bg-opacity-10 p-5">
       <TaskList tasks={todayTasks.todayTasks}></TaskList>
+      <Outlet />
     </div>
   );
 }

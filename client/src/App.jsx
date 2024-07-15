@@ -9,7 +9,6 @@ import Task from "./pages/toDos/Tasks/Task";
 import EditTask from "./pages/toDos/Tasks/EditTask";
 import ErrorPage from "./pages/Error";
 import TodayTasks from "./pages/toDos/Tasks/TodayTasks";
-import FixedTask from "./pages/toDos/Tasks/FixedTask";
 import { checkAuthToken } from "./util/auth";
 
 // React Router DOM action
@@ -48,20 +47,13 @@ const router = createBrowserRouter([
         index: true,
         element: <TodayTasks />,
         loader: loadTodayTasks,
+        action: handleTask,
       },
+
       {
         path: "all-tasks",
         element: <AllTasks />,
         action: handleTaskList,
-      },
-      {
-        path: "fixed-tasks",
-        children: [
-          {
-            path: ":fixedListName",
-            element: <FixedTask />,
-          },
-        ],
       },
 
       {
