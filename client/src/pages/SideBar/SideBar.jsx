@@ -5,6 +5,7 @@ import AddList from "../toDos/ListNames/AddList";
 import Modal from "../../components/ui/Modal";
 import { logout } from "../../services/apiUsers";
 import FixedSidebar from "./FixedSidebar";
+import { removeAuthToken } from "../../util/auth";
 
 function SideBar({ toggleDrawer }) {
   const { taskList: fetchListNames } = useRouteLoaderData("todo");
@@ -18,7 +19,8 @@ function SideBar({ toggleDrawer }) {
     const logOut = await logout();
     console.log(logOut);
     if (logOut === 200) {
-      localStorage.removeItem("token");
+      removeAuthToken();
+      // localStorage.removeItem("token");
       navigate("/");
     }
   }

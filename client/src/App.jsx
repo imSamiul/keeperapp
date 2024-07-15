@@ -8,6 +8,7 @@ import AllTasks from "./pages/toDos/Tasks/AllTasks";
 import Task from "./pages/toDos/Tasks/Task";
 import EditTask from "./pages/toDos/Tasks/EditTask";
 import ErrorPage from "./pages/Error";
+import TodayTasks from "./pages/toDos/Tasks/TodayTasks";
 import { checkAuthToken } from "./util/auth";
 
 // React Router DOM action
@@ -21,6 +22,10 @@ import { action as editTask } from "./components/actions/EditTask";
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
 import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
+import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
+import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
+import FixedTask from "./pages/toDos/Tasks/FixedTask";
+import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 
 const router = createBrowserRouter([
   {
@@ -43,9 +48,29 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <TodayTasks />,
+        loader: loadTodayTasks,
+        action: handleTask,
+      },
+
+      {
+        path: "all-tasks",
         element: <AllTasks />,
         action: handleTaskList,
       },
+      {
+        path: "fixed-tasks",
+        element: <FixedTask />,
+        children: [
+          {
+            path: ":fixedTaskName",
+            element: <ShowFixedTasks />,
+            loader: loadFixedTasks,
+            action: handleTask,
+          },
+        ],
+      },
+
       {
         path: ":listNameId",
         element: <Task />,

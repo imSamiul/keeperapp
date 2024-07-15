@@ -62,7 +62,9 @@ function Register() {
         {formErrors && (
           <p className="text-red-500 text-sm">{formErrors.message}</p>
         )}
-        <Button classNames="py-3 text-white ">Sign Up</Button>
+        <Button classNames="py-3 text-white bg-[#C425D9] border-none text-white hover:text-black hover:outline-1  hover:border-black hover:border-solid hover:border-st">
+          Sign Up
+        </Button>
       </Form>
       {/* 
       <div className=" mt-8 mb-4 flex items-center justify-between">

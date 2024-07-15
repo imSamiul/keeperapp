@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux";
 import { resetHeader } from "./listNamesSlice";
 
 function AllListWithTasks() {
-  const { taskList: listNamesData, user } = useRouteLoaderData("todo");
+  const { taskList: listNamesData } = useRouteLoaderData("todo");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,9 +16,6 @@ function AllListWithTasks() {
 
   return (
     <div className="px-4 py-4">
-      <h1 className="pb-5 font-alegreya text-4xl font-medium  capitalize">
-        Hello {user.name},
-      </h1>
       <div className="grid  md:grid-cols-3  gap-5 ">
         <div className="bg-[#fca311] bg-opacity-20 rounded-md p-5">
           <div className="border-dashed border-2 border-[#fca311] py-2 px-4 h-full rounded-md overflow-hidden">

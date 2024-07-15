@@ -12,13 +12,26 @@ const taskSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    important: {
+      type: Boolean,
+      default: false,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
+    today: {
+      type: Date,
+      default: null,
+    },
+    listName: {
+      type: String,
+      required: true,
+    },
     listId: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: 'List',
     },
   },

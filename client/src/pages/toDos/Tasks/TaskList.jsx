@@ -1,20 +1,19 @@
-import { useRouteLoaderData, useSubmit } from "react-router-dom";
+import { useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
 import Modal from "../../../components/ui/Modal";
 
-function TaskList() {
-  const data = useRouteLoaderData("listName");
+function TaskList({ tasks }) {
   const submit = useSubmit();
-  // id: id of list name and tasks: list of tasks
-  const { id: listId, tasks } = data;
 
-  function handleCompleteTask(e) {
-    const taskId = e.target.name;
-    submit({ taskId }, { method: "PATCH" });
+  function handleCheckCompleteTask(taskId) {
+    submit({ taskId, checkTitle: "completeTask" }, { method: "PATCH" });
   }
-  function handleDeleteTask(taskId) {
-    submit({ listId, taskId }, { method: "DELETE" });
+  function handleCheckImportantTask(taskId) {
+    submit({ taskId, checkTitle: "importantTask" }, { method: "PATCH" });
+  }
+  function handleDeleteTask(taskId, deleteListId) {
+    submit({ taskId, deleteListId }, { method: "DELETE" });
   }
 
   return (
@@ -30,19 +29,50 @@ function TaskList() {
               <Checkbox
                 className=" border-[#fca311] [--chkbg:#fca311] [--chkfg:white]"
                 checked={task.completed}
-                onChange={handleCompleteTask}
-                name={task._id}
+                onChange={() => handleCheckCompleteTask(task._id)}
+                name="checkComplete"
               />
-              <p
-                className={`font-shantellSans text-xl text-black ${
-                  task.completed && "line-through"
-                }`}
-              >
-                {task.title}
-              </p>
+              <div className="flex flex-col md:flex-row">
+                <p
+                  className={`font-shantellSans text-xl text-black ${
+                    task.completed && "line-through"
+                  }`}
+                >
+                  {task.title}
+                </p>
+                <p className="font-shantellSans text-black/50">
+                  -{task.listName}{" "}
+                  {task.today && (
+                    <span className="bg-[#fca311] text-white px-2 rounded-md">
+                      Today
+                    </span>
+                  )}
+                </p>
+              </div>
             </div>
-            <div className="flex gap-3">
-              <LinkButton to={task._id} state={location.pathname}>
+            <div className="flex gap-3 items-center">
+              <p className="font-shantellSans text-black/50 hidden md:block">
+                {task.important ? "important" : "make important ->"}
+              </p>
+              <label className="swap swap-flip">
+                {/* this hidden checkbox controls the state */}
+
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckImportantTask(task._id)}
+                  checked={task.important}
+                  name="checkImportant"
+                />
+
+                <div className="swap-on">
+                  <i className="fa-solid fa-star text-[#fca311] text-lg"></i>
+                </div>
+                <div className="swap-off">
+                  <i className="fa-regular fa-star text-lg"></i>
+                </div>
+              </label>
+
+              <LinkButton to={`/todo/${task.listId}/${task._id}`}>
                 <i className="fa-solid fa-pen-to-square fa-xl"></i>
               </LinkButton>
 
@@ -50,7 +80,9 @@ function TaskList() {
                 iconClassNames="fa-solid fa-trash-can  fa-lg"
                 btnClassNames="p-3 bg-[#fca311] text-white hover:bg-white hover:text-black "
                 actionBtnTitle={["Delete", "Cancel"]}
-                handleModalAction={() => handleDeleteTask(task?._id)}
+                handleModalAction={() =>
+                  handleDeleteTask(task?._id, task?.listId)
+                }
                 task={task}
               >
                 <h1 className="text-lg lg:text-xl">
