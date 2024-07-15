@@ -21,7 +21,7 @@ export async function action({ request, params }) {
     completed: checked,
     listName: listName,
   };
-  console.log(taskObj);
+
   if (btnIntent === "addToday") {
     taskObj = {
       ...taskObj,

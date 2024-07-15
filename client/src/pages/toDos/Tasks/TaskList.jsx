@@ -1,4 +1,4 @@
-import { useSubmit } from "react-router-dom";
+import { NavLink, useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
 import Modal from "../../../components/ui/Modal";
@@ -40,6 +40,9 @@ function TaskList({ tasks }) {
               <p className="font-shantellSans text-black/50">
                 -{task.listName}
               </p>
+              {task.today && (
+                <p className="bg-[#fca311] text-white px-2 rounded-md">Today</p>
+              )}
             </div>
             <div className="flex gap-3">
               <LinkButton to={`/todo/${task.listId}/${task._id}`}>

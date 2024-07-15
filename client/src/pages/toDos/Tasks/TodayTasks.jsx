@@ -4,7 +4,6 @@ import AddToDo from "./AddToDo";
 
 function TodayTasks() {
   const todayTasks = useLoaderData();
-  console.log(todayTasks.todayTasks);
 
   return (
     <div className="bg-[#fca311] h-full bg-opacity-10 p-5">

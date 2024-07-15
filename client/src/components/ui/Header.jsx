@@ -11,9 +11,13 @@ function Header({ toggleDrawer }) {
   const [listName, setListName] = useState(listNameHeader || "");
   const submit = useSubmit();
   const params = useParams(); // Use the entire params object
+  const specialLists = ["All Tasks", "Today's Tasks", "tasks"];
+
+  const showEditBtn = !specialLists.includes(listName) ? true : false;
 
   useEffect(() => {
     setListName(listNameHeader);
+    setToggleInput(false);
   }, [listNameHeader]);
 
   // to check if the list name is editing or not
@@ -70,7 +74,7 @@ function Header({ toggleDrawer }) {
           </Button>
         )}
       </div>
-      {!toggleInput && listName !== "All Tasks" && (
+      {showEditBtn && (
         <div className="w-full flex p-5 gap-2 md:gap-3  justify-end">
           <Button
             classNames="bg-[#14213d] text-white md:text-base w-fit"
