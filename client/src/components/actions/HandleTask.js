@@ -10,7 +10,7 @@ export async function action({ request, params }) {
   const data = await request.formData();
   const taskId = data.get("taskId");
 
-  const listId = params.listNameId;
+  let listId = params.listNameId;
 
   // PATCH: complete task
   if (request.method === "PATCH") {
@@ -28,7 +28,7 @@ export async function action({ request, params }) {
   // POST: add task
   const btnIntent = data.get("intent");
   const title = data.get("title");
-  const listName = data.get("listName");
+  let listName = data.get("listName");
 
   // check if task is empty
   let message = {};
@@ -38,13 +38,23 @@ export async function action({ request, params }) {
   if (Object.keys(message).length > 0) {
     return message;
   }
-  const toDoData = {
+  let toDoData = {
     title,
     listName,
     listId,
     completed: false,
     today: null,
   };
+
+  if (listName === "Today's Tasks") {
+    toDoData = {
+      ...toDoData,
+      listName: "tasks",
+      listId: store.getState().listNames.defaultTaskId,
+      today: Date.now(),
+    };
+  }
+
   if (btnIntent === "addTask") {
     const newTask = await createTask(toDoData);
     store.dispatch(addTodo(newTask.savedTask));
