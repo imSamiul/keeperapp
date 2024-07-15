@@ -33,7 +33,7 @@ function SideBar({ toggleDrawer }) {
         className="drawer-overlay"
         onClick={toggleDrawer}
       ></label>
-      <div className="bg-[#e5e5e5] h-[calc(100vh-48px)] lg:h-full py-4 px-9 w-80 flex flex-col ">
+      <div className="bg-[#e5e5e5] h-[calc(100vh-64px)] lg:h-full py-4 px-9 w-80 flex flex-col ">
         <button
           className="btn h-auto min-h-6 w-fit rounded-none border-none outline-none border-0 text-lg font-normal my-2 self-end shadow-none  lg:hidden"
           onClick={toggleDrawer}

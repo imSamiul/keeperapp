@@ -3,7 +3,7 @@ const navLinks = [
   { to: "/todo", title: "Today" },
   { to: "/todo/all-tasks", title: "All Tasks" },
   { to: "/todo/fixed-tasks/important", title: "Important" },
-  { to: "/todo/fixed-tasks/completed", title: "Complete" },
+  { to: "/todo/fixed-tasks/completed", title: "Completed" },
   { to: "/todo/fixed-tasks/uncompleted", title: "Uncompleted" },
 ];
 function FixedSidebar() {
