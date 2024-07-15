@@ -32,22 +32,26 @@ function TaskList({ tasks }) {
                 onChange={() => handleCheckCompleteTask(task._id)}
                 name="checkComplete"
               />
-              <p
-                className={`font-shantellSans text-xl text-black ${
-                  task.completed && "line-through"
-                }`}
-              >
-                {task.title}
-              </p>
-              <p className="font-shantellSans text-black/50">
-                -{task.listName}
-              </p>
-              {task.today && (
-                <p className="bg-[#fca311] text-white px-2 rounded-md">Today</p>
-              )}
+              <div className="flex flex-col md:flex-row">
+                <p
+                  className={`font-shantellSans text-xl text-black ${
+                    task.completed && "line-through"
+                  }`}
+                >
+                  {task.title}
+                </p>
+                <p className="font-shantellSans text-black/50">
+                  -{task.listName}{" "}
+                  {task.today && (
+                    <span className="bg-[#fca311] text-white px-2 rounded-md">
+                      Today
+                    </span>
+                  )}
+                </p>
+              </div>
             </div>
-            <div className="flex gap-3">
-              <p className="font-shantellSans text-black/50">
+            <div className="flex gap-3 items-center">
+              <p className="font-shantellSans text-black/50 hidden md:block">
                 {task.important ? "important" : "make important ->"}
               </p>
               <label className="swap swap-flip">
