@@ -134,6 +134,21 @@ router.patch('/tasks/edit/:id', auth, async (req, res) => {
     return res.status(500).send({ message: error.toString() });
   }
 });
+// make task important or not
+router.patch('/tasks/important/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const task = await Task.findOne({ _id: id, owner: req.user._id });
+    if (!task) {
+      return res.status(400).send({ message: 'Task not found' });
+    }
+    task.important = !task.important;
+    await task.save();
+    return res.status(201).send({ task });
+  } catch (error) {
+    return res.status(500).send({ message: error.toString() });
+  }
+});
 
 // DELETE:
 router.delete('/tasks/:listId/:id', auth, async (req, res) => {

@@ -3,6 +3,7 @@ import {
   createTask,
   deleteTask,
   handleCompleteTask,
+  handleImportantTask,
 } from "../../services/apiTasks";
 import store from "../../store";
 
@@ -14,6 +15,12 @@ export async function action({ request, params }) {
 
   // PATCH: complete task
   if (request.method === "PATCH") {
+    const checkTitle = data.get("checkTitle");
+    if (checkTitle === "importantTask") {
+      const task = await handleImportantTask(taskId);
+      return task;
+    }
+
     const task = await handleCompleteTask(taskId);
     console.log(task);
     return null;

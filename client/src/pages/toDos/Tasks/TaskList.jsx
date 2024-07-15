@@ -1,4 +1,4 @@
-import { NavLink, useSubmit } from "react-router-dom";
+import { useSubmit } from "react-router-dom";
 import LinkButton from "../../../components/ui/LinkButton";
 import Checkbox from "../../../components/ui/Checkbox";
 import Modal from "../../../components/ui/Modal";
@@ -6,9 +6,11 @@ import Modal from "../../../components/ui/Modal";
 function TaskList({ tasks }) {
   const submit = useSubmit();
 
-  function handleCompleteTask(e) {
-    const taskId = e.target.name;
-    submit({ taskId }, { method: "PATCH" });
+  function handleCheckCompleteTask(taskId) {
+    submit({ taskId, checkTitle: "completeTask" }, { method: "PATCH" });
+  }
+  function handleCheckImportantTask(taskId) {
+    submit({ taskId, checkTitle: "importantTask" }, { method: "PATCH" });
   }
   function handleDeleteTask(taskId, deleteListId) {
     submit({ taskId, deleteListId }, { method: "DELETE" });
@@ -27,8 +29,8 @@ function TaskList({ tasks }) {
               <Checkbox
                 className=" border-[#fca311] [--chkbg:#fca311] [--chkfg:white]"
                 checked={task.completed}
-                onChange={handleCompleteTask}
-                name={task._id}
+                onChange={() => handleCheckCompleteTask(task._id)}
+                name="checkComplete"
               />
               <p
                 className={`font-shantellSans text-xl text-black ${
@@ -45,6 +47,24 @@ function TaskList({ tasks }) {
               )}
             </div>
             <div className="flex gap-3">
+              <label className="swap swap-flip">
+                {/* this hidden checkbox controls the state */}
+
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckImportantTask(task._id)}
+                  checked={task.important}
+                  name="checkImportant"
+                />
+
+                <div className="swap-on">
+                  <i className="fa-solid fa-star"></i>
+                </div>
+                <div className="swap-off">
+                  <i className="fa-regular fa-star"></i>
+                </div>
+              </label>
+
               <LinkButton to={`/todo/${task.listId}/${task._id}`}>
                 <i className="fa-solid fa-pen-to-square fa-xl"></i>
               </LinkButton>

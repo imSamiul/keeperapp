@@ -94,6 +94,7 @@ export async function createTask(taskData) {
 }
 
 // PATCH:
+// patch complete task
 export async function handleCompleteTask(taskId) {
   try {
     const res = await fetch(`${API_URL}/check/${taskId}`, {
@@ -114,6 +115,7 @@ export async function handleCompleteTask(taskId) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+// patch update task
 export async function updateTask(taskId, taskData) {
   try {
     const res = await fetch(`${API_URL}/edit/${taskId}`, {
@@ -123,6 +125,27 @@ export async function updateTask(taskId, taskData) {
         Authorization: `Bearer ${getAuthToken()}`,
       },
       body: JSON.stringify(taskData),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
+// patch important task
+export async function handleImportantTask(taskId) {
+  try {
+    const res = await fetch(`${API_URL}/important/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
     });
     const data = await res.json();
     if (res.ok) {
