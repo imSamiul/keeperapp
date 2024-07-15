@@ -23,6 +23,9 @@ import { loader as loadListNames } from "./components/loaders/LoadListNames";
 import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
 import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
+import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
+import FixedTask from "./pages/toDos/Tasks/FixedTask";
+import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +57,18 @@ const router = createBrowserRouter([
         path: "all-tasks",
         element: <AllTasks />,
         action: handleTaskList,
+      },
+      {
+        path: "fixed-tasks",
+        element: <FixedTask />,
+        children: [
+          {
+            path: ":fixedTaskName",
+            element: <ShowFixedTasks />,
+            loader: loadFixedTasks,
+            action: handleTask,
+          },
+        ],
       },
 
       {

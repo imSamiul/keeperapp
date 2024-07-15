@@ -53,6 +53,45 @@ router.get('/tasks/edit/:id', auth, async (req, res) => {
     return res.status(500).send({ message: error.toString() });
   }
 });
+// get fixed tasks
+router.get('/tasks/fixed-tasks/:fixedTaskName', auth, async (req, res) => {
+  const { fixedTaskName } = req.params;
+  try {
+    if (fixedTaskName === 'important') {
+      const fixedTasks = await Task.find({
+        owner: req.user._id,
+        important: true,
+      });
+      if (!fixedTasks) {
+        return res.status(400).send({ message: 'No important tasks found' });
+      }
+      return res.status(201).send({ fixedTasks });
+    }
+    if (fixedTaskName === 'completed') {
+      const fixedTasks = await Task.find({
+        owner: req.user._id,
+        completed: true,
+      });
+      if (!fixedTasks) {
+        return res.status(400).send({ message: 'No completed tasks found' });
+      }
+      return res.status(201).send({ fixedTasks });
+    }
+    if (fixedTaskName === 'uncompleted') {
+      const fixedTasks = await Task.find({
+        owner: req.user._id,
+        completed: false,
+      });
+      if (!fixedTasks) {
+        return res.status(400).send({ message: 'No uncompleted tasks found' });
+      }
+      return res.status(201).send({ fixedTasks });
+    }
+    return res.status(400).send({ message: 'Invalid fixed task name' });
+  } catch (error) {
+    return res.status(500).send({ message: error.toString() });
+  }
+});
 
 // POST:
 router.post('/tasks', auth, async (req, res) => {

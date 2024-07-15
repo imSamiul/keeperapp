@@ -68,6 +68,27 @@ export async function getTodayTasks() {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+// get fixed tasks
+export async function getFixedTask(fixedTaskName) {
+  try {
+    const res = await fetch(`${API_URL}/fixed-tasks/${fixedTaskName}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
 
 // POST:
 export async function createTask(taskData) {
