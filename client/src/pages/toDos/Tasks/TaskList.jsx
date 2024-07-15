@@ -47,6 +47,9 @@ function TaskList({ tasks }) {
               )}
             </div>
             <div className="flex gap-3">
+              <p className="font-shantellSans text-black/50">
+                {task.important ? "important" : "make important ->"}
+              </p>
               <label className="swap swap-flip">
                 {/* this hidden checkbox controls the state */}
 
@@ -58,10 +61,10 @@ function TaskList({ tasks }) {
                 />
 
                 <div className="swap-on">
-                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star text-[#fca311] text-lg"></i>
                 </div>
                 <div className="swap-off">
-                  <i className="fa-regular fa-star"></i>
+                  <i className="fa-regular fa-star text-lg"></i>
                 </div>
               </label>
 
