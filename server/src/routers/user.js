@@ -12,7 +12,7 @@ const router = new express.Router();
 
 // POST:
 // send OTP
-router.post('/users/send-otp', async (req, res) => {
+router.post('/users/register/send-otp', async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -31,6 +31,25 @@ router.post('/users/send-otp', async (req, res) => {
   } catch (error) {
     console.log(error.message);
     return res.status(500).send({ message: error.message });
+  }
+});
+// match and verify OTP
+router.post('/users/register/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  try {
+    const existingOTP = await OTP.findOne({ email, otp });
+
+    if (existingOTP) {
+      // OTP is valid
+      res
+        .status(200)
+        .send({ success: true, message: 'OTP verification successful' });
+    } else {
+      // OTP is invalid
+      res.status(400).send({ message: 'OTP is not valid' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.toString() });
   }
 });
 // create new user

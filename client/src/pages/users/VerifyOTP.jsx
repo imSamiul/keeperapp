@@ -9,6 +9,7 @@ function VerifyOTP() {
   const [error, setError] = useState("");
   const otpEmail = useSelector((state) => state.user.otpEmail);
 
+  // TODO: add error for verify otp page
   return (
     <Form className="w-3/4 ">
       <h1 className="text-xl font-medium text-[#14213d] ">

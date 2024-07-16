@@ -7,7 +7,7 @@ const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 // send OTP for verify email
 export async function sendOTP(userEmailObj) {
   try {
-    const res = await fetch(`${API_URL}/send-otp`, {
+    const res = await fetch(`${API_URL}/register/send-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,6 +26,8 @@ export async function sendOTP(userEmailObj) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+// match and verify OTP
+export async function verifyOTP(otpObj)
 // register user
 export async function registerUser(userData) {
   try {
