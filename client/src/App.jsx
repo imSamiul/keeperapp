@@ -30,6 +30,7 @@ import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 
 import EmailVerify from "./pages/users/EmailVerify";
 import VerifyOTP from "./pages/users/VerifyOTP";
+import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
 
 const router = createBrowserRouter([
   {
@@ -41,9 +42,15 @@ const router = createBrowserRouter([
       {
         path: "/register",
         children: [
-          { index: true, element: <EmailVerify />, action: sendOTP },
+          {
+            index: true,
+
+            element: <EmailVerify />,
+            action: sendOTP,
+          },
           { path: "verify-otp", element: <VerifyOTP /> },
         ],
+        errorElement: <ErrorPageAuthentication />,
       },
     ],
     errorElement: <ErrorPage />,

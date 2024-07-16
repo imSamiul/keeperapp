@@ -6,6 +6,7 @@ import { useState } from "react";
 function VerifyOTP() {
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
+
   return (
     <Form className="w-3/4 ">
       <h1 className="text-xl font-medium text-[#14213d] ">

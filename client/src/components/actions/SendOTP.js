@@ -10,8 +10,7 @@ export async function action({ request }) {
   const errors = {};
   if (email.length < 1) {
     errors.error = "Email must not be empty.";
-  }
-  if (email.includes("@") === false) {
+  } else if (email.includes("@") === false) {
     errors.error = "Email must be valid.";
   }
   if (Object.keys(errors).length > 0) {
@@ -20,8 +19,8 @@ export async function action({ request }) {
   const emailObj = {
     email,
   };
-  // const res = await sendOTP(emailObj);
-  // const userMail = res.email;
-  store.dispatch(setOtpEmail("samiul15-3041@diu.edu.bd"));
+  const res = await sendOTP(emailObj);
+  const userMail = res.email;
+  store.dispatch(setOtpEmail(userMail));
   return redirect("./verify-otp");
 }
