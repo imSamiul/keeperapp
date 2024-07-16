@@ -4,6 +4,7 @@ const path = require('path');
 const userRouter = require('./routers/user');
 const taskRouter = require('./routers/task');
 const listName = require('./routers/listName');
+
 require('dotenv').config({
   path: path.resolve(__dirname, '../config/dev.env'),
 });
@@ -23,4 +24,5 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 app.use(listName);
+
 module.exports = app;

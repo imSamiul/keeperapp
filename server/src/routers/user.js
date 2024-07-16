@@ -4,7 +4,9 @@ const User = require('../model/user');
 const auth = require('../middleware/auth');
 const ListName = require('../model/listName');
 const mailSender = require('../utils/sendMail');
-const otpMail = require('../utils/mailTemplate');
+
+const OTP = require('../model/otp');
+const findExistingOTP = require('../utils/findExistingOtp');
 
 const router = new express.Router();
 
@@ -45,6 +47,30 @@ router.post('/users/register', async (req, res) => {
     }
   }
 });
+// send otp
+router.post('/users/send-otp', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(404).send({ message: 'User already registered' });
+    }
+
+    const otp = await findExistingOTP();
+    const otpBody = new OTP({ email, otp });
+    await otpBody.save();
+    // const otpBody = await OTP.create(otpPayload);
+
+    return res.status(200).json({
+      message: 'OTP sent successfully',
+      otp,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 router.post('/users/login', async (req, res) => {
   const { email, password } = req.body;
   try {
