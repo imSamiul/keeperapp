@@ -19,8 +19,8 @@ export async function action({ request }) {
   const emailObj = {
     email,
   };
-  const res = await sendOTP(emailObj);
-  const userMail = res.email;
-  store.dispatch(setOtpEmail(userMail));
+  // const res = await sendOTP(emailObj);
+  // const userMail = res.email;
+  store.dispatch(setOtpEmail("samiul15-3041@"));
   return redirect("./verify-otp");
 }

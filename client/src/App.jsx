@@ -38,13 +38,17 @@ const router = createBrowserRouter([
     loader: checkAuthToken,
     children: [
       { index: true, element: <Welcome /> },
-      { element: <Login />, path: "/login", action: loginUser },
+      {
+        element: <Login />,
+        path: "/login",
+        action: loginUser,
+        errorElement: <ErrorPageAuthentication />,
+      },
       {
         path: "/register",
         children: [
           {
             index: true,
-
             element: <EmailVerify />,
             action: sendOTP,
           },

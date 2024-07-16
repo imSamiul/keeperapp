@@ -2,19 +2,19 @@ import { Form } from "react-router-dom";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function VerifyOTP() {
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
+  const otpEmail = useSelector((state) => state.user.otpEmail);
 
   return (
     <Form className="w-3/4 ">
       <h1 className="text-xl font-medium text-[#14213d] ">
         An email with OTP has been sent to{" "}
-        <span className=" font-bold text-[#fca311]">
-          samiul15-3041@diu.edu.bd
-        </span>
-        . Submit it here before it expires.
+        <span className=" font-bold text-[#fca311]">{otpEmail}</span>. Submit it
+        here before it expires.
       </h1>
       <div className="flex items-center justify-center flex-col gap-3">
         <Input

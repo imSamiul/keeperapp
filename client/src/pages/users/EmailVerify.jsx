@@ -7,7 +7,6 @@ function EmailVerify() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const actionData = useActionData();
-
   const navigation = useNavigation();
 
   useEffect(() => {
