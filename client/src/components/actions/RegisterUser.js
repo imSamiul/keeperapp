@@ -35,11 +35,9 @@ export async function action({ request }) {
     return errors;
   }
   if (res) {
-    console.log(res);
     store.dispatch(addUser(res.user));
     store.dispatch(setToken(res.token));
     setAuthToken(res.token);
-    // localStorage.setItem("token", res.token);
     return redirect("/todo");
   } else {
     return redirect("/register");

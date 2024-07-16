@@ -26,15 +26,17 @@ import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
 import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
 import FixedTask from "./pages/toDos/Tasks/FixedTask";
 import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
+import Otp from "./pages/users/Otp";
 
 const router = createBrowserRouter([
   {
     element: <Homepage />,
     loader: checkAuthToken,
     children: [
-      { element: <Welcome />, path: "/" },
+      { index: true, element: <Welcome /> },
       { element: <Login />, path: "/login", action: loginUser },
       { element: <Register />, path: "/register", action: registerUser },
+      { element: <Otp />, path: "/otp" },
     ],
     errorElement: <ErrorPage />,
   },

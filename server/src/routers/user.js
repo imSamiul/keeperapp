@@ -3,14 +3,22 @@ const express = require('express');
 const User = require('../model/user');
 const auth = require('../middleware/auth');
 const ListName = require('../model/listName');
+const mailSender = require('../utils/sendMail');
+const otpMail = require('../utils/mailTemplate');
 
 const router = new express.Router();
 
+// POST:
+// create new user
 router.post('/users/register', async (req, res) => {
   const { name, email, password } = req.body;
   const createUser = new User({ name, email, password });
 
   try {
+    // const findEmail = await User.findOne({ email });
+    // if (findEmail) {
+    //   return res.status(409).send({ message: 'Email is already registered' });
+    // }
     const createUserSave = await createUser.save();
 
     if (createUserSave) {
@@ -20,7 +28,13 @@ router.post('/users/register', async (req, res) => {
       });
       await newList.save();
       const token = await createUser.generateAuthToken();
-      res.status(201).send({ user: createUser, token });
+      const sendMail = await mailSender(
+        createUser.email,
+        'Welcome to Keeper',
+        otpMail(),
+      );
+      console.log('Email sent successfully: ', sendMail);
+      res.status(201).send({ user: createUser, token, sendMail });
     }
   } catch (error) {
     if (error.code === 11000) {
