@@ -17,6 +17,7 @@ import { action as registerUser } from "./components/actions/RegisterUser";
 import { action as handleTaskList } from "./components/actions/HandleTaskList";
 import { action as handleTask } from "./components/actions/HandleTask";
 import { action as editTask } from "./components/actions/EditTask";
+import { action as sendOTP } from "./components/actions/SendOTP";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
@@ -26,7 +27,9 @@ import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
 import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
 import FixedTask from "./pages/toDos/Tasks/FixedTask";
 import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
-import Otp from "./pages/users/Otp";
+
+import EmailVerify from "./pages/users/EmailVerify";
+import VerifyOTP from "./pages/users/VerifyOTP";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +38,13 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Welcome /> },
       { element: <Login />, path: "/login", action: loginUser },
-      { element: <Register />, path: "/register", action: registerUser },
-      { element: <Otp />, path: "/otp" },
+      {
+        path: "/register",
+        children: [
+          { index: true, element: <EmailVerify />, action: sendOTP },
+          { path: "verify-otp", element: <VerifyOTP /> },
+        ],
+      },
     ],
     errorElement: <ErrorPage />,
   },

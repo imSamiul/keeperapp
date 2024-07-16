@@ -11,6 +11,28 @@ const findExistingOTP = require('../utils/findExistingOtp');
 const router = new express.Router();
 
 // POST:
+// send OTP
+router.post('/users/send-otp', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(404).send({ message: 'User already registered' });
+    }
+
+    const otp = await findExistingOTP();
+    const otpBody = new OTP({ email, otp });
+    const savedOTP = await otpBody.save();
+
+    return res.status(200).send({
+      message: 'OTP sent successfully',
+      email: savedOTP.email,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ message: error.message });
+  }
+});
 // create new user
 router.post('/users/register', async (req, res) => {
   const { name, email, password } = req.body;
@@ -47,29 +69,6 @@ router.post('/users/register', async (req, res) => {
     }
   }
 });
-// send otp
-router.post('/users/send-otp', async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (user) {
-      return res.status(404).send({ message: 'User already registered' });
-    }
-
-    const otp = await findExistingOTP();
-    const otpBody = new OTP({ email, otp });
-    await otpBody.save();
-    // const otpBody = await OTP.create(otpPayload);
-
-    return res.status(200).json({
-      message: 'OTP sent successfully',
-      otp,
-    });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: error.message });
-  }
-});
 
 router.post('/users/login', async (req, res) => {
   const { email, password } = req.body;
@@ -81,7 +80,7 @@ router.post('/users/login', async (req, res) => {
       res.status(201).send({ user: loginSuccessfulUser, token });
     }
   } catch (error) {
-    res.status(403).send({ message: error.toString() });
+    res.status(500).send({ message: error.toString() });
   }
 });
 router.post('/users/logout', auth, async (req, res) => {
