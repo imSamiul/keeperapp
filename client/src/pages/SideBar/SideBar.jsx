@@ -7,7 +7,7 @@ import { logout } from "../../services/apiUsers";
 import FixedSidebar from "./FixedSidebar";
 import { removeAuthToken } from "../../util/auth";
 
-function SideBar({ toggleDrawer }) {
+function SideBar({ toggleDrawer, setIsLoggingOut }) {
   const { taskList: fetchListNames } = useRouteLoaderData("todo");
   const navigate = useNavigate();
 
@@ -16,9 +16,11 @@ function SideBar({ toggleDrawer }) {
   });
 
   async function handleLogout() {
+    setIsLoggingOut(true);
     const logOut = await logout();
     console.log(logOut);
     if (logOut === 200) {
+      setIsLoggingOut(false);
       removeAuthToken();
       // localStorage.removeItem("token");
       navigate("/");
@@ -44,7 +46,7 @@ function SideBar({ toggleDrawer }) {
         <div className="flex-1">
           <AddList
             inputClassNames="w-full max-w-xs bg-white"
-            btnClassNames="w-full text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black "
+            btnClassNames="w-full text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black border-none "
             iconClassNames="fa-solid fa-plus"
             placeholder="Add list name here"
           />
@@ -57,9 +59,9 @@ function SideBar({ toggleDrawer }) {
           <SideBarList taskListNames={modifyListNames} />
         </div>
         <div className="flex justify-around w-full flex-1 items-center">
-          <h1>Settings</h1>
+          {/* <h1>Settings</h1> */}
           <Modal
-            btnClassNames="w-full text-base py-3 md:py-2.5 bg-[#fca311] text-white hover:bg-white hover:text-black "
+            btnClassNames="w-full text-base py-3 md:py-2.5 bg-[#fca311] text-white hover:bg-white hover:text-black border-none "
             iconClassNames="fa-solid fa-right-from-bracket"
             btnTitle="Log Out"
             actionBtnTitle={["Yes", "No"]}

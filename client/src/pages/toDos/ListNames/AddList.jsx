@@ -14,6 +14,8 @@ function AddList({
   const actionData = useActionData();
   const navigation = useNavigation();
 
+  const isSubmitting = navigation.state === "submitting";
+
   useEffect(() => {
     if (navigation.state === "idle" && actionData) {
       if (actionData.message) {
@@ -36,8 +38,12 @@ function AddList({
           setError("");
         }}
       />
-      <Button classNames={btnClassNames} iconClassNames={iconClassNames}>
-        Add new List
+      <Button
+        classNames={btnClassNames}
+        iconClassNames={iconClassNames}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Waiting..." : "Add new List"}
       </Button>
       {error && <p>{error}</p>}
     </Form>

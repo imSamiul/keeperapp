@@ -1,6 +1,7 @@
 import { Outlet, useRouteLoaderData } from "react-router-dom";
-import AddToDo from "./AddToDo";
+
 import TaskList from "./TaskList";
+import AddToDo from "./AddToDo";
 
 function Task() {
   const data = useRouteLoaderData("listName");
