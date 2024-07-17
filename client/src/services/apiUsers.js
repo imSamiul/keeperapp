@@ -27,7 +27,27 @@ export async function sendOTP(userEmailObj) {
   }
 }
 // match and verify OTP
-// export async function verifyOTP(otpObj)
+export async function verifyOTP(otpObj) {
+  try {
+    const res = await fetch(`${API_URL}/register/verify-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(otpObj),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
 // register user
 export async function registerUser(userData) {
   try {

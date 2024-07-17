@@ -1,3 +1,5 @@
+import { redirect } from "react-router-dom";
+import { verifyOTP } from "../../services/apiUsers";
 import { getOtpEmail } from "../../util/auth";
 
 export async function action({ request }) {
@@ -12,5 +14,12 @@ export async function action({ request }) {
   if (Object.keys(errors).length > 0) {
     return errors;
   }
-  return null;
+  const otpObj = {
+    email: otpEmail,
+    otp,
+  };
+  const res = await verifyOTP(otpObj);
+  console.log(res);
+
+  return redirect("../register-user");
 }

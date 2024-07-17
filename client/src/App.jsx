@@ -54,6 +54,10 @@ const router = createBrowserRouter([
             action: sendOTP,
           },
           { path: "verify-otp", element: <VerifyOTP />, action: verifyOTP },
+          {
+            path: "register-user",
+            element: <Register />,
+          },
         ],
         errorElement: <ErrorPageAuthentication />,
       },

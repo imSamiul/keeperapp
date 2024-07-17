@@ -20,8 +20,9 @@ export async function action({ request }) {
   const emailObj = {
     email,
   };
-  // const res = await sendOTP(emailObj);
-  // const userMail = res.email;
-  addOtpEmail("samiul@gmal.com");
+  const res = await sendOTP(emailObj);
+  console.log(res);
+  const userMail = res.email;
+  addOtpEmail(userMail);
   return redirect("./verify-otp");
 }

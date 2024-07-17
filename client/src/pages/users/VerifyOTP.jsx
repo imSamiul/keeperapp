@@ -16,7 +16,7 @@ function VerifyOTP() {
   const otpEmail = getOtpEmail();
   const actionData = useActionData();
   const navigation = useNavigation();
-
+  console.log(otpEmail);
   useEffect(() => {
     if (!otpEmail) {
       console.log(otpEmail);

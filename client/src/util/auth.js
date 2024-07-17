@@ -40,5 +40,10 @@ export function addOtpEmail(otpEmail) {
   // So, 10 minutes = 20 / 1440 days.
 }
 export function getOtpEmail() {
-  Cookies.get("otpEmail");
+  const otpEmail = Cookies.get("otpEmail");
+  if (!otpEmail) {
+    console.log("No token found");
+    return null;
+  }
+  return otpEmail;
 }
