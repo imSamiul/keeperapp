@@ -1,9 +1,9 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 
 const User = require('../model/user');
 const auth = require('../middleware/auth');
 const ListName = require('../model/listName');
-const mailSender = require('../utils/sendMail');
 
 const OTP = require('../model/otp');
 const findExistingOTP = require('../utils/findExistingOtp');
@@ -41,9 +41,12 @@ router.post('/users/register/verify-otp', async (req, res) => {
 
     if (existingOTP) {
       // OTP is valid
+      const token = jwt.sign({ email }, process.env.OTP_VERIFY_TOKEN, {
+        expiresIn: '5m',
+      });
       res
         .status(200)
-        .send({ success: true, message: 'OTP verification successful' });
+        .send({ success: true, message: 'OTP verification successful', token });
     } else {
       // OTP is invalid
       res.status(400).send({ message: 'OTP is not valid' });
@@ -54,14 +57,19 @@ router.post('/users/register/verify-otp', async (req, res) => {
 });
 // create new user
 router.post('/users/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  const createUser = new User({ name, email, password });
+  const { otpToken, name, password } = req.body;
 
   try {
-    // const findEmail = await User.findOne({ email });
-    // if (findEmail) {
-    //   return res.status(409).send({ message: 'Email is already registered' });
-    // }
+    if (!otpToken) {
+      return res.status(400).send({ message: 'OTP token is required' });
+    }
+    const decoded = jwt.verify(otpToken, process.env.OTP_VERIFY_TOKEN);
+    const { email } = decoded;
+    const createUser = new User({ name, email, password });
+    const findEmail = await User.findOne({ email });
+    if (findEmail) {
+      return res.status(409).send({ message: 'Email is already registered' });
+    }
     const createUserSave = await createUser.save();
 
     if (createUserSave) {
@@ -71,22 +79,19 @@ router.post('/users/register', async (req, res) => {
       });
       await newList.save();
       const token = await createUser.generateAuthToken();
-      const sendMail = await mailSender(
-        createUser.email,
-        'Welcome to Keeper',
-        otpMail(),
-      );
-      console.log('Email sent successfully: ', sendMail);
-      res.status(201).send({ user: createUser, token, sendMail });
+
+      return res.status(201).send({ user: createUser, token });
     }
   } catch (error) {
     if (error.code === 11000) {
       // Duplicate key error
       res.status(409).send({ message: 'Email is already registered' });
     } else {
-      res.status(500).send({ message: error });
+      res.status(500).send({ message: error.toString() });
     }
+    return null;
   }
+  return null;
 });
 
 router.post('/users/login', async (req, res) => {

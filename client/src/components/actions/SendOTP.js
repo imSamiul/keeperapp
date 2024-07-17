@@ -1,7 +1,6 @@
 import { redirect } from "react-router-dom";
 
 import { sendOTP } from "../../services/apiUsers";
-import store from "../../store";
 import { addOtpEmail } from "../../util/auth";
 
 export async function action({ request }) {
@@ -21,7 +20,7 @@ export async function action({ request }) {
     email,
   };
   const res = await sendOTP(emailObj);
-  console.log(res);
+
   const userMail = res.email;
   addOtpEmail(userMail);
   return redirect("./verify-otp");

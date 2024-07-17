@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import { verifyOTP } from "../../services/apiUsers";
-import { getOtpEmail } from "../../util/auth";
+import { addOtpToken, getOtpEmail } from "../../util/auth";
 
 export async function action({ request }) {
   const data = await request.formData();
@@ -19,7 +19,7 @@ export async function action({ request }) {
     otp,
   };
   const res = await verifyOTP(otpObj);
-  console.log(res);
 
-  return redirect("../register-user");
+  addOtpToken(res.token);
+  return redirect(`../register-user`);
 }

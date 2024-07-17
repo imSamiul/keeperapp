@@ -57,6 +57,7 @@ const router = createBrowserRouter([
           {
             path: "register-user",
             element: <Register />,
+            action: registerUser,
           },
         ],
         errorElement: <ErrorPageAuthentication />,
