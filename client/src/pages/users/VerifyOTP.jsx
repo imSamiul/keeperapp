@@ -1,25 +1,36 @@
-import { Form, useNavigate } from "react-router-dom";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { getOtpEmail } from "../../util/auth";
 
 function VerifyOTP() {
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const otpEmail = useSelector((state) => state.user.otpEmail);
+  const otpEmail = getOtpEmail();
+  const actionData = useActionData();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    if (otpEmail === "") {
+    if (!otpEmail) {
       console.log(otpEmail);
       navigate(-1);
     }
-  }, [otpEmail, navigate]);
+    if (navigation.state === "idle" && actionData)
+      if (actionData.error) {
+        setError(actionData.error);
+      }
+  }, [otpEmail, navigate, actionData, navigation.state]);
 
   // TODO: add error for verify otp page
   return (
-    <Form className="w-3/4 ">
+    <Form method="POST" className="w-3/4 ">
       <h1 className="text-xl font-medium text-[#14213d] ">
         An email with OTP has been sent to{" "}
         <span className=" font-bold text-[#fca311]">{otpEmail}</span>. Submit it
@@ -35,8 +46,9 @@ function VerifyOTP() {
             setOTP(e.target.value);
             setError("");
           }}
-          name="email"
+          name="otp"
         ></Input>
+        {error && <p className="text-red-500">{error}</p>}
         <Button classNames="text-base py-2 bg-[#fca311] text-white hover:bg-white hover:text-black">
           Verify
         </Button>

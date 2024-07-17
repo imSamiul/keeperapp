@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { setOtpEmail } from "../../pages/users/userSlice";
+
 import { sendOTP } from "../../services/apiUsers";
 import store from "../../store";
 import { addOtpEmail } from "../../util/auth";

@@ -18,6 +18,7 @@ import { action as handleTaskList } from "./components/actions/HandleTaskList";
 import { action as handleTask } from "./components/actions/HandleTask";
 import { action as editTask } from "./components/actions/EditTask";
 import { action as sendOTP } from "./components/actions/SendOTP";
+import { action as verifyOTP } from "./components/actions/VerifyOTP";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
             element: <EmailVerify />,
             action: sendOTP,
           },
-          { path: "verify-otp", element: <VerifyOTP /> },
+          { path: "verify-otp", element: <VerifyOTP />, action: verifyOTP },
         ],
         errorElement: <ErrorPageAuthentication />,
       },
