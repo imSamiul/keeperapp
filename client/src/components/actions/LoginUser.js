@@ -11,13 +11,20 @@ export async function action({ request }) {
     password: formData.get("password"),
   };
   const errors = {};
-  if (!authData.email || !authData.password) {
-    errors.message = "Please fill in all fields";
+  if (authData.email.length < 1) {
+    errors.error = "Please fill the email field";
+  } else if (
+    authData.email.includes("@") === false ||
+    authData.email.includes(".") === false
+  ) {
+    errors.error = "Please enter a valid email address";
+  } else if (authData.password.length < 1) {
+    errors.error = "Please fill the password field";
   }
-  if (errors.message) {
+  if (Object.keys(errors).length > 0) {
     return errors;
   }
-
+  console.log("called");
   const res = await login(authData);
 
   if (res) {

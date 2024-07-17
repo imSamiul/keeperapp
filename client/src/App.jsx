@@ -32,94 +32,103 @@ import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 import EmailVerify from "./pages/users/EmailVerify";
 import VerifyOTP from "./pages/users/VerifyOTP";
 import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
+import { useState } from "react";
+import Loader from "./components/ui/Loader";
 
-const router = createBrowserRouter([
-  {
-    element: <Homepage />,
-    loader: checkAuthToken,
-    children: [
-      { index: true, element: <Welcome /> },
-      {
-        element: <Login />,
-        path: "/login",
-        action: loginUser,
-        errorElement: <ErrorPageAuthentication />,
-      },
-      {
-        path: "/register",
-        children: [
-          {
-            index: true,
-            element: <EmailVerify />,
-            action: sendOTP,
-          },
-          { path: "verify-otp", element: <VerifyOTP />, action: verifyOTP },
-          {
-            path: "register-user",
-            element: <Register />,
-            action: registerUser,
-          },
-        ],
-        errorElement: <ErrorPageAuthentication />,
-      },
-    ],
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/todo",
-    element: <AppLayout />,
-    id: "todo",
-    loader: loadListNames,
-    action: handleTaskList,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <TodayTasks />,
-        loader: loadTodayTasks,
-        action: handleTask,
-      },
+const wireRouter = (setLoaded) =>
+  createBrowserRouter([
+    {
+      element: <Homepage setLoaded={setLoaded} />,
+      loader: checkAuthToken,
+      children: [
+        { index: true, element: <Welcome /> },
+        {
+          element: <Login />,
+          path: "/login",
+          action: loginUser,
+          errorElement: <ErrorPageAuthentication />,
+        },
+        {
+          path: "/register",
+          children: [
+            {
+              index: true,
+              element: <EmailVerify />,
+              action: sendOTP,
+            },
+            { path: "verify-otp", element: <VerifyOTP />, action: verifyOTP },
+            {
+              path: "register-user",
+              element: <Register />,
+              action: registerUser,
+            },
+          ],
+          errorElement: <ErrorPageAuthentication />,
+        },
+      ],
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/todo",
+      element: <AppLayout setLoaded={setLoaded} />,
+      id: "todo",
+      loader: loadListNames,
+      action: handleTaskList,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <TodayTasks />,
+          loader: loadTodayTasks,
+          action: handleTask,
+        },
 
-      {
-        path: "all-tasks",
-        element: <AllTasks />,
-        action: handleTaskList,
-      },
-      {
-        path: "fixed-tasks",
-        element: <FixedTask />,
-        children: [
-          {
-            path: ":fixedTaskName",
-            element: <ShowFixedTasks />,
-            loader: loadFixedTasks,
-            action: handleTask,
-          },
-        ],
-      },
+        {
+          path: "all-tasks",
+          element: <AllTasks />,
+          action: handleTaskList,
+        },
+        {
+          path: "fixed-tasks",
+          element: <FixedTask />,
+          children: [
+            {
+              path: ":fixedTaskName",
+              element: <ShowFixedTasks />,
+              loader: loadFixedTasks,
+              action: handleTask,
+            },
+          ],
+        },
 
-      {
-        path: ":listNameId",
-        element: <Task />,
-        action: handleTask,
-        loader: loadTaskList,
-        id: "listName",
-        children: [
-          {
-            path: ":taskId",
+        {
+          path: ":listNameId",
+          element: <Task />,
+          action: handleTask,
+          loader: loadTaskList,
+          id: "listName",
+          children: [
+            {
+              path: ":taskId",
 
-            element: <EditTask />,
-            loader: loadTask,
-            action: editTask,
-          },
-        ],
-      },
-    ],
-  },
-]);
+              element: <EditTask />,
+              loader: loadTask,
+              action: editTask,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  const [pageLoaded, setLoaded] = useState(false);
+  return (
+    <>
+      {!pageLoaded ? <Loader /> : null}
+      <RouterProvider router={wireRouter(setLoaded)} />
+    </>
+  );
 }
 
 export default App;

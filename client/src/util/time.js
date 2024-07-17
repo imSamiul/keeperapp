@@ -4,6 +4,25 @@ export function getLastSecondBeforeTomorrow() {
   lastSecondToday.setHours(23, 59, 59, 999); // Set the time to 11:59:59.999 PM
   return lastSecondToday;
 }
+export function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+
+  // Get the components of the date
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+  const timeString = date.toLocaleString("en-US", options);
+
+  // Format the date components
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const year = date.getFullYear().toString().slice(-2);
+
+  const formattedDate = `${timeString} ${day}-${month}-${year}`;
+  return formattedDate;
+}
 
 //   function isTodayOver() {
 //     const now = new Date();

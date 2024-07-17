@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Form, Link, useActionData, useNavigation } from "react-router-dom";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 
@@ -8,6 +8,17 @@ function Login() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  const actionData = useActionData();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (navigation.state === "idle" && actionData) {
+      if (actionData.error) {
+        setError(actionData.error);
+      }
+    }
+  }, [navigation.state, actionData]);
   function handleChange(e) {
     const { name, value } = e.target;
     setFormInputValue((preFormData) => {
@@ -18,11 +29,15 @@ function Login() {
     });
   }
   return (
-    <div className="font-figtree">
-      <h1 className=" text-2xl md:text-4xl font-extrabold">Sign In</h1>
+    <div className=" w-3/4">
+      <h1 className=" text-3xl font-medium text-[#14213d]">
+        Start your day quickly by
+        <br />
+        <span className=" font-bold text-[#fca311] ">Sign In</span>
+      </h1>
       <Form method="POST" className="pt-5 flex flex-col gap-6">
         <Input
-          classNames=" bg-blue-100 "
+          classNames=" bg-[#e5e5e5] w-full text-lg "
           placeholder="Your email"
           type="email"
           name="email"
@@ -30,14 +45,14 @@ function Login() {
           value={formInputValue.email}
         ></Input>
         <Input
-          className="input bg-blue-100 p-5 h-0 focus:border-none border-none focus:outline-none"
+          classNames=" bg-[#e5e5e5] w-full text-lg "
           placeholder="Your password"
           type="password"
           name="password"
           onChange={handleChange}
           value={formInputValue.password}
         ></Input>
-        <Button className=" bg-[#C425D9] border-none py-3 text-white min-h-0 h-auto hover:text-black hover:outline-1  hover:border-black hover:border-solid hover:border-st">
+        <Button classNames="text-base py-2 bg-[#fca311] text-white hover:bg-white hover:text-black">
           Login
         </Button>
       </Form>
@@ -52,10 +67,10 @@ function Login() {
         <i className="fa-brands fa-google"></i>
         <span>Google</span>
       </button> */}
-
-      <p className="text-lg mt-6">
+      {error && <p className="text-red-500">{error}</p>}
+      <p className="text-lg mt-6 text-center">
         Don't have an account?
-        <Link to="/register" className="text-blue-500 ml-2">
+        <Link to="/register" className="text-[#fca311] ml-2">
           Sign Up
         </Link>
       </p>

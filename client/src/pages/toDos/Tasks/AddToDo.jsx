@@ -12,6 +12,7 @@ function AddToDo() {
 
   const actionData = useActionData();
   const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   useEffect(() => {
     if (navigation.state === "idle" && actionData) {
       if (actionData.error) {
@@ -42,8 +43,9 @@ function AddToDo() {
         value="addTask"
         classNames="text-base py-2 md:py-2 bg-[#fca311] text-white hover:bg-white hover:text-black "
         iconClassNames="fa-solid fa-clipboard-list"
+        disabled={isSubmitting}
       >
-        Add
+        {isSubmitting ? "Adding..." : "Add"}
       </Button>
       {error && <p>{error}</p>}
     </Form>

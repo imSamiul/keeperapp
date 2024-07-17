@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Checkbox from "../../../components/ui/Checkbox";
 import { useSelector } from "react-redux";
+import { formatTimestamp } from "../../../util/time";
 
 function EditTask() {
   const data = useLoaderData();
@@ -60,13 +61,13 @@ function EditTask() {
 
         <div className="mt-2 flex gap-2 items-center justify-end">
           <button
-            className="btn h-auto min-h-6 rounded-sm p-2 text-md hover:bg-[#e5e5e5]  hover:border-solid"
+            className="btn h-auto min-h-6 rounded-sm p-2 text-md hover:bg-[#e5e5e5]  hover:border-solid bg-[#14213d] text-white hover:text-black"
             onClick={() => navigate(-1)}
           >
             Cancel
           </button>
           <Button
-            classNames="p-2 text-md bg-[#fca311] text-white hover:bg-white hover:text-black "
+            classNames="p-2 text-md bg-[#fca311] text-white hover:bg-[#e5e5e5] hover:text-black "
             iconClassNames="fa-solid fa-check"
             disabled={task.title === title}
           >
@@ -76,7 +77,11 @@ function EditTask() {
 
         <div className="mt-3">
           <Button
-            classNames="bg-[#fca311] text-white hover:bg-white hover:text-black py-2 w-full"
+            classNames={`${
+              addToday
+                ? "hover:bg-[#e5e5e5] border-solid border-black hover:border-solid bg-[#14213d] text-white hover:text-black"
+                : "bg-[#fca311] text-white hover:bg-white hover:text-black"
+            } py-2 w-full`}
             iconClassNames="fa-solid fa-sun"
             name="intent"
             value={addToday ? "removeToday" : "addToday"}
@@ -84,6 +89,9 @@ function EditTask() {
             {addToday ? "Remove from today" : "Add to today"}
           </Button>
         </div>
+        <p className="text-center mt-3 text-black/50">
+          Created at: {formatTimestamp(task.createdAt)}
+        </p>
       </div>
     </Form>
   );
