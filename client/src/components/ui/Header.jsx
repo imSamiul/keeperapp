@@ -73,7 +73,7 @@ function Header({ toggleDrawer }) {
         {toggleInput && (
           <Button
             iconClassNames="fa-solid fa-check"
-            classNames="bg-[#14213d] text-white md:text-base py-2"
+            classNames="bg-[#14213d] text-white md:text-base py-2 border-none hover:border-solid hover:text-black"
             onClick={handleEditListName}
             disabled={listName === listNameHeader || listName === ""}
           >
@@ -84,14 +84,14 @@ function Header({ toggleDrawer }) {
       {showEditBtn && !toggleInput && (
         <div className="w-full flex p-5 gap-2 md:gap-3  justify-end">
           <Button
-            classNames="bg-[#14213d] text-white md:text-base w-fit"
+            classNames="bg-[#14213d] text-white md:text-base w-fit border-none hover:border-solid hover:text-black"
             iconClassNames="fa-solid fa-pen-to-square"
             onClick={handleToggleEditListName}
           ></Button>
           <Modal
             actionBtnTitle={["Yes", "No"]}
             iconClassNames="fa-solid fa-trash-can"
-            btnClassNames="bg-[#14213d] text-white md:text-base w-fit h-full"
+            btnClassNames="bg-[#14213d] text-white md:text-base w-fit h-full border-none hover:border-solid hover:text-black"
             handleModalAction={handleDeleteList}
           >
             <h1 className="text-lg lg:text-xl">
