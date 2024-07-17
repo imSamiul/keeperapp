@@ -7,7 +7,7 @@ require('dotenv').config({
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REFRESH_TOKEN, USER } =
   process.env;
-// TODO: add CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REFRESH_TOKEN, USER to production environment
+
 // create a new OAuth2 client from google
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
