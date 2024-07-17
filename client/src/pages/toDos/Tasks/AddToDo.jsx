@@ -45,7 +45,7 @@ function AddToDo() {
         iconClassNames="fa-solid fa-clipboard-list"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Adding..." : "Add"}
+        {isSubmitting ? "Loading..." : "Add"}
       </Button>
       {error && <p>{error}</p>}
     </Form>

@@ -43,7 +43,7 @@ function AddList({
         iconClassNames={iconClassNames}
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Waiting..." : "Add new List"}
+        {isSubmitting ? "Loading..." : "Add new List"}
       </Button>
       {error && <p>{error}</p>}
     </Form>
