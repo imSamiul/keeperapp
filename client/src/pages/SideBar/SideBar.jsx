@@ -28,14 +28,14 @@ function SideBar({ toggleDrawer, setIsLoggingOut }) {
   }
 
   return (
-    <div className="drawer-side mt-14  lg:mt-0  rounded-l-lg  ">
+    <div className="drawer-side mt-14  lg:mt-0  rounded-l-lg mb-14 ">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
         onClick={toggleDrawer}
       ></label>
-      <div className="bg-[#e5e5e5] min-h-full lg:h-full py-4 px-9 w-80 flex flex-col pb-14 ">
+      <div className="bg-[#e5e5e5] min-h-full lg:h-full py-4 px-9 w-80 flex flex-col pb-20 mb-14 ">
         <button
           className="btn h-auto min-h-6 w-fit rounded-none border-none outline-none border-0 text-lg font-normal my-2 self-end shadow-none  lg:hidden"
           onClick={toggleDrawer}
@@ -52,13 +52,13 @@ function SideBar({ toggleDrawer, setIsLoggingOut }) {
           />
         </div>
 
-        <div className="my-2  flex-[3] rounded-md bg-[#14213d]  bg-opacity-5 ">
+        <div className="my-2   rounded-md bg-[#14213d]  bg-opacity-5 ">
           <FixedSidebar />
         </div>
         <div className="mb-4 flex-[9] rounded-md bg-[#14213d]  bg-opacity-5  overflow-hidden scrollbar">
           <SideBarList taskListNames={modifyListNames} />
         </div>
-        <div className="flex justify-around w-full flex-1 items-center">
+        <div className="flex justify-around w-full flex-1 items-center mb-14">
           {/* <h1>Settings</h1> */}
           <Modal
             btnClassNames="w-full text-base py-3 md:py-2.5 bg-[#fca311] text-white hover:bg-white hover:text-black border-none "
