@@ -28,7 +28,7 @@ function SideBar({ toggleDrawer, setIsLoggingOut }) {
   }
 
   return (
-    <div className="drawer-side  mt-14  lg:mt-0  rounded-l-lg  ">
+    <div className="drawer-side  mt-14  lg:mt-0  rounded-l-lg  pb-15">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
