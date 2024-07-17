@@ -28,14 +28,14 @@ function SideBar({ toggleDrawer, setIsLoggingOut }) {
   }
 
   return (
-    <div className="drawer-side  mt-14  lg:mt-0  rounded-l-lg  pb-15">
+    <div className="drawer-side  mt-14  lg:mt-0  rounded-l-lg ">
       <label
         htmlFor="my-drawer-2"
         aria-label="close sidebar"
         className="drawer-overlay"
         onClick={toggleDrawer}
       ></label>
-      <div className="bg-[#e5e5e5] min-h-full lg:h-full py-4 px-9 w-80 flex flex-col pb-15 ">
+      <div className="bg-[#e5e5e5] min-h-full lg:h-full py-4 px-9 w-80 flex flex-col pb-14 ">
         <button
           className="btn h-auto min-h-6 w-fit rounded-none border-none outline-none border-0 text-lg font-normal my-2 self-end shadow-none  lg:hidden"
           onClick={toggleDrawer}
