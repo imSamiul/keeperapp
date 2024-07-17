@@ -23,5 +23,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, addUser, removeUser, removeToken } = userSlice.actions;
+export const { setToken, addUser, removeUser, removeToken, setOtpEmail } =
+  userSlice.actions;
 export default userSlice.reducer;

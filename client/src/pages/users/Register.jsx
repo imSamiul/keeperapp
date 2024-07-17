@@ -1,16 +1,27 @@
-import { useState } from "react";
-import { Form, Link, useActionData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
+import { getOtpEmail, getOtpToken } from "../../util/auth";
 
 function Register() {
   const [formInputValue, setFormInputValue] = useState({
     name: "",
-    email: "",
     password: "",
     rePassword: "",
   });
-  const formErrors = useActionData();
+  const [error, setError] = useState("");
+  const actionData = useActionData();
+  const navigation = useNavigation();
+  const otpEmail = getOtpEmail();
+  const otpToken = getOtpToken();
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -22,29 +33,33 @@ function Register() {
     });
   }
 
+  useEffect(() => {
+    if (!otpToken) {
+      navigate(-1);
+    }
+    if (navigation.state === "idle" && actionData)
+      if (actionData.error) {
+        setError(actionData.error);
+      }
+  }, [otpToken, navigate, actionData, navigation.state]);
+
   return (
-    <div className="pt-6 font-figtree">
-      <h1 className=" text-2xl md:text-4xl font-extrabold">Register</h1>
-      <Form method="POST" className="pt-5 flex flex-col gap-6">
+    <div className="  w-3/4">
+      <h1 className="text-xl font-medium text-[#14213d] ">
+        One more step to go. Please provide username and password for{" "}
+        <span className=" font-bold text-[#fca311]">{otpEmail}</span>.
+      </h1>
+      <Form method="POST" className="pt-5 flex flex-col gap-3">
         <Input
-          classNames=" bg-blue-100"
+          classNames="  bg-[#e5e5e5]  w-full text-lg border-none"
           placeholder="Your name"
           type="text"
           name="name"
           onChange={handleChange}
           value={formInputValue.name}
         ></Input>
-
         <Input
-          classNames=" bg-blue-100"
-          placeholder="Your email"
-          type="email"
-          name="email"
-          onChange={handleChange}
-          value={formInputValue.email}
-        ></Input>
-        <Input
-          classNames=" bg-blue-100"
+          classNames="  bg-[#e5e5e5]  w-full text-lg border-none"
           placeholder="Your password"
           type="password"
           name="password"
@@ -52,17 +67,15 @@ function Register() {
           value={formInputValue.password}
         ></Input>
         <Input
-          classNames=" bg-blue-100"
+          classNames="  bg-[#e5e5e5]  w-full text-lg border-none"
           placeholder="Re-enter your password"
           type="password"
           name="rePassword"
           onChange={handleChange}
           value={formInputValue.rePassword}
         ></Input>
-        {formErrors && (
-          <p className="text-red-500 text-sm">{formErrors.message}</p>
-        )}
-        <Button classNames="py-3 text-white bg-[#C425D9] border-none text-white hover:text-black hover:outline-1  hover:border-black hover:border-solid hover:border-st">
+        {error && <p className="text-red-500">{error}</p>}
+        <Button classNames="text-base py-2 bg-[#fca311] text-white hover:bg-white hover:text-black">
           Sign Up
         </Button>
       </Form>
@@ -78,9 +91,9 @@ function Register() {
         <span>Google</span>
       </button> */}
 
-      <p className="text-lg mt-6">
+      <p className="text-lg mt-6 text-center">
         Already have an account?
-        <Link to="/login" className="text-blue-500 ml-2">
+        <Link to="/login" className="text-[#fca311] ml-2">
           Sign In
         </Link>
       </p>

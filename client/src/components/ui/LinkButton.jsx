@@ -9,7 +9,7 @@ function LinkButton({ children, to, ...props }) {
   if (to === "-1")
     return (
       <Button
-        classNames="bg-[#fca311] text-white hover:bg-white hover:text-black "
+        classNames="bg-[#fca311] text-white hover:bg-white hover:text-black py-2 text-base"
         onClick={() => navigate(-1)}
       >
         {children}

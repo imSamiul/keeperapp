@@ -30,3 +30,32 @@ export function setAuthToken(token) {
 export function removeAuthToken() {
   Cookies.remove("token");
 }
+
+export function addOtpEmail(otpEmail) {
+  Cookies.set("otpEmail", otpEmail, { expires: 5 / 1440 });
+  // 1 day = 24 hours
+  // 1 hour = 60 minutes
+  // 1 day = 1440 minutes
+
+  // So, 10 minutes = 20 / 1440 days.
+}
+export function getOtpEmail() {
+  const otpEmail = Cookies.get("otpEmail");
+  if (!otpEmail) {
+    console.log("No token found");
+    return null;
+  }
+  return otpEmail;
+}
+
+export function addOtpToken(otpToken) {
+  Cookies.set("otpToken", otpToken, { expires: 5 / 1440 });
+}
+export function getOtpToken() {
+  const otpToken = Cookies.get("otpToken");
+  if (!otpToken) {
+    console.log("No otp token");
+    return null;
+  }
+  return otpToken;
+}
