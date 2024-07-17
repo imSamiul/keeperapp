@@ -27,7 +27,7 @@ export async function sendOTP(userEmailObj) {
   }
 }
 // match and verify OTP
-export async function verifyOTP(otpObj)
+// export async function verifyOTP(otpObj)
 // register user
 export async function registerUser(userData) {
   try {

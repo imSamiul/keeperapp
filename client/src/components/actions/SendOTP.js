@@ -2,6 +2,7 @@ import { redirect } from "react-router-dom";
 import { setOtpEmail } from "../../pages/users/userSlice";
 import { sendOTP } from "../../services/apiUsers";
 import store from "../../store";
+import { addOtpEmail } from "../../util/auth";
 
 export async function action({ request }) {
   const data = await request.formData();
@@ -21,6 +22,6 @@ export async function action({ request }) {
   };
   // const res = await sendOTP(emailObj);
   // const userMail = res.email;
-  store.dispatch(setOtpEmail("samiul15-3041@"));
+  addOtpEmail("samiul@gmal.com");
   return redirect("./verify-otp");
 }

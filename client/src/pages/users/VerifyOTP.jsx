@@ -1,13 +1,21 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function VerifyOTP() {
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const otpEmail = useSelector((state) => state.user.otpEmail);
+
+  useEffect(() => {
+    if (otpEmail === "") {
+      console.log(otpEmail);
+      navigate(-1);
+    }
+  }, [otpEmail, navigate]);
 
   // TODO: add error for verify otp page
   return (

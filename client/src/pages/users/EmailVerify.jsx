@@ -28,7 +28,7 @@ function EmailVerify() {
       <div className="flex items-center justify-center flex-col gap-3">
         <Input
           classNames="bg-[#e5e5e5] mt-4 w-full text-lg "
-          type="text"
+          type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => {
