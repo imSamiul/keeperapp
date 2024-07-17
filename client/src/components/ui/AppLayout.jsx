@@ -25,7 +25,7 @@ function AppLayout({ setLoaded }) {
       ) : (
         <div id="content" className="  font-figtree  ">
           <NavBar />
-          <div className="  bg-[#ffffff] md:rounded-lg h-[calc(100vh-64px)]">
+          <div className="  bg-[#ffffff] md:rounded-lg h-lvh">
             <div className="drawer lg:drawer-open   h-full rounded-lg  ">
               <input
                 id="my-drawer-2"

@@ -8,7 +8,6 @@ function Homepage({ setLoaded }) {
   useEffect(() => {
     setLoaded(true);
   }, [navigation.state, setLoaded]);
-  console.log(navigation.state);
 
   return (
     <>
