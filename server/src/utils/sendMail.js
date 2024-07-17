@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 const path = require('path');
 require('dotenv').config({
-  path: path.resolve(__dirname, '../../config/dev.env'),
+  path: path.resolve(__dirname, '../../config/prod.env'),
 });
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REFRESH_TOKEN, USER } =
