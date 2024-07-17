@@ -16,14 +16,14 @@ function EmailVerify() {
       }
     }
   }, [navigation.state, actionData]);
-  console.log(navigation.state);
+
   return (
     <>
       {navigation.state === "loading" && <p>Loading...</p>}
       <div className="w-3/4 ">
         <h1 className="text-3xl font-medium text-[#14213d] leading-10">
-          Welcome! Please enter your email to get started with{" "}
-          <span className="font-shantellSans font-bold text-[#fca311]">
+          Welcome! Please enter your email to get started with <br />
+          <span className="font-shantellSans font-bold text-[#fca311] ">
             Keeper.
           </span>
         </h1>

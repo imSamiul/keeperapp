@@ -10,7 +10,7 @@ export async function action({ request }) {
   const errors = {};
   if (email.length < 1) {
     errors.error = "Email must not be empty.";
-  } else if (email.includes("@") === false) {
+  } else if (email.includes("@") === false || email.includes(".") === false) {
     errors.error = "Email must be valid.";
   }
   if (Object.keys(errors).length > 0) {
