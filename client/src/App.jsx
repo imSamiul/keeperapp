@@ -34,6 +34,7 @@ import VerifyOTP from "./pages/users/VerifyOTP";
 import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
 import { useState } from "react";
 import Loader from "./components/ui/Loader";
+import MyProfile from "./pages/profile/MyProfile";
 
 const wireRouter = (setLoaded) =>
   createBrowserRouter([
@@ -118,6 +119,10 @@ const wireRouter = (setLoaded) =>
           ],
         },
       ],
+    },
+    {
+      path: "/profile",
+      element: <MyProfile setLoaded={setLoaded} />,
     },
   ]);
 
