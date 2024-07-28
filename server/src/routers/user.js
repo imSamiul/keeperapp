@@ -1,5 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const sharp = require('sharp');
 
 const User = require('../model/user');
 const auth = require('../middleware/auth');
@@ -93,7 +95,7 @@ router.post('/users/register', async (req, res) => {
   }
   return null;
 });
-
+// Login user
 router.post('/users/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -107,6 +109,7 @@ router.post('/users/login', async (req, res) => {
     res.status(500).send({ message: error.toString() });
   }
 });
+// Logout user
 router.post('/users/logout', auth, async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(
@@ -118,4 +121,36 @@ router.post('/users/logout', auth, async (req, res) => {
     res.status(500).send({ message: error });
   }
 });
+
+// PATCH:
+// Add avatar
+const storage = multer.memoryStorage();
+const avatar = multer({
+  storage,
+  limits: { fileSize: 5000000 },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Please upload an image file'));
+    }
+    return cb(undefined, true);
+  },
+});
+router.patch(
+  '/profile/avatar',
+  auth,
+  avatar.single('avatar'),
+  async (req, res) => {
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+    try {
+      User.findByIdAndUpdate(req.user.id, { avatar: buffer }, { new: true });
+
+      res.status(200).send({ message: 'Avatar uploaded successfully' });
+    } catch (error) {
+      res.status(500).send({ message: error.toString() });
+    }
+  },
+);
 module.exports = router;
