@@ -3,20 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer utilities {
-  .scrollbar::-webkit-scrollbar {
-    @apply w-0 h-5;
-  }
-  .scrollbar::-webkit-scrollbar-track {
-    @apply bg-[#e5e5e5];
-  }
-
-  .scrollbar::-webkit-scrollbar-thumb {
-    @apply rounded-lg bg-[#14213d] bg-opacity-25;
-  }
-
-  .scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
-  }
-}
