@@ -3,7 +3,7 @@ import Header from "../ui/Header";
 
 function Content({ toggleDrawer }) {
   return (
-    <div className="overflow-auto h-full scrollbar">
+    <div className="overflow-auto scrollbar">
       <Header toggleDrawer={toggleDrawer} />
       <Outlet />
     </div>

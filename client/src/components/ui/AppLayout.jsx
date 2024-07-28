@@ -25,8 +25,8 @@ function AppLayout({ setLoaded }) {
       ) : (
         <div id="content" className="  font-figtree  ">
           <NavBar />
-          <div className="  bg-[#ffffff] md:rounded-lg h-lvh">
-            <div className="drawer lg:drawer-open   h-full rounded-lg  ">
+          <div className="  bg-[#ffffff] md:rounded-lg ">
+            <div className="drawer lg:drawer-open    rounded-lg  ">
               <input
                 id="my-drawer-2"
                 type="checkbox"
@@ -35,7 +35,7 @@ function AppLayout({ setLoaded }) {
                 readOnly
               />
 
-              <div className="drawer-content overflow-hidden  ">
+              <div className="drawer-content overflow-hidden ">
                 <Content toggleDrawer={toggleDrawer} />
               </div>
 

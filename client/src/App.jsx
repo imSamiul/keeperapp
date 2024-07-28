@@ -66,7 +66,7 @@ const wireRouter = (setLoaded) =>
           errorElement: <ErrorPageAuthentication />,
         },
       ],
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
     },
     {
       path: "/todo",
@@ -74,7 +74,7 @@ const wireRouter = (setLoaded) =>
       id: "todo",
       loader: loadListNames,
       action: handleTaskList,
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
       children: [
         {
           index: true,
