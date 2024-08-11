@@ -12,6 +12,16 @@ const findExistingOTP = require('../utils/findExistingOtp');
 
 const router = new express.Router();
 
+// GET:
+// Get user profile
+router.get('/users/me', auth, async (req, res) => {
+  try {
+    res.send(req.user);
+  } catch (error) {
+    res.status(500).send({ message: error.toString() });
+  }
+});
+
 // POST:
 // send OTP
 router.post('/users/register/send-otp', async (req, res) => {
@@ -141,7 +151,7 @@ router.patch(
   avatar.single('avatar'),
   async (req, res) => {
     const buffer = await sharp(req.file.buffer)
-      .resize({ width: 250, height: 250 })
+      .resize({ width: 360, height: 360 })
       .png()
       .toBuffer();
     try {
