@@ -1,8 +1,12 @@
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 
 function ProfileForm() {
+  const data = useLoaderData();
+  const { name, email } = data;
+  console.log(name, email);
+
   return (
     <Form method="POST">
       <div className="label">
@@ -11,17 +15,13 @@ function ProfileForm() {
       <Input
         type="text"
         classNames="disabled:text-black disabled:bg-gray-400 w-full"
-        placeholder="samiulkarimprodhan@gmail.com"
+        value={email}
         disabled
       />
       <div className="label">
         <span className="label-text text-lg">Name:</span>
       </div>
-      <Input
-        type="text"
-        classNames="text-black bg-white w-full"
-        value="Samiul"
-      />
+      <Input type="text" classNames="text-black bg-white w-full" value={name} />
       <div className="label">
         <span className="label-text text-lg">Password:</span>
       </div>

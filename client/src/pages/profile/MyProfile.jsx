@@ -12,8 +12,8 @@ function MyProfile({ setLoaded }) {
   }, [navigation.state, setLoaded]);
 
   return (
-    <div className="flex justify-center items-center h-screen text-white font-figtree ">
-      <div className="bg-[#14213d] p-5 rounded-md grid grid-cols-2  w-2/4">
+    <div className="flex justify-center items-center md:h-screen text-white font-figtree ">
+      <div className="bg-[#14213d]  p-5 md:rounded-md grid grid-cols-1 md:grid-cols-2 w-full  md:w-3/4 lg:w-2/4  gap-5">
         <ProfileImage />
         <ProfileForm />
       </div>

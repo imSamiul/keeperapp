@@ -17,7 +17,7 @@ function ProfileImage() {
   };
   return (
     <div
-      className="relative flex items-center justify-center  h-80 w-80 "
+      className="relative flex items-center justify-center "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -34,7 +34,7 @@ function ProfileImage() {
       <img
         src={image}
         alt="Click to upload"
-        className="cursor-pointer rounded-lg border-2 border-blue-500 hover:border-blue-700"
+        className="cursor-pointer rounded-lg border-2 border-blue-500 hover:border-blue-700 w-full h-full max-w-80 max-h-80 "
         onClick={handleImageClick}
       />
 
