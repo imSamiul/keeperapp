@@ -5,7 +5,7 @@ const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 // GET:
 // Get user profile
-export async function getUserProfileInfo() {
+export async function getUserProfileDetails() {
   try {
     const res = await fetch(`${API_URL}/me`, {
       method: "GET",

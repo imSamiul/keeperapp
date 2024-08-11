@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useState } from "react";
 import Homepage from "./pages/Homepage";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/users/Login";
@@ -9,7 +10,14 @@ import Task from "./pages/toDos/Tasks/Task";
 import EditTask from "./pages/toDos/Tasks/EditTask";
 import ErrorPage from "./pages/Error";
 import TodayTasks from "./pages/toDos/Tasks/TodayTasks";
+import FixedTask from "./pages/toDos/Tasks/FixedTask";
+import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 import { checkAuthToken } from "./util/auth";
+import EmailVerify from "./pages/users/EmailVerify";
+import VerifyOTP from "./pages/users/VerifyOTP";
+import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
+import Loader from "./components/ui/Loader";
+import MyProfile from "./pages/profile/MyProfile";
 
 // React Router DOM action
 import { action as loginUser } from "./components/actions/LoginUser";
@@ -26,15 +34,7 @@ import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
 import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
 import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
-import FixedTask from "./pages/toDos/Tasks/FixedTask";
-import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
-
-import EmailVerify from "./pages/users/EmailVerify";
-import VerifyOTP from "./pages/users/VerifyOTP";
-import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
-import { useState } from "react";
-import Loader from "./components/ui/Loader";
-import MyProfile from "./pages/profile/MyProfile";
+import { loader as loadUserProfileDetails } from "./components/loaders/loadUserProfileDetails";
 
 const wireRouter = (setLoaded) =>
   createBrowserRouter([
@@ -123,6 +123,8 @@ const wireRouter = (setLoaded) =>
     {
       path: "/profile",
       element: <MyProfile setLoaded={setLoaded} />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
+      loader: loadUserProfileDetails,
     },
   ]);
 
