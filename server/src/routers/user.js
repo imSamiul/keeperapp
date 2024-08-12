@@ -163,4 +163,30 @@ router.patch(
     }
   },
 );
+
+router.patch('/users/me', auth, async (req, res) => {
+  const updateUserData = req.body;
+  const allowedUpdates = ['name'];
+  const updates = Object.keys(updateUserData);
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update),
+  );
+  if (!isValidOperation) {
+    return res.status(400).send({ message: 'Invalid updates' });
+  }
+  try {
+    const user = await User.findOne({ _id: req.user._id });
+    if (!user) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+    updates.forEach((update) => {
+      user[update] = updateUserData[update];
+    });
+    await user.save();
+    return res.status(201).send({ user });
+  } catch (error) {
+    return res.status(500).send({ message: error.toString() });
+  }
+});
+
 module.exports = router;

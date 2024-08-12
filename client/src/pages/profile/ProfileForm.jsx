@@ -1,11 +1,22 @@
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { Form, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function ProfileForm() {
   const data = useLoaderData();
+  const [formInputValue, setFormInputValue] = useState({ name: "" });
   const { name, email } = data;
-  console.log(name, email);
+
+  useEffect(() => {
+    setFormInputValue({ name, email });
+  }, [name, email]);
+
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+
+    setFormInputValue({ ...formInputValue, [name]: value });
+  }
 
   return (
     <Form method="POST">
@@ -21,7 +32,13 @@ function ProfileForm() {
       <div className="label">
         <span className="label-text text-lg">Name:</span>
       </div>
-      <Input type="text" classNames="text-black bg-white w-full" value={name} />
+      <Input
+        type="text"
+        classNames="text-black bg-white w-full"
+        value={formInputValue.name}
+        name="name"
+        onChange={handleInputChange}
+      />
       <div className="label">
         <span className="label-text text-lg">Password:</span>
       </div>

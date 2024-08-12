@@ -9,6 +9,6 @@ export async function loader() {
     return redirect("/register");
   }
   const profileInfo = await getUserProfileDetails();
-  console.log(profileInfo);
+
   return profileInfo;
 }

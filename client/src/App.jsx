@@ -27,6 +27,7 @@ import { action as handleTask } from "./components/actions/HandleTask";
 import { action as editTask } from "./components/actions/EditTask";
 import { action as sendOTP } from "./components/actions/SendOTP";
 import { action as verifyOTP } from "./components/actions/VerifyOTP";
+import { action as handleUserProfileUpdate } from "./components/actions/EditProfileForm";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
@@ -125,6 +126,7 @@ const wireRouter = (setLoaded) =>
       element: <MyProfile setLoaded={setLoaded} />,
       errorElement: <ErrorPage setLoaded={setLoaded} />,
       loader: loadUserProfileDetails,
+      action: handleUserProfileUpdate,
     },
   ]);
 
