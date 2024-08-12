@@ -141,3 +141,28 @@ export async function logout() {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+
+// PATCH:
+// update user profile
+export async function updateUserProfile(userData) {
+  try {
+    const res = await fetch(`${API_URL}/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+      body: JSON.stringify(userData),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}
