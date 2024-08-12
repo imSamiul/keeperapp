@@ -1,6 +1,6 @@
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, Link, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function ProfileForm() {
@@ -48,10 +48,16 @@ function ProfileForm() {
         value="Samiul"
         disabled
       />
-      <div className="mt-5">
+      <div className="mt-5 flex justify-between">
         <Button classNames="bg-[#fca311] text-white hover:bg-white hover:text-black border-none py-2 text-md">
           Update
         </Button>
+        <Link
+          to="/todo"
+          className="btn bg-[#fca311] text-white hover:bg-white hover:text-black border-none py-2 text-md  shadow-none   min-h-6 h-auto  rounded-sm  "
+        >
+          Home
+        </Link>
       </div>
     </Form>
   );
