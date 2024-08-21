@@ -31,7 +31,7 @@ export async function action({ request, params }) {
   if (btnIntent === "removeToday") {
     taskObj = {
       ...taskObj,
-      today: "",
+      today: null,
     };
   }
 

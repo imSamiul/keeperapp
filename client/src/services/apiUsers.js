@@ -166,3 +166,28 @@ export async function updateUserProfile(userData) {
     throw json({ message: error.message }, { status: error.status || 500 });
   }
 }
+
+// update profile image
+export async function updateAvatar(avatarObj) {
+  console.log(avatarObj.get("avatar"));
+
+  try {
+    const res = await fetch(`${API_URL}/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+      body: avatarObj,
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      const error = new Error(data.message);
+      error.status = res.status;
+      throw error;
+    }
+  } catch (error) {
+    throw json({ message: error.message }, { status: error.status || 500 });
+  }
+}

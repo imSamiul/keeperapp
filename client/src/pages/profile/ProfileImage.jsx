@@ -1,14 +1,25 @@
 import { useRef, useState } from "react";
 import image from "../../assets/99440742-c256-45d5-83ed-3eba65361063.jpg";
+import { useSubmit } from "react-router-dom";
+import { updateAvatar } from "../../services/apiUsers";
 
 function ProfileImage() {
   const fileInputRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
-  const handleFileChange = (event) => {
+  const submit = useSubmit();
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log("Selected file:", file.name);
+      const formData = new FormData();
+      console.log("Selected file:", file);
+
+      formData.append("avatar", file);
+      console.log(formData.get("avatar"));
+      // const res = await updateAvatar(formData);
+
       // You can do something with the selected file here
+
+      submit({ avatar: formData }, { method: "PATCH" });
     }
   };
 

@@ -145,17 +145,28 @@ const avatar = multer({
     return cb(undefined, true);
   },
 });
+// (req, res, next) => {
+//   console.log('Incoming request:', req.headers);
+//   console.log('File:', req.file);
+//   next(); // Proceed to the next middleware
+// },
 router.patch(
-  '/profile/avatar',
+  '/users/me/avatar',
   auth,
   avatar.single('avatar'),
   async (req, res) => {
+    console.log(req.file);
+
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 360, height: 360 })
       .png()
       .toBuffer();
     try {
-      User.findByIdAndUpdate(req.user.id, { avatar: buffer }, { new: true });
+      await User.findByIdAndUpdate(
+        req.user.id,
+        { avatar: buffer },
+        { new: true },
+      );
 
       res.status(200).send({ message: 'Avatar uploaded successfully' });
     } catch (error) {

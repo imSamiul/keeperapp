@@ -19,7 +19,7 @@ function ProfileForm() {
   }
 
   return (
-    <Form method="POST">
+    <Form method="PATCH">
       <div className="label">
         <span className="label-text text-lg">Email:</span>
       </div>
