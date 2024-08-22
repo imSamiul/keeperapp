@@ -1,15 +1,23 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import image from "../../assets/99440742-c256-45d5-83ed-3eba65361063.jpg";
+import image from "../../assets/blank-profile.png";
 
 import { updateAvatar } from "../../services/apiUsers";
+import { useLoaderData } from "react-router-dom";
 
 function ProfileImage() {
+  const data = useLoaderData();
+  const { avatar, fileType } = data;
+
   const fileInputRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [avatarObj, setAvatarObj] = useState(null);
+  const [avatarObj, setAvatarObj] = useState({ avatar, fileType });
+
+  // useEffect(() => {
+  //   setAvatarObj({ avatar, fileType });
+  // }, [avatar, fileType]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -50,9 +58,11 @@ function ProfileImage() {
       />
       {/* Image that acts as a button */}
       <img
-        src={`data:image/${avatarObj ? avatarObj.fileType : "png"};base64,${
-          avatarObj ? avatarObj.avatar : image
-        }`}
+        src={
+          avatarObj.avatar && avatarObj.fileType
+            ? `data:image/${avatarObj.fileType};base64,${avatarObj.avatar}`
+            : image
+        }
         alt="Click to upload"
         className="cursor-pointer rounded-lg border-2 border-blue-500 hover:border-blue-700 w-full h-full max-w-80 max-h-80 "
         onClick={handleImageClick}

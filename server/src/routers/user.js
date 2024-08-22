@@ -1,4 +1,5 @@
 const express = require('express');
+
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const sharp = require('sharp');
@@ -17,7 +18,19 @@ const router = new express.Router();
 // Get user profile
 router.get('/users/me', auth, async (req, res) => {
   try {
-    res.send(req.user);
+    const base64Avatar = req.user.avatar
+      ? req.user.avatar.toString('base64')
+      : null;
+    const getFileType = await findFileType();
+
+    const fileTypeResult = base64Avatar
+      ? await getFileType.fileTypeFromBuffer(req.user.avatar)
+      : null;
+    res.send({
+      user: req.user,
+      avatar: base64Avatar,
+      fileType: fileTypeResult && fileTypeResult.ext,
+    });
   } catch (error) {
     res.status(500).send({ message: error.toString() });
   }
