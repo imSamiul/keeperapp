@@ -36,6 +36,7 @@ import { loader as loadTask } from "./components/loaders/loadTask";
 import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
 import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
 import { loader as loadUserProfileDetails } from "./components/loaders/loadUserProfileDetails";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const wireRouter = (setLoaded) =>
   createBrowserRouter([
@@ -136,6 +137,20 @@ function App() {
     <>
       {!pageLoaded ? <Loader /> : null}
       <RouterProvider router={wireRouter(setLoaded)} />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="colored"
+        transition={Bounce}
+        stacked
+      />
     </>
   );
 }

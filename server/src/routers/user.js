@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const sharp = require('sharp');
+const { findFileType } = require('../utils/findFileType');
 
 const User = require('../model/user');
 const auth = require('../middleware/auth');
@@ -134,44 +135,68 @@ router.post('/users/logout', auth, async (req, res) => {
 
 // PATCH:
 // Add avatar
+
+// Configure Multer with memory storage and file size limit
 const storage = multer.memoryStorage();
 const avatar = multer({
   storage,
-  limits: { fileSize: 5000000 },
+  limits: { fileSize: 5000000 }, // 5MB limit
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Please upload an image file'));
+      return cb(new Error('Please upload an image file (jpg, jpeg, png)'));
     }
     return cb(undefined, true);
   },
 });
-// (req, res, next) => {
-//   console.log('Incoming request:', req.headers);
-//   console.log('File:', req.file);
-//   next(); // Proceed to the next middleware
-// },
+
+// Route for uploading avatar
 router.patch(
   '/users/me/avatar',
   auth,
   avatar.single('avatar'),
   async (req, res) => {
-    console.log(req.file);
-
-    const buffer = await sharp(req.file.buffer)
-      .resize({ width: 360, height: 360 })
-      .png()
-      .toBuffer();
     try {
-      await User.findByIdAndUpdate(
+      if (!req.file) {
+        throw new Error('No file uploaded');
+      }
+
+      // Resize the image using Sharp
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 360, height: 360 })
+        .png()
+        .toBuffer();
+
+      // Update the user's avatar in the database
+      const user = await User.findByIdAndUpdate(
         req.user.id,
         { avatar: buffer },
         { new: true },
       );
+      const base64Avatar = user.avatar.toString('base64');
+      const getFileType = await findFileType();
 
-      res.status(200).send({ message: 'Avatar uploaded successfully' });
+      const fileTypeResult = await getFileType.fileTypeFromBuffer(buffer);
+
+      res
+        .status(200)
+        .send({ avatar: base64Avatar, fileType: fileTypeResult.ext });
     } catch (error) {
       res.status(500).send({ message: error.toString() });
     }
+  },
+  (error, req, res, next) => {
+    // Handle Multer errors
+
+    if (error instanceof multer.MulterError) {
+      if (error.code === 'LIMIT_FILE_SIZE') {
+        return res
+          .status(400)
+          .send({ message: 'File too large. Max size is 5MB.' });
+      }
+    }
+
+    // Handle other errors (e.g., file type, no file uploaded)
+    return res.status(400).send({ message: error.message });
   },
 );
 

@@ -155,6 +155,7 @@ export async function updateUserProfile(userData) {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
+
     if (res.ok) {
       return data;
     } else {
@@ -169,8 +170,6 @@ export async function updateUserProfile(userData) {
 
 // update profile image
 export async function updateAvatar(avatarObj) {
-  console.log(avatarObj.get("avatar"));
-
   try {
     const res = await fetch(`${API_URL}/me/avatar`, {
       method: "PATCH",
@@ -180,6 +179,7 @@ export async function updateAvatar(avatarObj) {
       body: avatarObj,
     });
     const data = await res.json();
+
     if (res.ok) {
       return data;
     } else {

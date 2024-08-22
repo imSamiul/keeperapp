@@ -13,15 +13,6 @@ export async function action({ request }) {
   // if (Object.keys(errors).length > 0) {
   //   return errors;
   // }
-  console.log(JSON.parse(formData.get("avatar")));
-
-  const data = new FormData();
-  const avatar = data.append("avatar", formData.get("avatar"));
-
-  console.log(avatar);
-
-  // const res = await updateAvatar(avatar);
-  // console.log(res);
 
   // const res = await updateUserProfile(editProfileForm);
   // if (res) {
