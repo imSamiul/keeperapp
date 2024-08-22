@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function ProfileForm() {
   const data = useLoaderData();
   const [formInputValue, setFormInputValue] = useState({ name: "" });
-  const { name, email } = data;
+  const { name, email } = data.user;
 
   useEffect(() => {
     setFormInputValue({ name, email });

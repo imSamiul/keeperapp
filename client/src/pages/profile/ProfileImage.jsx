@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,10 +14,6 @@ function ProfileImage() {
   const fileInputRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [avatarObj, setAvatarObj] = useState({ avatar, fileType });
-
-  // useEffect(() => {
-  //   setAvatarObj({ avatar, fileType });
-  // }, [avatar, fileType]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
