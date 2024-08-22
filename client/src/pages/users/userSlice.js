@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: {},
   token: "",
+  avatarObj: {},
 };
 const userSlice = createSlice({
   name: "user",
@@ -20,9 +21,18 @@ const userSlice = createSlice({
     removeToken(state) {
       state.token = "";
     },
+    addAvatar(state, action) {
+      state.avatarObj = action.payload;
+    },
   },
 });
 
-export const { setToken, addUser, removeUser, removeToken, setOtpEmail } =
-  userSlice.actions;
+export const {
+  setToken,
+  addUser,
+  removeUser,
+  removeToken,
+  setOtpEmail,
+  addAvatar,
+} = userSlice.actions;
 export default userSlice.reducer;
