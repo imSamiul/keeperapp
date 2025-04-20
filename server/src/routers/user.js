@@ -37,71 +37,73 @@ router.get('/users/me', auth, async (req, res) => {
 });
 
 // POST:
-// send OTP
-router.post('/users/register/send-otp', async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (user) {
-      return res.status(409).send({ message: 'User already registered' });
-    }
+// // send OTP
+// router.post('/users/register/send-otp', async (req, res) => {
+//   const { email } = req.body;
+//   try {
+//     const user = await User.findOne({ email });
+//     if (user) {
+//       return res.status(409).send({ message: 'User already registered' });
+//     }
 
-    const otp = await findExistingOTP();
-    const otpBody = new OTP({ email, otp });
-    const savedOTP = await otpBody.save();
+//     const otp = await findExistingOTP();
+//     const otpBody = new OTP({ email, otp });
+//     const savedOTP = await otpBody.save();
 
-    return res.status(200).send({
-      message: 'OTP sent successfully',
-      email: savedOTP.email,
-    });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).send({ message: error.message });
-  }
-});
-// match and verify OTP
-router.post('/users/register/verify-otp', async (req, res) => {
-  const { email, otp } = req.body;
-  try {
-    const existingOTP = await OTP.findOne({ email, otp });
+//     return res.status(200).send({
+//       message: 'OTP sent successfully',
+//       email: savedOTP.email,
+//     });
+//   } catch (error) {
+//     console.log(error.message);
+//     return res.status(500).send({ message: error.message });
+//   }
+// });
+// // match and verify OTP
+// router.post('/users/register/verify-otp', async (req, res) => {
+//   const { email, otp } = req.body;
+//   try {
+//     const existingOTP = await OTP.findOne({ email, otp });
 
-    if (existingOTP) {
-      // OTP is valid
-      const token = jwt.sign({ email }, process.env.OTP_VERIFY_TOKEN, {
-        expiresIn: '5m',
-      });
-      res
-        .status(200)
-        .send({ success: true, message: 'OTP verification successful', token });
-    } else {
-      // OTP is invalid
-      res.status(400).send({ message: 'OTP is not valid' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.toString() });
-  }
-});
+//     if (existingOTP) {
+//       // OTP is valid
+//       const token = jwt.sign({ email }, process.env.OTP_VERIFY_TOKEN, {
+//         expiresIn: '5m',
+//       });
+//       res
+//         .status(200)
+//         .send({ success: true, message: 'OTP verification successful', token });
+//     } else {
+//       // OTP is invalid
+//       res.status(400).send({ message: 'OTP is not valid' });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.toString() });
+//   }
+// });
 // create new user
 router.post('/users/register', async (req, res) => {
-  const { otpToken, name, password } = req.body;
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send({ message: 'Email and password are required' });
+  }
 
   try {
-    if (!otpToken) {
-      return res.status(400).send({ message: 'OTP token is required' });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).send({ message: 'User already registered' });
     }
-    const decoded = jwt.verify(otpToken, process.env.OTP_VERIFY_TOKEN);
-    const { email } = decoded;
-    const createUser = new User({ name, email, password });
-    const findEmail = await User.findOne({ email });
-    if (findEmail) {
-      return res.status(409).send({ message: 'Email is already registered' });
-    }
-    const createUserSave = await createUser.save();
+    const newUser = new User({
+      email,
+      password,
+    });
+    const createUser = await newUser.save();
 
-    if (createUserSave) {
+    if (createUser) {
       const newList = new ListName({
         name: 'tasks',
-        owner: createUserSave._id,
+        owner: createUser._id,
       });
       await newList.save();
       const token = await createUser.generateAuthToken();

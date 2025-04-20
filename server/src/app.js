@@ -19,6 +19,11 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
+// Routes
+app.get('/', (req, res) => {
+  res.send(`Hello, World! Environment: ${process.env.NODE_ENV}`);
+});
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(userRouter);
