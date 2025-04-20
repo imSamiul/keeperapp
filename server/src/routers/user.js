@@ -83,7 +83,7 @@ router.get('/users/me', auth, async (req, res) => {
 // });
 // create new user
 router.post('/users/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   if (!email || !password) {
     return res.status(400).send({ message: 'Email and password are required' });
@@ -97,6 +97,7 @@ router.post('/users/register', async (req, res) => {
     const newUser = new User({
       email,
       password,
+      name,
     });
     const createUser = await newUser.save();
 
