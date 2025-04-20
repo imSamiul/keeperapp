@@ -13,14 +13,15 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "env-cmd": "^10.1.0",
     "express": "^4.19.2",
     "googleapis": "^140.0.1",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.7.0",
-    "mongoose": "^8.4.1",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
     "nodemailer": "^6.9.14",
     "otp-generator": "^4.0.1",
     "validator": "^13.12.0"
@@ -38,5 +39,11 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.2"
+  },
+  "packageManager": "pnpm@10.5.0+sha512.11106a5916c7406fe4b8cb8e3067974b8728f47308a4f5ac5e850304afa6f57e2847d7950dfe78877d8d36bfb401d381c4215db3a4c3547ffa63c14333a6fa51",
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "bcrypt"
+    ]
   }
 }
