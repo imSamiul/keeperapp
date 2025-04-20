@@ -5,6 +5,8 @@ export async function action({ request, params }) {
   const { taskId } = params;
   const data = await request.formData();
   const checkTask = data.get("checkTask");
+  console.log(checkTask);
+
   const title = data.get("title");
   const listName = data.get("listName");
 
@@ -31,7 +33,7 @@ export async function action({ request, params }) {
   if (btnIntent === "removeToday") {
     taskObj = {
       ...taskObj,
-      today: "",
+      today: null,
     };
   }
 

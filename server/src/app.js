@@ -6,7 +6,7 @@ const taskRouter = require('./routers/task');
 const listName = require('./routers/listName');
 
 require('dotenv').config({
-  path: path.resolve(__dirname, '../config/prod.env'),
+  path: path.resolve(__dirname, '../config/dev.env'),
 });
 
 require('./db/mongoose');
@@ -18,6 +18,11 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
+
+// Routes
+app.get('/', (req, res) => {
+  res.send(`Hello, World! Environment: ${process.env.NODE_ENV}`);
+});
 
 app.use(cors(corsOptions));
 app.use(express.json());

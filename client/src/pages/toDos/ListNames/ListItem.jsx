@@ -10,7 +10,7 @@ function ListItem({ listNameData }) {
   return (
     <div
       key={listNameData.id}
-      className="min-h-60 max-h-60   bg-[#fca311] bg-opacity-20 rounded-md font-shantellSans p-5"
+      className="min-h-60 max-h-60   bg-[#fca311] bg-opacity-20 rounded-md font-shantellSans p-5 cursor-pointer"
       onClick={() => handleDivClick(listNameData.id)}
     >
       <div className="border-dashed border-2 border-[#fca311] py-2 px-4 h-full rounded-md overflow-hidden">

@@ -2,6 +2,7 @@ const express = require('express');
 const ListName = require('../model/listName');
 const auth = require('../middleware/auth');
 const Task = require('../model/task');
+const { findFileType } = require('../utils/findFileType');
 
 const router = new express.Router();
 
@@ -36,8 +37,21 @@ router.get('/listNames', auth, async (req, res) => {
       title: list.title,
       tasks: list.tasks,
     }));
+    const base64Avatar = req.user.avatar
+      ? req.user.avatar.toString('base64')
+      : null;
+    const getFileType = await findFileType();
 
-    res.status(201).send({ listNamesArray, user: req.user });
+    const fileTypeResult = base64Avatar
+      ? await getFileType.fileTypeFromBuffer(req.user.avatar)
+      : null;
+
+    res.status(201).send({
+      listNamesArray,
+      user: req.user,
+      avatar: base64Avatar,
+      fileType: fileTypeResult && fileTypeResult.ext,
+    });
   } catch (error) {
     res.status(500).send({ message: error.toString() });
   }

@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useState } from "react";
 import Homepage from "./pages/Homepage";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/users/Login";
@@ -9,7 +10,14 @@ import Task from "./pages/toDos/Tasks/Task";
 import EditTask from "./pages/toDos/Tasks/EditTask";
 import ErrorPage from "./pages/Error";
 import TodayTasks from "./pages/toDos/Tasks/TodayTasks";
+import FixedTask from "./pages/toDos/Tasks/FixedTask";
+import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
 import { checkAuthToken } from "./util/auth";
+import EmailVerify from "./pages/users/EmailVerify";
+import VerifyOTP from "./pages/users/VerifyOTP";
+import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
+import Loader from "./components/ui/Loader";
+import MyProfile from "./pages/profile/MyProfile";
 
 // React Router DOM action
 import { action as loginUser } from "./components/actions/LoginUser";
@@ -19,6 +27,7 @@ import { action as handleTask } from "./components/actions/HandleTask";
 import { action as editTask } from "./components/actions/EditTask";
 import { action as sendOTP } from "./components/actions/SendOTP";
 import { action as verifyOTP } from "./components/actions/VerifyOTP";
+import { action as handleUserProfileUpdate } from "./components/actions/EditProfileForm";
 
 // React Router DOM loader function
 import { loader as loadListNames } from "./components/loaders/LoadListNames";
@@ -26,14 +35,8 @@ import { loader as loadTaskList } from "./components/loaders/loadTaskList";
 import { loader as loadTask } from "./components/loaders/loadTask";
 import { loader as loadTodayTasks } from "./components/loaders/loadTodayTasks";
 import { loader as loadFixedTasks } from "./components/loaders/loadFixedTasks";
-import FixedTask from "./pages/toDos/Tasks/FixedTask";
-import ShowFixedTasks from "./pages/toDos/Tasks/ShowFixedTasks";
-
-import EmailVerify from "./pages/users/EmailVerify";
-import VerifyOTP from "./pages/users/VerifyOTP";
-import ErrorPageAuthentication from "./pages/users/ErrorPageAuthentication";
-import { useState } from "react";
-import Loader from "./components/ui/Loader";
+import { loader as loadUserProfileDetails } from "./components/loaders/loadUserProfileDetails";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const wireRouter = (setLoaded) =>
   createBrowserRouter([
@@ -66,7 +69,7 @@ const wireRouter = (setLoaded) =>
           errorElement: <ErrorPageAuthentication />,
         },
       ],
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
     },
     {
       path: "/todo",
@@ -74,7 +77,7 @@ const wireRouter = (setLoaded) =>
       id: "todo",
       loader: loadListNames,
       action: handleTaskList,
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
       children: [
         {
           index: true,
@@ -119,6 +122,13 @@ const wireRouter = (setLoaded) =>
         },
       ],
     },
+    {
+      path: "/profile",
+      element: <MyProfile setLoaded={setLoaded} />,
+      errorElement: <ErrorPage setLoaded={setLoaded} />,
+      loader: loadUserProfileDetails,
+      action: handleUserProfileUpdate,
+    },
   ]);
 
 function App() {
@@ -127,6 +137,20 @@ function App() {
     <>
       {!pageLoaded ? <Loader /> : null}
       <RouterProvider router={wireRouter(setLoaded)} />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="colored"
+        transition={Bounce}
+        stacked
+      />
     </>
   );
 }

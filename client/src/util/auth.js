@@ -35,9 +35,9 @@ export function addOtpEmail(otpEmail) {
   Cookies.set("otpEmail", otpEmail, { expires: 5 / 1440 });
   // 1 day = 24 hours
   // 1 hour = 60 minutes
-  // 1 day = 1440 minutes
+  // 1 day = 24*60 = 1440 minutes
 
-  // So, 10 minutes = 20 / 1440 days.
+  // So, 5 minutes = (5 / 1440) days.
 }
 export function getOtpEmail() {
   const otpEmail = Cookies.get("otpEmail");

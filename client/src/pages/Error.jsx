@@ -1,8 +1,14 @@
-import { useRouteError } from "react-router-dom";
+import { useNavigation, useRouteError } from "react-router-dom";
 import LinkButton from "../components/ui/LinkButton";
+import { useEffect } from "react";
 
-function ErrorPage() {
+function ErrorPage({ setLoaded }) {
   const error = useRouteError();
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    setLoaded(true);
+  }, [navigation.state, setLoaded]);
 
   let title = "Something went wrong 😢";
   let message = error.data?.message || "An error occurred.";
